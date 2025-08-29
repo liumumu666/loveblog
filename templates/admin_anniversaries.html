@@ -234,6 +234,13 @@
             transform: translateY(0);
             box-shadow: 0 1px 2px rgba(220, 53, 69, 0.3);
         }
+
+        /* 活动导航项样式 */
+        .admin-nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: bold;
+            border-left: 3px solid #ff4d4f;
+        }
     </style>
     <!-- 引入 Font Awesome 图标 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -245,9 +252,11 @@
 
         <!-- 管理导航 -->
         <div class="admin-nav">
-            <a href="/admin_anniversaries"><i class="fas fa-calendar-alt"></i> 纪念日管理</a>
+            <a href="/admin"><i class="fas fa-home"></i> 管理首页</a>
+            <a href="/admin_anniversaries" class="active"><i class="fas fa-calendar-alt"></i> 纪念日管理</a>
             <a href="/admin_basic_info"><i class="fas fa-cog"></i> 基础信息管理</a>
             <a href="/admin_attachments"><i class="fas fa-file"></i> 附件管理</a>
+            <a href="/admin_moments"><i class="fas fa-camera"></i> 点滴瞬间管理</a>
         </div>
 
         <!-- 消息提示 -->
@@ -273,6 +282,7 @@
 
                 <div class="form-group">
                     <label for="icon">图标</label>
+                    <!-- 增加更多图标选项 -->
                     <select id="icon" name="icon" required>
                         <option value="heart">心形 (heart)</option>
                         <option value="star">星星 (star)</option>
@@ -284,7 +294,98 @@
                         <option value="plane">飞机 (plane)</option>
                         <option value="coffee">咖啡 (coffee)</option>
                         <option value="fire">火焰 (fire)</option>
+                        <option value="gift">礼物 (gift)</option>
+                        <option value="flower">花朵 (flower)</option>
+                        <option value="moon">月亮 (moon)</option>
+                        <option value="sun">太阳 (sun)</option>
+                        <option value="camera">相机 (camera)</option>
+                        <option value="book">书本 (book)</option>
+                        <option value="music">音乐 (music)</option>
+                        <option value="film">电影 (film)</option>
+                        <option value="utensils">餐具 (utensils)</option>
+                        <option value="glass-cheers">干杯 (glass-cheers)</option>
+                        <option value="tree">树 (tree)</option>
+                        <option value="gift">礼物 (gift)</option>
                     </select>
+                    
+                    <!-- 增加更多图标颜色选项 -->
+                    <select id="icon_color" name="icon_color">
+                        <option value="">默认</option>
+                        <option value="text-primary">蓝色</option>
+                        <option value="text-danger">红色</option>
+                        <option value="text-success">绿色</option>
+                        <option value="text-warning">黄色</option>
+                        <option value="text-info">青色</option>
+                        <option value="text-purple">紫色</option>
+                        <option value="text-pink">粉色</option>
+                        <option value="text-secondary">灰色</option>
+                        <option value="text-dark">黑色</option>
+                        <option value="text-light">白色</option>
+                    </select>
+                    
+                    <!-- 增加更多卡片颜色选项 -->
+                    <select id="card_color" name="card_color" required>
+                        <option value="card-red">红色</option>
+                        <option value="card-blue">蓝色</option>
+                        <option value="card-green">绿色</option>
+                        <option value="card-purple">紫色</option>
+                        <option value="card-dark">深色</option>
+                        <option value="card-pink">粉色</option>
+                        <option value="card-yellow">黄色</option>
+                        <option value="card-cyan">青色</option>
+                        <option value="card-indigo">靛蓝色</option>
+                        <option value="card-teal">蓝绿色</option>
+                        <option value="card-orange">橙色</option>
+                    </select>
+                    
+                    <!-- 在编辑表单中也做同样的修改 -->
+                    <!-- 找到id="editIcon"、id="editIconColor"、id="editCardColor"的select元素，添加相同的选项 -->
+                    
+                    <!-- 修改showAddModal()函数，添加自动随机选择颜色和图标的逻辑 -->
+                    <script>
+                        // 添加纪念日模态框显示函数
+                        function showAddModal() {
+                            // 清空表单
+                            document.getElementById('addForm').reset();
+                    
+                            // 获取当前最大排序值
+                            fetch('/admin/get_max_sort_order')
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error('获取最大排序值失败');
+                                    }
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    // 设置默认排序值为最大排序值+1
+                                    const maxSortOrder = data.max_sort_order || 0;
+                                    document.getElementById('addSortOrder').value = maxSortOrder + 1;
+                                })
+                                .catch(error => {
+                                    console.error('获取最大排序值失败:', error);
+                                    // 如果获取失败，设置为1作为默认值
+                                    document.getElementById('addSortOrder').value = 1;
+                                });
+                    
+                            // 随机选择图标
+                            const iconSelect = document.getElementById('icon');
+                            const randomIconIndex = Math.floor(Math.random() * iconSelect.options.length);
+                            iconSelect.selectedIndex = randomIconIndex;
+                    
+                            // 随机选择图标颜色（有30%几率不选择颜色，保持默认）
+                            const iconColorSelect = document.getElementById('icon_color');
+                            const randomColorIndex = Math.random() < 0.3 ? 0 : Math.floor(Math.random() * (iconColorSelect.options.length - 1)) + 1;
+                            iconColorSelect.selectedIndex = randomColorIndex;
+                    
+                            // 随机选择卡片颜色
+                            const cardColorSelect = document.getElementById('card_color');
+                            const randomCardColorIndex = Math.floor(Math.random() * cardColorSelect.options.length);
+                            cardColorSelect.selectedIndex = randomCardColorIndex;
+                    
+                            // 显示模态框
+                            document.getElementById('addModal').style.display = 'flex';
+                        }
+                    </script>
                 </div>
 
                 <div class="form-group">

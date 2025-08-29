@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台管理 - 点滴瞬间</title>
+    <!-- 引入 Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        /* 导航样式 */
+        .admin-nav {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .admin-nav a {
+            color: #00b894;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .admin-nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* 消息提示 */
+        .message {
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* 表单样式 */
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #00b894;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #00a085;
+        }
+
+        /* 图片上传预览 */
+        .image-preview {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .preview-item {
+            position: relative;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .preview-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .remove-img {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ff4757;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        /* 点滴瞬间列表样式 */
+        .moments-list {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .moment-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+
+        .moment-item:last-child {
+            border-bottom: none;
+        }
+
+        .moment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .moment-date {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .moment-content {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .moment-images {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .moment-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .moment-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-danger {
+            background-color: #ff4757;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #ff3742;
+        }
+
+        /* 动画效果 */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* 删除确认弹窗样式 */
+        .confirm-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .confirm-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 400px;
+            max-width: 90%;
+        }
+
+        .confirm-icon {
+            font-size: 48px;
+            color: #ff6348;
+            margin-bottom: 15px;
+        }
+
+        .confirm-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .confirm-buttons .btn {
+            margin: 0 10px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+        }
+
+        /* 活动导航项样式 */
+        .admin-nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: bold;
+            border-left: 3px solid #ff4d4f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>点滴瞬间管理</h1>
+
+        <!-- 管理导航 -->
+        <div class="admin-nav">
+            <a href="/admin"><i class="fas fa-home"></i> 管理首页</a>
+            <a href="/admin_anniversaries"><i class="fas fa-calendar-alt"></i> 纪念日管理</a>
+            <a href="/admin_basic_info"><i class="fas fa-cog"></i> 基础信息管理</a>
+            <a href="/admin_attachments"><i class="fas fa-file"></i> 附件管理</a>
+            <a href="/admin_moments" class="active"><i class="fas fa-camera"></i> 点滴瞬间管理</a>
+        </div>
+
+        <!-- 消息提示 -->
+        {% if message %}
+        <div class="message {{ message_type }}">
+            {{ message }}
+        </div>
+        {% endif %}
+
+        <!-- 添加点滴瞬间表单 -->
+        <div class="form-container">
+            <h2><i class="fas fa-plus"></i> 添加新的点滴瞬间</h2>
+            <form id="addMomentForm" enctype="multipart/form-data" action="/admin/add_moment" method="POST">
+                <div class="form-group">
+                    <label for="content">内容</label>
+                    <textarea id="content" name="content" placeholder="分享你的点滴瞬间..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="images">上传图片（可选）</label>
+                    <input type="file" id="images" name="images[]" multiple accept="image/*">
+                    <div id="imagePreview" class="image-preview"></div>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> 保存</button>
+            </form>
+        </div>
+
+        <!-- 点滴瞬间列表 -->
+        <div class="moments-list">
+            <h2><i class="fas fa-list"></i> 点滴瞬间列表</h2>
+            {% if moments %}
+            {% for moment in moments %}
+            <div class="moment-item fade-in" data-id="{{ moment.id }}">
+                <div class="moment-header">
+                    <div class="moment-date">{{ moment.created_at.strftime('%Y-%m-%d %H:%M') }}</div>
+                </div>
+                <div class="moment-content">{{ moment.content }}</div>
+                {% if moment.images %}
+                <div class="moment-images">
+                    {% for image in moment.images %}
+                    <img src="{{ image }}" alt="瞬间图片" class="moment-image">
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <div class="moment-actions">
+                    <button class="btn btn-danger delete-moment" data-id="{{ moment.id }}"><i class="fas fa-trash"></i>
+                        删除</button>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>暂无点滴瞬间，快来添加第一个吧！</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- 删除确认弹窗 -->
+    <div id="deleteConfirmModal" class="confirm-modal">
+        <div class="confirm-content">
+            <div class="confirm-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <h3>确认删除</h3>
+            <p>确定要删除这个点滴瞬间吗？删除后无法恢复。</p>
+            <div class="confirm-buttons">
+                <button id="cancelDelete" class="btn">取消</button>
+                <button id="confirmDelete" class="btn btn-danger">确认删除</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载完成后执行初始化
+        document.addEventListener('DOMContentLoaded', function () {
+            // 图片预览功能
+            const imageInput = document.getElementById('images');
+            const imagePreview = document.getElementById('imagePreview');
+
+            if (imageInput && imagePreview) {
+                imageInput.addEventListener('change', function (e) {
+                    imagePreview.innerHTML = '';
+                    const files = e.target.files;
+
+                    if (files) {
+                        Array.from(files).forEach((file, index) => {
+                            if (file.type.startsWith('image/')) {
+                                const reader = new FileReader();
+                                reader.onload = function (event) {
+                                    const previewItem = document.createElement('div');
+                                    previewItem.className = 'preview-item';
+                                    previewItem.innerHTML = `
+                                        <img src="${event.target.result}" alt="预览图片" class="preview-img">
+                                        <div class="remove-img" data-index="${index}">×</div>
+                                    `;
+                                    imagePreview.appendChild(previewItem);
+                                };
+                                reader.readAsDataURL(file);
+                            }
+                        });
+                    }
+                });
+
+                // 删除预览图片
+                imagePreview.addEventListener('click', function (e) {
+                    if (e.target.classList.contains('remove-img')) {
+                        const index = parseInt(e.target.getAttribute('data-index'));
+                        const newFiles = Array.from(imageInput.files).filter((_, i) => i !== index);
+
+                        // 由于无法直接修改FileList，这里我们通过重新设置input的值来清除选择
+                        // 在实际应用中，可能需要使用FormData来处理文件上传
+                        imageInput.value = '';
+                        imagePreview.innerHTML = '';
+                    }
+                });
+            }
+
+            // 删除确认弹窗
+            const deleteModal = document.getElementById('deleteConfirmModal');
+            const cancelDeleteBtn = document.getElementById('cancelDelete');
+            const confirmDeleteBtn = document.getElementById('confirmDelete');
+            let currentMomentId = null;
+
+            // 显示删除确认弹窗
+            document.querySelectorAll('.delete-moment').forEach(button => {
+                button.addEventListener('click', function () {
+                    currentMomentId = this.getAttribute('data-id');
+                    deleteModal.style.display = 'flex';
+                });
+            });
+
+            // 取消删除
+            cancelDeleteBtn.addEventListener('click', function () {
+                deleteModal.style.display = 'none';
+                currentMomentId = null;
+            });
+
+            // 确认删除
+            confirmDeleteBtn.addEventListener('click', function () {
+                if (currentMomentId) {
+                    // 发送删除请求
+                    fetch(`/admin/delete_moment/${currentMomentId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // 删除成功，移除DOM元素
+                                const momentItem = document.querySelector(`.moment-item[data-id="${currentMomentId}"]`);
+                                if (momentItem) {
+                                    momentItem.style.transition = 'all 0.3s ease';
+                                    momentItem.style.opacity = '0';
+                                    momentItem.style.height = '0';
+                                    momentItem.style.margin = '0';
+                                    momentItem.style.padding = '0';
+                                    momentItem.style.overflow = 'hidden';
+
+                                    setTimeout(() => {
+                                        momentItem.remove();
+                                    }, 300);
+                                }
+
+                                // 显示删除成功消息
+                                showMessage('点滴瞬间删除成功！', 'success');
+                            } else {
+                                // 删除失败，显示错误消息
+                                showMessage(`删除失败：${data.error || '未知错误'}`, 'error');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('删除请求失败：', error);
+                            showMessage('删除请求失败，请重试', 'error');
+                        })
+                        .finally(() => {
+                            deleteModal.style.display = 'none';
+                            currentMomentId = null;
+                        });
+                }
+            });
+
+            // 点击弹窗外部关闭弹窗
+            deleteModal.addEventListener('click', function (e) {
+                if (e.target === deleteModal) {
+                    deleteModal.style.display = 'none';
+                    currentMomentId = null;
+                }
+            });
+
+            // ESC键关闭弹窗
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && deleteModal.style.display === 'flex') {
+                    deleteModal.style.display = 'none';
+                    currentMomentId = null;
+                }
+            });
+
+            // 消息提示函数
+            function showMessage(text, type = 'success') {
+                // 检查是否已存在消息元素，如果有则移除
+                const existingMessage = document.querySelector('.message');
+                if (existingMessage) {
+                    existingMessage.remove();
+                }
+
+                // 创建新的消息元素
+                const message = document.createElement('div');
+                message.className = `message ${type}`;
+                message.textContent = text;
+
+                // 添加到容器中
+                const container = document.querySelector('.container');
+                const firstChild = container.firstChild;
+                container.insertBefore(message, firstChild);
+
+                // 添加动画效果
+                message.classList.add('fade-in');
+
+                // 3秒后自动移除
+                setTimeout(() => {
+                    message.style.transition = 'opacity 0.3s ease';
+                    message.style.opacity = '0';
+                    setTimeout(() => {
+                        message.remove();
+                    }, 300);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+
+</html>

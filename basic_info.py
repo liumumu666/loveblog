@@ -8,8 +8,8 @@ from flask import Blueprint, request, jsonify
 # 创建蓝图
 basic_info_bp = Blueprint('basic_info', __name__)
 
-# 文件上传配置
-UPLOAD_FOLDER = 'static/uploads'
+# 修改文件上传配置
+UPLOAD_FOLDER = 'static/uploads/basic_info'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 # 定义用户信息模型
@@ -71,7 +71,7 @@ def register_basic_info_routes(bp, app, db, UserInfo, Attachment):
                     unique_filename = f"avatar1_{timestamp}_{original_filename}"
                     
                     # 保存文件
-                    filepath = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
+                    filepath = os.path.join(UPLOAD_FOLDER, unique_filename)
                     file.save(filepath)
                     
                     # 获取文件大小
@@ -80,7 +80,7 @@ def register_basic_info_routes(bp, app, db, UserInfo, Attachment):
                     # 先创建附件记录
                     attachment = Attachment(
                         filename=original_filename,
-                        filepath=f"/static/uploads/{unique_filename}",
+                        filepath=f"/static/uploads/basic_info/{unique_filename}",
                         size=file_size,
                         upload_date=datetime.datetime.now(),
                         is_referenced=True,  # 标记为已引用
@@ -90,7 +90,7 @@ def register_basic_info_routes(bp, app, db, UserInfo, Attachment):
                     db.session.flush()  # 确保attachment.id已生成
                     
                     # 再更新用户信息
-                    user_info.avatar1 = f"/static/uploads/{unique_filename}"
+                    user_info.avatar1 = f"/static/uploads/basic_info/{unique_filename}"
             
             # 处理头像2上传
             if 'avatar2' in request.files and request.files['avatar2'].filename:
@@ -100,7 +100,7 @@ def register_basic_info_routes(bp, app, db, UserInfo, Attachment):
                     timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
                     unique_filename = f"avatar2_{timestamp}_{original_filename}"
                     
-                    filepath = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
+                    filepath = os.path.join(UPLOAD_FOLDER, unique_filename)
                     file.save(filepath)
                     
                     file_size = os.path.getsize(filepath)
@@ -108,7 +108,7 @@ def register_basic_info_routes(bp, app, db, UserInfo, Attachment):
                     # 先创建附件记录
                     attachment = Attachment(
                         filename=original_filename,
-                        filepath=f"/static/uploads/{unique_filename}",
+                        filepath=f"/static/uploads/basic_info/{unique_filename}",
                         size=file_size,
                         upload_date=datetime.datetime.now(),
                         is_referenced=True,  # 标记为已引用
@@ -118,7 +118,7 @@ def register_basic_info_routes(bp, app, db, UserInfo, Attachment):
                     db.session.flush()
                     
                     # 再更新用户信息
-                    user_info.avatar2 = f"/static/uploads/{unique_filename}"
+                    user_info.avatar2 = f"/static/uploads/basic_info/{unique_filename}"
             
             # 处理壁纸上传
             if 'banner' in request.files and request.files['banner'].filename:
@@ -128,7 +128,7 @@ def register_basic_info_routes(bp, app, db, UserInfo, Attachment):
                     timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
                     unique_filename = f"banner_{timestamp}_{original_filename}"
                     
-                    filepath = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
+                    filepath = os.path.join(UPLOAD_FOLDER, unique_filename)
                     file.save(filepath)
                     
                     file_size = os.path.getsize(filepath)
@@ -136,7 +136,7 @@ def register_basic_info_routes(bp, app, db, UserInfo, Attachment):
                     # 先创建附件记录
                     attachment = Attachment(
                         filename=original_filename,
-                        filepath=f"/static/uploads/{unique_filename}",
+                        filepath=f"/static/uploads/basic_info/{unique_filename}",
                         size=file_size,
                         upload_date=datetime.datetime.now(),
                         is_referenced=True,  # 标记为已引用
@@ -146,7 +146,7 @@ def register_basic_info_routes(bp, app, db, UserInfo, Attachment):
                     db.session.flush()
                     
                     # 再更新用户信息
-                    user_info.banner = f"/static/uploads/{unique_filename}"
+                    user_info.banner = f"/static/uploads/basic_info/{unique_filename}"
             
             # 提交更改到数据库
             db.session.commit()

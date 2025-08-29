@@ -13,6 +13,8 @@ from anniversaries import anniversary_bp, init_anniversary_model, register_anniv
 from basic_info import basic_info_bp, init_basic_info_model, register_basic_info_routes
 # 导入附件管理模块
 from attachments import attachments_bp, init_attachment_model, register_attachment_routes
+# 导入点滴瞬间模块
+from moments import moments_bp, init_moment_model, register_moment_routes
 
 app = Flask(__name__)
 # 配置SQLite数据库
@@ -29,6 +31,28 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
+# 确保点滴瞬间图片目录存在
+if not os.path.exists(os.path.join(UPLOAD_FOLDER, 'moments')):
+    os.makedirs(os.path.join(UPLOAD_FOLDER, 'moments'))
+    
+# 确保基础信息图片目录存在
+if not os.path.exists(os.path.join(UPLOAD_FOLDER, 'basic_info')):
+    os.makedirs(os.path.join(UPLOAD_FOLDER, 'basic_info'))
+
+# 初始化数据库
+# 确保这里使用正确的方式初始化数据库
+# 注意：这里需要确保先有db对象才能初始化模型
+# 因此，我们先创建db对象
+from flask_sqlalchemy import SQLAlchemy
+
+# 创建数据库对象
+from flask_sqlalchemy import SQLAlchemy
+
+# 创建db对象
+# 确保这是在Flask应用创建之后，但在模型初始化之前
+# 在实际应用中，应该避免重复导入，这里只是为了确保代码的完整性
+from flask_sqlalchemy import SQLAlchemy
+
 db = SQLAlchemy(app)
 
 # 初始化纪念日模型
@@ -44,6 +68,9 @@ UserInfo = init_basic_info_model(db)
 # 初始化附件模型
 Attachment = init_attachment_model(db)
 
+# 初始化点滴瞬间模型
+Moment = init_moment_model(db)
+
 # 注册基础信息相关路由到蓝图并注册蓝图到应用
 basic_info_bp = register_basic_info_routes(basic_info_bp, app, db, UserInfo, Attachment)
 app.register_blueprint(basic_info_bp)
@@ -51,6 +78,10 @@ app.register_blueprint(basic_info_bp)
 # 注册附件相关路由到蓝图并注册蓝图到应用
 attachments_bp = register_attachment_routes(attachments_bp, app, db, Attachment, UserInfo, Anniversary)
 app.register_blueprint(attachments_bp)
+
+# 注册点滴瞬间相关路由到蓝图并注册蓝图到应用
+moments_bp = register_moment_routes(moments_bp, app, db, Moment, Attachment)
+app.register_blueprint(moments_bp)
 
 # 更新首页路由，安全地获取UserInfo数据
 @app.route('/')

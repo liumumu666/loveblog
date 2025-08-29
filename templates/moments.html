@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点滴瞬间 - 爱情纪念册</title>
+    <!-- 引入 Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* 导航栏 */
+        .nav {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .nav a {
+            color: #00b894;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: #00a085;
+            text-decoration: underline;
+        }
+
+        /* 点滴瞬间列表 */
+        .moments-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .moment-item {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s ease;
+        }
+
+        .moment-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .moment-item:last-child {
+            border-bottom: none;
+        }
+
+        .moment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .moment-date {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .moment-content {
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .moment-images {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .moment-image {
+            width: calc(33.333% - 10px);
+            height: 200px;
+            object-fit: cover;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .moment-image:nth-child(3n) {
+            margin-right: 0;
+        }
+
+        .moment-image:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 空状态提示 */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+
+        .empty-text {
+            font-size: 18px;
+        }
+
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #00b894;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: #00a085;
+            transform: translateY(-3px);
+        }
+
+        /* 图片全屏预览 */
+        .fullscreen-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .fullscreen-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .fullscreen-image {
+            max-width: 100%;
+            max-height: 100vh;
+        }
+
+        .close-preview {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-preview:hover {
+            color: #bbb;
+        }
+
+        /* 动画效果 */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .moment-image {
+                width: calc(50% - 7.5px);
+                height: 150px;
+            }
+            
+            .moment-image:nth-child(3n) {
+                margin-right: 15px;
+            }
+            
+            .moment-image:nth-child(2n) {
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .moment-image {
+                width: 100%;
+                height: 200px;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-camera"></i> 点滴瞬间</h1>
+            <p class="subtitle">记录我们生活中的每一个美好时刻</p>
+        </header>
+
+        <!-- 导航 -->
+        <div class="nav">
+            <a href="/"><i class="fas fa-home"></i> 首页</a>
+            <a href="/moments"><i class="fas fa-camera"></i> 点滴瞬间</a>
+        </div>
+
+        <!-- 点滴瞬间列表 -->
+        <div class="moments-container">
+            {% if moments %}
+                {% for moment in moments %}
+                    <div class="moment-item fade-in">
+                        <div class="moment-header">
+                            <div class="moment-date">{{ moment.formatted_date }}</div>
+                        </div>
+                        <div class="moment-content">{{ moment.content }}</div>
+                        {% if moment.images %}
+                            <div class="moment-images">
+                                {% for image in moment.images %}
+                                    <img src="{{ image }}" alt="瞬间图片" class="moment-image" data-src="{{ image }}">
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <div class="empty-icon"><i class="fas fa-image"></i></div>
+                    <div class="empty-text">还没有记录点滴瞬间哦~</div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <div id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- 图片全屏预览弹窗 -->
+    <div id="fullscreenModal" class="fullscreen-modal">
+        <span class="close-preview">&times;</span>
+        <div class="fullscreen-content">
+            <img class="fullscreen-image" id="currentFullscreenImage">
+        </div>
+    </div>
+
+    <script>
+        // 页面加载完成后执行初始化
+        document.addEventListener('DOMContentLoaded', function () {
+            // 返回顶部按钮功能
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function () {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // 图片全屏预览功能
+            const fullscreenModal = document.getElementById('fullscreenModal');
+            const fullscreenImage = document.getElementById('currentFullscreenImage');
+            const closePreview = document.querySelector('.close-preview');
+            
+            // 点击图片打开全屏预览
+            document.querySelectorAll('.moment-image').forEach(img => {
+                img.addEventListener('click', function () {
+                    fullscreenImage.src = this.getAttribute('data-src');
+                    fullscreenModal.style.display = 'flex';
+                });
+            });
+            
+            // 关闭全屏预览
+            closePreview.addEventListener('click', function () {
+                fullscreenModal.style.display = 'none';
+            });
+            
+            // 点击弹窗外部关闭预览
+            fullscreenModal.addEventListener('click', function (e) {
+                if (e.target === fullscreenModal) {
+                    fullscreenModal.style.display = 'none';
+                }
+            });
+            
+            // ESC键关闭预览
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && fullscreenModal.style.display === 'flex') {
+                    fullscreenModal.style.display = 'none';
+                }
+            });
+            
+            // 平滑滚动效果
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

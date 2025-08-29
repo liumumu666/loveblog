@@ -202,6 +202,12 @@
         color: #721c24;
         border: 1px solid #f5c6cb;
     }
+    /* 活动导航项样式 */
+.admin-nav a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+    border-left: 3px solid #ff4d4f;
+}
     </style>
 </head>
 
@@ -210,10 +216,13 @@
         <h1>爱情纪念册 - 后台管理</h1>
 
         <!-- 管理导航 -->
+        <!-- 管理导航 -->
         <div class="admin-nav">
+            <a href="/admin"><i class="fas fa-home"></i> 管理首页</a>
             <a href="/admin_anniversaries"><i class="fas fa-calendar-alt"></i> 纪念日管理</a>
-            <a href="/admin_basic_info"><i class="fas fa-cog"></i> 基础信息管理</a>
+            <a href="/admin_basic_info" class="active"><i class="fas fa-cog"></i> 基础信息管理</a>
             <a href="/admin_attachments"><i class="fas fa-file"></i> 附件管理</a>
+            <a href="/admin_moments"><i class="fas fa-camera"></i> 点滴瞬间管理</a>
         </div>
 
         <!-- 消息提示 -->
