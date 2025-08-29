@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>我们的爱情纪念册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #ffffff;
+            /* 添加格子背景 */
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: 0 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 顶部壁纸和头像样式 */
+        .top-banner {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .banner-image {
+            width: 100%;
+            height: 100%;
+            background-image: url('https://via.placeholder.com/1200x300');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.8);
+        }
+
+        .profile-avatars {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .avatar-circle {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            object-fit: cover;
+        }
+
+        .avatar-name {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .heart-animation {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .heart-animation i {
+            font-size: 36px;
+            color: #ff4d4f;
+            animation: heartBeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartBeat {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+        }
+
+        /* 顶部导航 */
+        .nav-icons {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .nav-icon {
+            width: 100px;
+            height: 80px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .nav-icon:nth-child(1) {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+        }
+
+        .nav-icon:nth-child(2) {
+            background: linear-gradient(135deg, #fd79a8, #e17055);
+        }
+
+        .nav-icon:nth-child(3) {
+            background: linear-gradient(135deg, #74b9ff, #a29bfe);
+        }
+
+        .nav-icon:nth-child(4) {
+            background: linear-gradient(135deg, #00cec9, #0984e3);
+        }
+
+        .nav-icon i {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        /* I Love Day 区域 */
+        .love-day {
+            background-color: #fff;
+            color: #333;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            position: relative;
+            padding-top: 40px;
+            /* 为mac按钮留出空间 */
+        }
+
+        /* Mac风格操作按钮 */
+        .mac-buttons {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .mac-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .mac-close {
+            background-color: #ff5f56;
+        }
+
+        .mac-minimize {
+            background-color: #ffbd2e;
+        }
+
+        .mac-maximize {
+            background-color: #27c93f;
+        }
+
+        .love-day h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .countdown {
+            margin-bottom: 10px;
+        }
+
+        .countdown-text {
+            font-size: 24px;
+            color: #ff8c00;
+            /* 橙色文字 */
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* 更新CSS样式 - 添加电子表风格 */
+        .countdown-numbers {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 确保style标签内只有CSS代码，没有HTML */
+        /* 电子表数字样式 */
+        .digital-number {
+            font-family: 'Courier New', monospace;
+            background-color: #f5f5f5;
+            padding: 5px 8px;
+            margin: 0 2px;
+            border-radius: 4px;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+            min-width: 28px;
+            display: inline-block;
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: #000;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+        }
+
+        .countdown-unit {
+            font-size: 18px;
+            color: #333;
+            font-weight: normal;
+            margin: 0 10px;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 最新留言 */
+        .messages {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .messages h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .message-tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .message-tab {
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .message-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #00b894;
+        }
+
+        .message-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .message-card {
+            padding: 15px;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #00b894;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+
+        .username {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .message-content {
+            font-size: 14px;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+
+        .message-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #adb5bd;
+        }
+
+        .message-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .message-action {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        /* 彩虹文字动画 */
+        #rainbowText {
+            font-size: 32px;
+            font-weight: bold;
+            animation: rainbow 3s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% {
+                color: #ff0000;
+            }
+
+            14% {
+                color: #ff7f00;
+            }
+
+            28% {
+                color: #ffff00;
+            }
+
+            42% {
+                color: #00ff00;
+            }
+
+            57% {
+                color: #0000ff;
+            }
+
+            71% {
+                color: #4b0082;
+            }
+
+            85% {
+                color: #9400d3;
+            }
+
+            100% {
+                color: #ff0000;
+            }
+        }
+
+        /* 纪念日卡片样式 */
+        .anniversaries {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .anniversary-card {
+            background-color: #fff;
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .anniversary-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 不同颜色的卡片样式 */
+        .card-purple {
+            border-color: #9c27b0;
+            background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
+        }
+
+        .card-green {
+            border-color: #4caf50;
+            background: linear-gradient(135deg, #f1f8e9 0%, #e8f5e9 100%);
+        }
+
+        .card-blue {
+            border-color: #2196f3;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        }
+
+        .card-red {
+            border-color: #f44336;
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+        }
+
+        .card-dark {
+            border-color: #34495e;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        /* 卡片内部布局调整 */
+        .card-icon {
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+        }
+
+        .card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-date {
+            font-size: 13px;
+            color: #6c757d;
+        }
+
+        .card-days {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            white-space: nowrap;
+            margin-left: auto;
+        }
+
+        /* 根据卡片颜色定制天数文本颜色 */
+        .card-purple .card-days {
+            color: #9c27b0;
+            border: 1px solid rgba(156, 39, 176, 0.3);
+        }
+
+        .card-green .card-days {
+            color: #4caf50;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .card-blue .card-days {
+            color: #2196f3;
+            border: 1px solid rgba(33, 150, 243, 0.3);
+        }
+
+        .card-red .card-days {
+            color: #f44336;
+            border: 1px solid rgba(244, 67, 54, 0.3);
+        }
+
+        .card-dark .card-days {
+            color: #34495e;
+            border: 1px solid rgba(52, 73, 94, 0.3);
+        }
+
+        /* 悬停效果 */
+        .anniversary-card:hover .card-days {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .anniversaries {
+                grid-template-columns: 1fr;
+            }
+
+            .card-days {
+                font-size: 18px;
+                padding: 6px 10px;
+            }
+        }
+
+        /* 移除重复的样式定义 */
+        .card-date {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+
+        .card-days {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e74c3c;
+            text-align: center;
+        }
+    </style>
+    <!-- 引入 Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- 添加顶部壁纸和头像区域 -->
+        <div class="top-banner">
+            <div class="banner-image" style="background-image: url('{{ user_info.banner }}');"></div>
+            <div class="profile-avatars">
+                <div class="avatar-circle">
+                    <img src="{{ user_info.avatar1 }}" alt="{{ user_info.username1 }}" class="avatar-image">
+                    <span class="avatar-name">{{ user_info.username1 }}</span>
+                </div>
+                <div class="heart-animation">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="avatar-circle">
+                    <img src="{{ user_info.avatar2 }}" alt="{{ user_info.username2 }}" class="avatar-image">
+                    <span class="avatar-name">{{ user_info.username2 }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 顶部导航图标 -->
+        <div class="nav-icons">
+            <div class="nav-icon"><i class="fas fa-calendar-check"></i>点滴瞬间</div>
+            <div class="nav-icon"><i class="fas fa-heart"></i>祝福留言</div>
+            <div class="nav-icon"><i class="fas fa-images"></i>恋爱相册</div>
+            <div class="nav-icon"><i class="fas fa-list"></i>恋爱事件</div>
+        </div>
+        <!-- I Love Day 区域 -->
+        <div class="love-day">
+            <!-- Mac风格操作按钮 -->
+            <div class="mac-buttons">
+                <div class="mac-button mac-close"></div>
+                <div class="mac-button mac-minimize"></div>
+                <div class="mac-button mac-maximize"></div>
+            </div>
+
+            <h2>I Love Day</h2>
+            <div class="countdown" id="loveCountdown">
+                <span class="countdown-text">这是我们一起走过的</span>
+                <div class="countdown-numbers">
+                    <div class="digital-number">{{ love_days }}</div><span class="countdown-unit">天</span>
+                    <div class="digital-number">{{ hours }}</div><span class="countdown-unit">时</span>
+                    <div class="digital-number">{{ minutes }}</div><span class="countdown-unit">分</span>
+                    <div class="digital-number">{{ seconds }}</div><span class="countdown-unit">秒</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 在正确位置添加纪念日卡片代码 -->
+        <!-- 纪念日卡片 -->
+        <div class="messages">
+            <h2>纪念日卡片</h2>
+            <div class="anniversaries">
+                {% for anniversary in anniversaries %}
+                <div class="anniversary-card {{ anniversary.card_color }}">
+                    <div class="card-icon">
+                        <i
+                            class="fas fa-{{ anniversary.icon }}{% if anniversary.icon_color %} {{ anniversary.icon_color }}{% endif %}"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">{{ anniversary.title }}</div>
+                        <div class="card-date">{{ anniversary.date.strftime('%Y.%m.%d') }}</div>
+                    </div>
+                    <div class="card-days">{{ anniversary.days_text }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- 最新留言 -->
+        <div class="messages">
+            <h2>最新留言</h2>
+            <div class="message-tabs">
+                <div class="message-tab active">全部</div>
+                <div class="message-tab">我的</div>
+                <div class="message-tab">祝福</div>
+            </div>
+            <div class="message-cards">
+                <div class="message-card">
+                    <div class="message-header">
+                        <div class="avatar">木</div>
+                        <div class="username">木木</div>
+                    </div>
+                    <div class="message-content">我是家里大王</div>
+                    <div class="message-footer">
+                        <span>6天前</span>
+                        <div class="message-actions">
+                            <span class="message-action"><i class="far fa-thumbs-up"></i> 1</span>
+                            <span class="message-action"><i class="far fa-comment"></i> 0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message-card">
+                    <div class="message-header">
+                        <div class="avatar">毛</div>
+                        <div class="username">毛毛</div>
+                    </div>
+                    <div class="message-content">毛毛最爱木木了！！</div>
+                    <div class="message-footer">
+                        <span>22天前</span>
+                        <div class="message-actions">
+                            <span class="message-action"><i class="far fa-thumbs-up"></i> 0</span>
+                            <span class="message-action"><i class="far fa-comment"></i> 0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message-card">
+                    <div class="message-header">
+                        <div class="avatar">毛</div>
+                        <div class="username">毛毛</div>
+                    </div>
+                    <div class="message-content">想和你一起慢慢变老</div>
+                    <div class="message-footer">
+                        <span>26天前</span>
+                        <div class="message-actions">
+                            <span class="message-action"><i class="far fa-thumbs-up"></i> 0</span>
+                            <span class="message-action"><i class="far fa-comment"></i> 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    // 恋爱开始日期的时间戳（毫秒）
+    const startTimestamp = parseInt('{{ start_timestamp }}', 10);
+
+    // 辅助函数：确保数字显示为两位数格式
+    function padZero(num) {
+        // 如果数字小于10，则在前面添加一个0，否则直接返回原数字
+        return num < 10 ? '0' + num : num;
+    }
+
+    // 更新倒计时的函数
+    function updateCountdown() {
+        const now = new Date();
+        const nowTimestamp = now.getTime();
+
+        // 计算时间差（毫秒）
+        const diffMs = nowTimestamp - startTimestamp;
+
+        // 转换为天、时、分、秒
+        const totalSeconds = Math.floor(diffMs / 1000);
+        const days = Math.floor(totalSeconds / (24 * 60 * 60));
+        const hours = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
+        const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+        const seconds = totalSeconds % 60;
+
+        <!-- 更新JavaScript代码 - 确保动态更新也使用电子表风格 -->
+        // 更新DOM
+        const countdownElement = document.getElementById('loveCountdown');
+        countdownElement.innerHTML = `
+                <span class="countdown-text">这是我们一起走过的</span>
+                <div class="countdown-numbers">
+                    <div class="digital-number">${days}</div><span class="countdown-unit">天</span>
+                    <div class="digital-number">${padZero(hours)}</div><span class="countdown-unit">时</span>
+                    <div class="digital-number">${padZero(minutes)}</div><span class="countdown-unit">分</span>
+                    <div class="digital-number">${padZero(seconds)}</div><span class="countdown-unit">秒</span>
+                </div>
+            `;
+    }
+
+    // 立即更新一次
+    updateCountdown();
+
+    // 设置每秒更新一次
+    setInterval(updateCountdown, 1000);
+</script>
+
+</html>

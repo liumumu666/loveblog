@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+venv/  # 本地虚拟环境，无需复制
+.env   # 本地环境变量，无需复制
+.git/  # Git文件，无需复制
+.gitignore

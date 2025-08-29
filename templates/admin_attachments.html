@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台管理 - 文件管理</title>
+    <!-- 引入 Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 在style标签中添加删除按钮相关样式 -->
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* 添加文件预览相关样式 */
+        .file-preview {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .preview-thumbnail {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 8px;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .preview-thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .file-info {
+            display: inline-block;
+            vertical-align: top;
+            max-width: 180px;
+        }
+
+        .fullscreen-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fullscreen-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .close-preview {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-preview:hover {
+            color: #bbb;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        /* 导航样式 */
+        .admin-nav {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .admin-nav a {
+            color: #00b894;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .admin-nav a:hover {
+            color: #00a085;
+            text-decoration: underline;
+        }
+
+        /* 消息提示 */
+        .message {
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* 过滤器样式 */
+        .filter-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-group label {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* 表格样式 */
+        .table-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            /* 添加垂直对齐 */
+            vertical-align: top;
+        }
+
+        /* 文件名和文件路径列的特殊样式 */
+        td:nth-child(1),
+        td:nth-child(2) {
+            /* 允许内容换行 */
+            word-wrap: break-word;
+            word-break: break-all;
+            /* 设置最大宽度，确保不会无限扩展 */
+            max-width: 250px;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            /* 表头不换行 */
+            white-space: nowrap;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* 美化表格头部链接样式 */
+        table th a {
+            color: #2c3e50;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        table th a:hover {
+            color: #00b894;
+            border-bottom: 2px solid transparent;
+        }
+
+        /* 当前排序的列头样式 */
+        table th a.sort-active {
+            color: #00b894;
+            font-weight: bold;
+        }
+
+        /* 状态标签样式 */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-badge.used {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-badge.unused {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            /* 在移动设备上增加文件名和路径的最大宽度 */
+            td:nth-child(1),
+            td:nth-child(2) {
+                max-width: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>爱情纪念册 - 附件管理</h1>
+
+        <!-- 管理导航 -->
+        <div class="admin-nav">
+            <a href="/admin_anniversaries"><i class="fas fa-calendar-alt"></i> 纪念日管理</a>
+            <a href="/admin_basic_info"><i class="fas fa-cog"></i> 基础信息管理</a>
+            <a href="/admin_attachments"><i class="fas fa-file"></i> 附件管理</a>
+        </div>
+
+        <!-- 消息提示 -->
+        {% if message %}
+        <div class="message {{ message_type }}">
+            {{ message }}
+        </div>
+        {% endif %}
+
+        <!-- 过滤器 -->
+        <div class="filter-container">
+            <div class="filter-group">
+                <label for="filter-type">文件类型:</label>
+                <select id="filter-type" onchange="filterFiles()">
+                    <option value="all">全部文件</option>
+                    <option value="image">图片文件</option>
+                    <option value="other">其他文件</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="filter-referenced">引用状态:</label>
+                <select id="filter-referenced" onchange="filterFiles()">
+                    <option value="all">全部</option>
+                    <option value="referenced">已引用</option>
+                    <option value="unreferenced">未引用</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="search-file">搜索文件:</label>
+                <input type="text" id="search-file" placeholder="输入文件名搜索..." oninput="filterFiles()">
+            </div>
+            
+            <!-- 添加检测附件状态按钮 -->
+            <div class="filter-group">
+                <button id="scan-attachments-btn" onclick="scanAttachments()" style="
+                    padding: 8px 16px;
+                    background-color: #00b894;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    transition: background-color 0.3s ease;
+                ">
+                    <i class="fas fa-sync-alt"></i> 检测所有附件状态
+                </button>
+            </div>
+        </div>
+
+        <!-- 文件列表表格 -->
+        <div class="table-container">
+            <!-- 修改表头，添加操作列 -->
+            <!-- 在style标签中添加删除按钮相关样式 -->
+            <style>
+                /* 全局样式 */
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+            
+                body {
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                    background-color: #f8f9fa;
+                }
+            
+                /* 添加文件预览相关样式 */
+                .file-preview {
+                    display: inline-block;
+                    position: relative;
+                    cursor: pointer;
+                }
+            
+                .preview-thumbnail {
+                    width: 60px;
+                    height: 60px;
+                    object-fit: cover;
+                    border-radius: 4px;
+                    margin-right: 8px;
+                    border: 1px solid #ddd;
+                    transition: all 0.3s ease;
+                }
+            
+                .preview-thumbnail:hover {
+                    transform: scale(1.05);
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                }
+            
+                .file-info {
+                    display: inline-block;
+                    vertical-align: top;
+                    max-width: 180px;
+                }
+            
+                .fullscreen-modal {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.9);
+                    z-index: 1000;
+                    justify-content: center;
+                    align-items: center;
+                }
+            
+                .fullscreen-content {
+                    max-width: 90%;
+                    max-height: 90%;
+                }
+            
+                .close-preview {
+                    position: absolute;
+                    top: 20px;
+                    right: 30px;
+                    color: white;
+                    font-size: 40px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: 0.3s;
+                }
+            
+                .close-preview:hover {
+                    color: #bbb;
+                }
+            
+                .container {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 20px;
+                }
+            
+                h1 {
+                    color: #2c3e50;
+                    text-align: center;
+                    margin-bottom: 30px;
+                }
+            
+                h2 {
+                    color: #2c3e50;
+                    margin-bottom: 20px;
+                }
+            
+                /* 导航样式 */
+                .admin-nav {
+                    background-color: #fff;
+                    padding: 15px;
+                    border-radius: 10px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    margin-bottom: 20px;
+                }
+            
+                .admin-nav a {
+                    color: #00b894;
+                    text-decoration: none;
+                    margin-right: 20px;
+                    transition: color 0.3s ease;
+                }
+            
+                .admin-nav a:hover {
+                    color: #00a085;
+                    text-decoration: underline;
+                }
+            
+                /* 消息提示 */
+                .message {
+                    padding: 10px 15px;
+                    border-radius: 5px;
+                    margin-bottom: 20px;
+                }
+            
+                .message.success {
+                    background-color: #d4edda;
+                    color: #155724;
+                    border: 1px solid #c3e6cb;
+                }
+            
+                .message.error {
+                    background-color: #f8d7da;
+                    color: #721c24;
+                    border: 1px solid #f5c6cb;
+                }
+            
+                /* 过滤器样式 */
+                .filter-container {
+                    background-color: #fff;
+                    padding: 20px;
+                    border-radius: 10px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    margin-bottom: 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: 15px;
+                }
+            
+                .filter-group {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+            
+                .filter-group label {
+                    font-weight: 500;
+                    color: #2c3e50;
+                }
+            
+                .filter-group select,
+                .filter-group input {
+                    padding: 8px 12px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    font-size: 14px;
+                }
+            
+                /* 表格样式 */
+                .table-container {
+                    background-color: #fff;
+                    padding: 20px;
+                    border-radius: 10px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    overflow-x: auto;
+                }
+            
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+            
+                th,
+                td {
+                    padding: 12px;
+                    text-align: left;
+                    border-bottom: 1px solid #ddd;
+                    /* 添加垂直对齐 */
+                    vertical-align: top;
+                }
+            
+                /* 文件名和文件路径列的特殊样式 */
+                td:nth-child(1),
+                td:nth-child(2) {
+                    /* 允许内容换行 */
+                    word-wrap: break-word;
+                    word-break: break-all;
+                    /* 设置最大宽度，确保不会无限扩展 */
+                    max-width: 250px;
+                }
+            
+                th {
+                    background-color: #f8f9fa;
+                    font-weight: 600;
+                    color: #2c3e50;
+                    position: sticky;
+                    top: 0;
+                    z-index: 1;
+                    /* 表头不换行 */
+                    white-space: nowrap;
+                }
+            
+                tr:hover {
+                    background-color: #f8f9fa;
+                }
+            
+                /* 美化表格头部链接样式 */
+                table th a {
+                    color: #2c3e50;
+                    text-decoration: none;
+                    display: inline-block;
+                    transition: all 0.3s ease;
+                    border-bottom: 2px solid transparent;
+                }
+            
+                table th a:hover {
+                    color: #00b894;
+                    border-bottom: 2px solid transparent;
+                }
+            
+                /* 当前排序的列头样式 */
+                table th a.sort-active {
+                    color: #00b894;
+                    font-weight: bold;
+                }
+            
+                /* 状态标签样式 */
+                .status-badge {
+                    display: inline-block;
+                    padding: 4px 8px;
+                    border-radius: 4px;
+                    font-size: 12px;
+                    font-weight: 500;
+                }
+            
+                .status-badge.used {
+                    background-color: #d4edda;
+                    color: #155724;
+                }
+            
+                .status-badge.unused {
+                    background-color: #f8d7da;
+                    color: #721c24;
+                }
+            
+                /* 响应式设计 */
+                @media (max-width: 768px) {
+                    .container {
+                        padding: 10px;
+                    }
+            
+                    .filter-container {
+                        flex-direction: column;
+                        align-items: stretch;
+                    }
+            
+                    .filter-group {
+                        flex-direction: column;
+                        align-items: stretch;
+                    }
+                    
+                    /* 在移动设备上增加文件名和路径的最大宽度 */
+                    td:nth-child(1),
+                    td:nth-child(2) {
+                        max-width: 150px;
+                    }
+                }
+            </style>
+            <!-- 在表格行中添加操作列单元格 -->
+            <table id="files-table">
+                <thead>
+                    <tr>
+                        <th><a href="#" onclick="sortTable(0)">文件预览</a></th>
+                        <th><a href="#" onclick="sortTable(1)">文件路径</a></th>
+                        <th><a href="#" onclick="sortTable(2)">文件大小</a></th>
+                        <th><a href="#" onclick="sortTable(3)">上传日期</a></th>
+                        <th><a href="#" onclick="sortTable(4)">引用状态</a></th>
+                        <!-- 添加操作列 -->
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for file in files %}
+                    <tr class="file-row" data-type="{{ 'image' if file.filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')) else 'other' }}" data-referenced="{{ 'true' if file.is_referenced else 'false' }}" data-id="{{ file.id }}">
+                        <!-- 修改文件名列，添加预览功能 -->
+                        <td>
+                            {% if file.filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')) %}
+                                <!-- 移除文件名显示，仅保留图片预览 -->
+                                <div class="file-preview" onclick="showFullscreenPreview('{{ file.filepath }}')">
+                                    <!-- 修复图片路径问题 - 去掉多余的斜杠 -->
+                                    <img src="{{ file.filepath }}" alt="{{ file.filename }}" class="preview-thumbnail">
+                                </div>
+                            {% else %}
+                                <i class="fas fa-file"></i> {{ file.filename }}
+                            {% endif %}
+                        </td>
+                        <!-- 其余表格内容保持不变 -->
+                        <td>{{ file.filepath }}</td>
+                        <td>{{ file.size|format_size }}</td>
+                        <td>{{ file.upload_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td>
+                            <span class="status-badge {{ 'used' if file.is_referenced else 'unused' }}">
+                                {{ '已引用' if file.is_referenced else '未引用' }}
+                            </span>
+                        </td>
+                        <!-- 添加操作列单元格和删除按钮 -->
+                        <td>
+                            <button class="delete-btn" 
+                                    {% if file.is_referenced %}disabled title="已引用的附件不可删除"{% endif %}
+                                    onclick="deleteAttachment('{{ file.id }}', this)">
+                                <i class="fas fa-trash-alt"></i> 删除
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <!-- 在style标签中添加删除按钮相关样式 -->
+            <style>
+                /* 全局样式 */
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+            
+                body {
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                    background-color: #f8f9fa;
+                }
+            
+                /* 添加文件预览相关样式 */
+                .file-preview {
+                    display: inline-block;
+                    position: relative;
+                    cursor: pointer;
+                }
+            
+                .preview-thumbnail {
+                    width: 60px;
+                    height: 60px;
+                    object-fit: cover;
+                    border-radius: 4px;
+                    margin-right: 8px;
+                    border: 1px solid #ddd;
+                    transition: all 0.3s ease;
+                }
+            
+                .preview-thumbnail:hover {
+                    transform: scale(1.05);
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                }
+            
+                /* 删除按钮优化样式 */
+                .delete-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    padding: 6px 12px;
+                    background-color: #ff4757;
+                    color: white;
+                    border: none;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-weight: 500;
+                    transition: all 0.3s ease;
+                    gap: 6px;
+                }
+            
+                .delete-btn:hover:not(:disabled) {
+                    background-color: #ff3742;
+                    transform: translateY(-1px);
+                    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
+                }
+            
+                .delete-btn:active:not(:disabled) {
+                    transform: translateY(0);
+                    box-shadow: 0 2px 6px rgba(255, 71, 87, 0.3);
+                }
+            
+                .delete-btn:disabled {
+                    background-color: #cccccc;
+                    color: #666666;
+                    cursor: not-allowed;
+                    opacity: 0.7;
+                    transform: none;
+                    box-shadow: none;
+                }
+            
+                .delete-btn i {
+                    font-size: 12px;
+                }
+            
+                /* 响应式调整 */
+                @media (max-width: 768px) {
+                    .delete-btn {
+                        padding: 5px 10px;
+                        font-size: 12px;
+                    }
+                }
+            
+                /* ... 其他现有样式 ... */
+            </style>
+            <!-- 在script标签末尾添加删除附件函数 -->
+            <script>
+                // 页面加载完成后执行初始化
+                document.addEventListener('DOMContentLoaded', function () {
+                    // 初始化表格排序状态
+                    window.sortColumn = -1;
+                    window.sortDirection = 1; // 1 表示升序，-1 表示降序
+                });
+            
+                // 文件过滤函数
+                function filterFiles() {
+                    const fileTypeFilter = document.getElementById('filter-type').value;
+                    const referencedFilter = document.getElementById('filter-referenced').value;
+                    const searchTerm = document.getElementById('search-file').value.toLowerCase();
+                    
+                    const rows = document.querySelectorAll('.file-row');
+                    
+                    rows.forEach(row => {
+                        const isImage = row.getAttribute('data-type') === 'image';
+                        const isReferenced = row.getAttribute('data-referenced') === 'true';
+                        const fileName = row.querySelector('td:first-child').textContent.toLowerCase();
+                        
+                        // 应用文件类型过滤
+                        const typeMatch = fileTypeFilter === 'all' || 
+                                       (fileTypeFilter === 'image' && isImage) || 
+                                       (fileTypeFilter === 'other' && !isImage);
+                        
+                        // 应用引用状态过滤
+                        const referencedMatch = referencedFilter === 'all' || 
+                                              (referencedFilter === 'referenced' && isReferenced) || 
+                                              (referencedFilter === 'unreferenced' && !isReferenced);
+                        
+                        // 应用搜索过滤
+                        const searchMatch = fileName.includes(searchTerm);
+                        
+                        // 显示或隐藏行
+                        row.style.display = (typeMatch && referencedMatch && searchMatch) ? '' : 'none';
+                    });
+                }
+            
+                // 表格排序函数
+                function sortTable(columnIndex) {
+                    const table = document.getElementById('files-table');
+                    const tbody = table.getElementsByTagName('tbody')[0];
+                    const rows = Array.from(tbody.getElementsByTagName('tr'));
+                    
+                    // 如果点击的是当前排序的列，则切换排序方向
+                    if (window.sortColumn === columnIndex) {
+                        window.sortDirection *= -1;
+                    } else {
+                        window.sortColumn = columnIndex;
+                        window.sortDirection = 1;
+                    }
+                    
+                    // 根据列内容排序行
+                    rows.sort((a, b) => {
+                        const aValue = a.getElementsByTagName('td')[columnIndex].textContent.trim();
+                        const bValue = b.getElementsByTagName('td')[columnIndex].textContent.trim();
+                        
+                        // 处理文件大小的特殊排序
+                        if (columnIndex === 2) {
+                            return parseFileSize(aValue) - parseFileSize(bValue);
+                        }
+                        // 处理日期的特殊排序
+                        else if (columnIndex === 3) {
+                            return new Date(aValue) - new Date(bValue);
+                        }
+                        // 其他列使用字符串排序
+                        else {
+                            return aValue.localeCompare(bValue);
+                        }
+                    });
+                    
+                    // 应用排序方向
+                    if (window.sortDirection === -1) {
+                        rows.reverse();
+                    }
+                    
+                    // 移除所有行并添加排序后的行
+                    rows.forEach(row => tbody.appendChild(row));
+                    
+                    // 更新排序指示器样式
+                    document.querySelectorAll('table th a').forEach((link, index) => {
+                        if (index === window.sortColumn) {
+                            link.classList.add('sort-active');
+                            // 这里可以添加排序图标，比如使用 Font Awesome
+                            const icon = window.sortDirection === 1 ? 'fa-sort-up' : 'fa-sort-down';
+                            link.innerHTML = link.innerHTML.replace(/ <i class="fas [^>]+><\/i>/g, '') + ` <i class="fas ${icon}"></i>`;
+                        } else {
+                            link.classList.remove('sort-active');
+                            link.innerHTML = link.innerHTML.replace(/ <i class="fas [^>]+><\/i>/g, '');
+                        }
+                    });
+                }
+            
+                // 解析文件大小（辅助函数）
+                function parseFileSize(sizeStr) {
+                    const sizeRegex = /^([\d.]+)\s*(KB|MB|GB|TB)?$/i;
+                    const match = sizeStr.match(sizeRegex);
+                    
+                    if (!match) return 0;
+                    
+                    let size = parseFloat(match[1]);
+                    const unit = (match[2] || 'B').toUpperCase();
+                    
+                    const unitMultipliers = {
+                        'B': 1,
+                        'KB': 1024,
+                        'MB': 1024 * 1024,
+                        'GB': 1024 * 1024 * 1024,
+                        'TB': 1024 * 1024 * 1024 * 1024
+                    };
+                    
+                    return size * unitMultipliers[unit];
+                }
+            
+                // 检测附件状态函数
+                function scanAttachments() {
+                    const btn = document.getElementById('scan-attachments-btn');
+                    const originalText = btn.innerHTML;
+                    
+                    // 禁用按钮并显示加载状态
+                    btn.disabled = true;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 检测中...';
+                    
+                    // 发送请求到服务器
+                    fetch('/admin/scan_attachments', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // 恢复按钮状态
+                        btn.disabled = false;
+                        btn.innerHTML = originalText;
+                        
+                        // 显示消息并刷新页面
+                        if (data.success) {
+                            alert(data.message);
+                            // 刷新页面以显示更新后的附件信息
+                            window.location.href = '/admin_attachments?message=' + encodeURIComponent(data.message) + '&message_type=success';
+                        } else {
+                            alert('检测失败: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        // 恢复按钮状态
+                        btn.disabled = false;
+                        btn.innerHTML = originalText;
+                        alert('请求失败: ' + error.message);
+                    });
+                }
+            
+                // 添加缺失的显示全屏预览函数
+                function showFullscreenPreview(imagePath) {
+                    const modal = document.getElementById('fullscreen-modal');
+                    const modalImg = document.getElementById('fullscreen-image');
+                    modal.style.display = 'flex';
+                    // 修复全屏预览的图片路径
+                    modalImg.src = imagePath;
+                }
+            
+                // 添加缺失的关闭全屏预览函数
+                function closeFullscreenPreview() {
+                    document.getElementById('fullscreen-modal').style.display = 'none';
+                }
+            
+                // 点击关闭按钮时关闭预览
+                document.querySelector('.close-preview').addEventListener('click', function(event) {
+                    event.stopPropagation(); // 阻止事件冒泡到模态框
+                    closeFullscreenPreview();
+                });
+            
+                // 按下ESC键关闭预览
+                document.addEventListener('keydown', function(event) {
+                    if (event.key === 'Escape' && document.getElementById('fullscreen-modal').style.display === 'flex') {
+                        closeFullscreenPreview();
+                    }
+                });
+            </script>
+        </div>
+    </div>
+
+    <!-- 全屏预览模态框 -->
+    <div id="fullscreen-modal" class="fullscreen-modal" onclick="closeFullscreenPreview()">
+        <span class="close-preview">&times;</span>
+        <img class="fullscreen-content" id="fullscreen-image">
+    </div>
+
+    <!-- 删除确认模态框 -->
+    <div id="delete-confirm-modal" class="modal" style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1001;
+        justify-content: center;
+        align-items: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    ">
+        <div class="modal-content" style="
+            background-color: white;
+            border-radius: 12px;
+            padding: 24px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: modalFadeIn 0.3s ease-out;
+        ">
+            <div class="modal-header" style="
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+                padding-bottom: 16px;
+                border-bottom: 1px solid #eee;
+            ">
+                <div class="warning-icon" style="
+                    color: #ff4757;
+                    font-size: 24px;
+                    margin-right: 12px;
+                ">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3 style="
+                    color: #2c3e50;
+                    font-size: 18px;
+                    font-weight: 600;
+                    margin: 0;
+                ">确认删除</h3>
+            </div>
+            <div class="modal-body" style="margin-bottom: 24px;">
+                <p style="
+                    color: #5a6c7d;
+                    line-height: 1.5;
+                    margin: 0;
+                ">确定要删除这个附件吗？删除后无法恢复。</p>
+            </div>
+            <div class="modal-footer" style="
+                display: flex;
+                justify-content: flex-end;
+                gap: 12px;
+            ">
+                <button id="cancel-delete" class="cancel-btn" style="
+                    padding: 8px 20px;
+                    background-color: #f8f9fa;
+                    color: #2c3e50;
+                    border: 1px solid #ddd;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-weight: 500;
+                    transition: all 0.3s ease;
+                ">
+                    取消
+                </button>
+                <button id="confirm-delete" class="confirm-btn" style="
+                    padding: 8px 20px;
+                    background-color: #ff4757;
+                    color: white;
+                    border: none;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-weight: 500;
+                    transition: all 0.3s ease;
+                ">
+                    确认删除
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* 模态框动画 */
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 按钮交互效果 */
+        .cancel-btn:hover {
+            background-color: #e9ecef;
+            border-color: #adb5bd;
+        }
+        
+        .confirm-btn:hover {
+            background-color: #ff3742;
+            box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .modal-content {
+                margin: 20px;
+            }
+        }
+    </style>
+
+    <script>
+        // 全局变量，用于存储当前要删除的附件信息
+        let currentAttachmentInfo = null;
+        
+        // 修改删除附件函数，使用自定义模态框
+        function deleteAttachment(attachmentId, buttonElement) {
+            // 如果按钮已禁用，则不执行删除操作
+            if (buttonElement.disabled) {
+                return;
+            }
+            
+            // 存储当前要删除的附件信息
+            currentAttachmentInfo = {
+                id: attachmentId,
+                button: buttonElement,
+                row: buttonElement.closest('tr')
+            };
+            
+            // 显示自定义的删除确认模态框
+            const modal = document.getElementById('delete-confirm-modal');
+            modal.style.display = 'flex';
+            
+            // 添加动画效果
+            setTimeout(() => {
+                modal.querySelector('.modal-content').style.opacity = '1';
+            }, 10);
+        }
+        
+        // 关闭删除确认模态框
+        function closeDeleteConfirmModal() {
+            const modal = document.getElementById('delete-confirm-modal');
+            modal.style.display = 'none';
+            currentAttachmentInfo = null;
+        }
+        
+        // 确认删除操作
+        function confirmDelete() {
+            if (!currentAttachmentInfo) {
+                return;
+            }
+            
+            const { id, button, row } = currentAttachmentInfo;
+            
+            // 关闭模态框
+            closeDeleteConfirmModal();
+            
+            // 显示加载状态
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 删除中...';
+            button.disabled = true;
+            
+            // 发送删除请求 - 这里保留原有的删除逻辑
+            fetch(`/admin/delete_attachment/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // 从表格中移除行
+                    if (row) {
+                        // 添加淡出动画
+                        row.style.opacity = '0';
+                        row.style.transition = 'opacity 0.5s ease';
+                        setTimeout(() => {
+                            row.remove();
+                            // 检查是否还有行
+                            const remainingRows = document.querySelectorAll('#files-table tbody tr');
+                            if (remainingRows.length === 0) {
+                                const tableContainer = document.querySelector('.table-container');
+                                tableContainer.innerHTML += `
+                                    <div style="text-align: center; padding: 40px; color: #6c757d;">
+                                        <i class="fas fa-folder-open" style="font-size: 48px; margin-bottom: 15px;"></i>
+                                        <p>暂无文件</p>
+                                    </div>
+                                `;
+                            }
+                        }, 500);
+                    }
+                    
+                    // 显示成功消息
+                    showMessage('文件删除成功', 'success');
+                } else {
+                    // 恢复按钮状态
+                    button.innerHTML = '<i class="fas fa-trash-alt"></i> 删除';
+                    button.disabled = false;
+                    
+                    // 显示错误消息
+                    showMessage('删除失败: ' + data.message, 'error');
+                }
+            })
+            .catch(error => {
+                // 恢复按钮状态
+                button.innerHTML = '<i class="fas fa-trash-alt"></i> 删除';
+                button.disabled = false;
+                
+                // 显示错误消息
+                showMessage('请求失败: ' + error.message, 'error');
+            });
+        }
+        
+        // 为模态框按钮添加事件监听
+        document.addEventListener('DOMContentLoaded', function() {
+            // 取消删除按钮
+            document.getElementById('cancel-delete').addEventListener('click', closeDeleteConfirmModal);
+            
+            // 确认删除按钮
+            document.getElementById('confirm-delete').addEventListener('click', confirmDelete);
+            
+            // 点击模态框外部关闭模态框
+            document.getElementById('delete-confirm-modal').addEventListener('click', function(event) {
+                if (event.target === this) {
+                    closeDeleteConfirmModal();
+                }
+            });
+            
+            // 按下ESC键关闭模态框
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && document.getElementById('delete-confirm-modal').style.display === 'flex') {
+                    closeDeleteConfirmModal();
+                }
+            });
+        });
+        
+        // 显示消息函数
+        function showMessage(message, messageType) {
+            // 检查是否已有消息元素
+            let messageElement = document.querySelector('.message');
+            
+            if (!messageElement) {
+                // 创建消息元素
+                messageElement = document.createElement('div');
+                const container = document.querySelector('.container');
+                const firstChild = container.firstChild;
+                container.insertBefore(messageElement, firstChild);
+            }
+            
+            // 设置消息内容和类型
+            messageElement.textContent = message;
+            messageElement.className = `message ${messageType}`;
+            messageElement.style.display = 'block';
+            
+            // 3秒后自动隐藏消息
+            setTimeout(() => {
+                messageElement.style.opacity = '0';
+                messageElement.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    messageElement.style.display = 'none';
+                }, 500);
+            }, 3000);
+        }
+    </script>

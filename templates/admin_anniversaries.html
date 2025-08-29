@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>后台管理 - 纪念日管理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .admin-nav {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .admin-nav a {
+            color: #00b894;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .admin-nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* 美化表格头部链接样式 */
+        table th a {
+            color: #2c3e50;
+            /* 初始颜色 */
+            text-decoration: none;
+            /* 移除默认下划线 */
+            display: inline-block;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        table th a:hover {
+            color: #00b894;
+            /* 鼠标悬停颜色 */
+            border-bottom: 2px solid transparent;
+            /* 移除悬停下划线 */
+        }
+
+        table th a:active {
+            color: #00a085;
+            /* 点击时颜色 */
+            transform: translateY(1px);
+            /* 轻微下移效果 */
+        }
+
+        table th a:visited {
+            color: #2c3e50;
+            /* 已访问链接颜色保持不变 */
+        }
+
+        /* 当前排序的列头样式 */
+        table th a.sort-active {
+            color: #00b894;
+            font-weight: bold;
+        }
+
+        /* 表单样式 */
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #00b894;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #00a085;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        /* 表格样式 */
+        .table-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        /* 消息提示 */
+        .message {
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* 拖拽样式 */
+        tr[draggable="true"] {
+            transition: transform 0.2s;
+        }
+
+        tr.drag-over {
+            background-color: #e3f2fd !important;
+            border-top: 2px dashed #2196f3;
+        }
+
+        tr[draggable="true"]:hover td:first-child {
+            background-color: #f5f5f5;
+        }
+
+        /* 优化删除按钮样式 */
+        .btn.btn-danger {
+            transition: all 0.3s ease;
+        }
+
+        .btn.btn-danger:hover {
+            background-color: #c82333;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn.btn-danger:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 2px rgba(220, 53, 69, 0.3);
+        }
+    </style>
+    <!-- 引入 Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>后台管理系统</h1>
+
+        <!-- 管理导航 -->
+        <div class="admin-nav">
+            <a href="/admin_anniversaries"><i class="fas fa-calendar-alt"></i> 纪念日管理</a>
+            <a href="/admin_basic_info"><i class="fas fa-cog"></i> 基础信息管理</a>
+            <a href="/admin_attachments"><i class="fas fa-file"></i> 附件管理</a>
+        </div>
+
+        <!-- 消息提示 -->
+        {% if message %}
+        <div class="message {{ message_type }}">
+            {{ message }}
+        </div>
+        {% endif %}
+
+        <!-- 添加纪念日表单 - 隐藏 -->
+        <div class="form-container" style="display: none;">
+            <h2>添加纪念日</h2>
+            <form action="/admin/add" method="post">
+                <div class="form-group">
+                    <label for="title">标题</label>
+                    <input type="text" id="title" name="title" required placeholder="请输入纪念日标题">
+                </div>
+
+                <div class="form-group">
+                    <label for="date">日期</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="icon">图标</label>
+                    <select id="icon" name="icon" required>
+                        <option value="heart">心形 (heart)</option>
+                        <option value="star">星星 (star)</option>
+                        <option value="home">家 (home)</option>
+                        <option value="map-marker-alt">地图标记 (map-marker-alt)</option>
+                        <option value="ring">戒指 (ring)</option>
+                        <option value="sync-alt">同步 (sync-alt)</option>
+                        <option value="handshake">握手 (handshake)</option>
+                        <option value="plane">飞机 (plane)</option>
+                        <option value="coffee">咖啡 (coffee)</option>
+                        <option value="fire">火焰 (fire)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="icon_color">图标颜色</label>
+                    <select id="icon_color" name="icon_color">
+                        <option value="">默认</option>
+                        <option value="text-primary">蓝色</option>
+                        <option value="text-danger">红色</option>
+                        <option value="text-success">绿色</option>
+                        <option value="text-warning">黄色</option>
+                        <option value="text-info">青色</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="card_color">卡片颜色</label>
+                    <select id="card_color" name="card_color" required>
+                        <option value="card-red">红色</option>
+                        <option value="card-blue">蓝色</option>
+                        <option value="card-green">绿色</option>
+                        <option value="card-purple">紫色</option>
+                        <option value="card-dark">深色</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="is_future">是否为未来日期</label>
+                    <input type="checkbox" id="is_future" name="is_future" style="width: auto;">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> 添加</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 纪念日列表 -->
+        <div class="table-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2>纪念日列表</h2>
+                <button class="btn btn-primary" onclick="showAddModal()">
+                    <i class="fas fa-plus"></i> 添加纪念日
+                </button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 40px; cursor: move;">✥</th> <!-- 拖拽列 -->
+                        <th><a
+                                href="/admin?sort_by=title&sort_order={% if current_sort == 'title' and current_order == 'asc' %}desc{% else %}asc{% endif %}">标题
+                                <i
+                                    class="fas fa-sort-{% if current_sort == 'title' %}{% if current_order == 'asc' %}up{% else %}down{% endif %}{% else %}sort{% endif %}"></i></a>
+                        </th>
+                        <th><a
+                                href="/admin?sort_by=date&sort_order={% if current_sort == 'date' and current_order == 'asc' %}desc{% else %}asc{% endif %}">日期
+                                <i
+                                    class="fas fa-sort-{% if current_sort == 'date' %}{% if current_order == 'asc' %}up{% else %}down{% endif %}{% else %}sort{% endif %}"></i></a>
+                        </th>
+                        <th>图标</th>
+                        <th>卡片颜色</th>
+                        <th>是否未来</th>
+                        <th><a
+                                href="/admin?sort_by=sort_order&sort_order={% if current_sort == 'sort_order' and current_order == 'asc' %}desc{% else %}asc{% endif %}">排序
+                                {% if current_sort == 'sort_order' %}<i
+                                    class="fas fa-sort-{% if current_order == 'asc' %}up{% else %}down{% endif %}"></i>{%
+                                endif %}</a></th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="anniversaries-table-body">
+                    {% for anniversary in anniversaries %}
+                    <tr data-id="{{ anniversary.id }}" data-sort-order="{{ anniversary.sort_order }}">
+                        <td style="cursor: move; user-select: none;">⋮⋮</td> <!-- 拖拽手柄 -->
+                        <td>{{ anniversary.title }}</td>
+                        <td>{{ anniversary.date.strftime('%Y-%m-%d') }}</td>
+                        <td><i
+                                class="fas fa-{{ anniversary.icon }}{% if anniversary.icon_color %} {{ anniversary.icon_color }}{% endif %}"></i>
+                        </td>
+                        <td>{{ anniversary.card_color }}</td>
+                        <td>{{ '是' if anniversary.is_future else '否' }}</td>
+                        <td>{{ anniversary.sort_order }}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn btn-secondary" onclick="editAnniversary('{{ anniversary.id }}')">
+                                    <i class="fas fa-edit"></i> 编辑
+                                </button>
+                                <button class="btn btn-danger" onclick="deleteAnniversary('{{ anniversary.id }}')">
+                                    <i class="fas fa-trash"></i> 删除
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 编辑纪念日模态框 -->
+        <div id="editModal"
+            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+            <div style="background-color: white; padding: 20px; border-radius: 10px; width: 500px; max-width: 90%;">
+                <h3>编辑纪念日</h3>
+                <form id="editForm" action="" method="post">
+                    <div class="form-group">
+                        <label for="editTitle">标题</label>
+                        <input type="text" id="editTitle" name="title" required placeholder="请输入纪念日标题">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editDate">日期</label>
+                        <input type="date" id="editDate" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editIcon">图标</label>
+                        <select id="editIcon" name="icon" required>
+                            <option value="heart">心形 (heart)</option>
+                            <option value="star">星星 (star)</option>
+                            <option value="home">家 (home)</option>
+                            <option value="map-marker-alt">地图标记 (map-marker-alt)</option>
+                            <option value="ring">戒指 (ring)</option>
+                            <option value="sync-alt">同步 (sync-alt)</option>
+                            <option value="handshake">握手 (handshake)</option>
+                            <option value="plane">飞机 (plane)</option>
+                            <option value="coffee">咖啡 (coffee)</option>
+                            <option value="fire">火焰 (fire)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editIconColor">图标颜色</label>
+                        <select id="editIconColor" name="icon_color">
+                            <option value="">默认</option>
+                            <option value="text-primary">蓝色</option>
+                            <option value="text-danger">红色</option>
+                            <option value="text-success">绿色</option>
+                            <option value="text-warning">黄色</option>
+                            <option value="text-info">青色</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editCardColor">卡片颜色</label>
+                        <select id="editCardColor" name="card_color" required>
+                            <option value="card-red">红色</option>
+                            <option value="card-blue">蓝色</option>
+                            <option value="card-green">绿色</option>
+                            <option value="card-purple">紫色</option>
+                            <option value="card-dark">深色</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editIsFuture">是否为未来日期</label>
+                        <input type="checkbox" id="editIsFuture" name="is_future" style="width: auto;">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editSortOrder">排序值</label>
+                        <input type="number" id="editSortOrder" name="sort_order" min="1" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">保存</button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 添加纪念日模态框 -->
+        <div id="addModal"
+            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+            <div style="background-color: white; padding: 20px; border-radius: 10px; width: 500px; max-width: 90%;">
+                <h3>添加纪念日</h3>
+                <form id="addForm" action="/admin/add" method="post">
+                    <div class="form-group">
+                        <label for="addTitle">标题</label>
+                        <input type="text" id="addTitle" name="title" required placeholder="请输入纪念日标题">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="addDate">日期</label>
+                        <input type="date" id="addDate" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="addIcon">图标</label>
+                        <select id="addIcon" name="icon" required>
+                            <option value="heart">心形 (heart)</option>
+                            <option value="star">星星 (star)</option>
+                            <option value="home">家 (home)</option>
+                            <option value="map-marker-alt">地图标记 (map-marker-alt)</option>
+                            <option value="ring">戒指 (ring)</option>
+                            <option value="sync-alt">同步 (sync-alt)</option>
+                            <option value="handshake">握手 (handshake)</option>
+                            <option value="plane">飞机 (plane)</option>
+                            <option value="coffee">咖啡 (coffee)</option>
+                            <option value="fire">火焰 (fire)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="addIconColor">图标颜色</label>
+                        <select id="addIconColor" name="icon_color">
+                            <option value="">默认</option>
+                            <option value="text-primary">蓝色</option>
+                            <option value="text-danger">红色</option>
+                            <option value="text-success">绿色</option>
+                            <option value="text-warning">黄色</option>
+                            <option value="text-info">青色</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="addCardColor">卡片颜色</label>
+                        <select id="addCardColor" name="card_color" required>
+                            <option value="card-red">红色</option>
+                            <option value="card-blue">蓝色</option>
+                            <option value="card-green">绿色</option>
+                            <option value="card-purple">紫色</option>
+                            <option value="card-dark">深色</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="addIsFuture">是否为未来日期</label>
+                        <input type="checkbox" id="addIsFuture" name="is_future" style="width: auto;">
+                    </div>
+                    <div class="form-group">
+                        <label for="addSortOrder">排序值</label>
+                        <input type="number" id="addSortOrder" name="sort_order" min="1" required readonly>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">添加</button>
+                        <button type="button" class="btn btn-secondary" onclick="closeAddModal()">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 删除确认模态框 -->
+        <div id="deleteConfirmModal"
+            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; transition: opacity 0.3s ease;">
+            <div
+                style="background-color: white; padding: 30px; border-radius: 10px; width: 400px; max-width: 90%; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transform: translateY(-20px); transition: transform 0.3s ease;">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div
+                        style="display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; background-color: #fff3cd; border-radius: 50%; margin-bottom: 15px;">
+                        <i class="fas fa-exclamation-triangle text-warning" style="font-size: 28px;"></i>
+                    </div>
+                    <h3 style="color: #333; margin: 0;">确认删除</h3>
+                </div>
+                <p style="text-align: center; color: #666; margin-bottom: 25px;">确定要删除这个纪念日吗？删除后无法恢复。</p>
+                <div style="display: flex; justify-content: center; gap: 15px;">
+                    <button id="cancelDeleteBtn"
+                        style="padding: 8px 20px; border: 1px solid #ddd; background-color: white; color: #666; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
+                        取消
+                    </button>
+                    <button id="confirmDeleteBtn"
+                        style="padding: 8px 20px; border: none; background-color: #dc3545; color: white; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
+                        确认删除
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 添加纪念日模态框显示函数
+        function showAddModal() {
+            // 清空表单
+            document.getElementById('addForm').reset();
+
+            // 获取当前最大排序值
+            fetch('/admin/get_max_sort_order')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('获取最大排序值失败');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // 设置默认排序值为最大排序值+1
+                    const maxSortOrder = data.max_sort_order || 0;
+                    document.getElementById('addSortOrder').value = maxSortOrder + 1;
+                })
+                .catch(error => {
+                    console.error('获取最大排序值失败:', error);
+                    // 如果获取失败，设置为1作为默认值
+                    document.getElementById('addSortOrder').value = 1;
+                });
+
+            // 显示模态框
+            document.getElementById('addModal').style.display = 'flex';
+        }
+
+        // 关闭添加模态框
+        function closeAddModal() {
+            document.getElementById('addModal').style.display = 'none';
+        }
+
+        // 编辑纪念日
+        function editAnniversary(id) {
+            // 发送请求获取纪念日数据
+            fetch(`/admin/get/${id}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('网络响应失败');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // 填充表单数据
+                    document.getElementById('editTitle').value = data.title;
+                    document.getElementById('editDate').value = data.date;
+                    document.getElementById('editIcon').value = data.icon;
+                    document.getElementById('editIconColor').value = data.icon_color || '';
+                    document.getElementById('editCardColor').value = data.card_color;
+                    document.getElementById('editIsFuture').checked = data.is_future;
+                    document.getElementById('editSortOrder').value = data.sort_order;
+
+                    // 设置表单的action属性
+                    document.getElementById('editForm').action = `/admin/edit/${id}`;
+
+                    // 显示模态框
+                    document.getElementById('editModal').style.display = 'flex';
+                })
+                .catch(error => {
+                    console.error('获取数据失败:', error);
+                    alert('获取编辑数据失败，请重试');
+                });
+        }
+
+        // 关闭编辑模态框
+        function closeModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        // 删除纪念日
+        function deleteAnniversary(id) {
+            // 存储当前要删除的ID
+            document.getElementById('confirmDeleteBtn').setAttribute('data-id', id);
+
+            // 显示模态框
+            const modal = document.getElementById('deleteConfirmModal');
+            modal.style.display = 'flex';
+            // 触发重绘后添加动画效果
+            setTimeout(() => {
+                modal.style.opacity = '1';
+                modal.querySelector('div').style.transform = 'translateY(0)';
+            }, 10);
+        }
+
+        // 取消删除
+        function cancelDelete() {
+            const modal = document.getElementById('deleteConfirmModal');
+            modal.style.opacity = '0';
+            modal.querySelector('div').style.transform = 'translateY(-20px)';
+
+            // 动画结束后隐藏模态框
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // 确认删除
+        function confirmDelete() {
+            const id = document.getElementById('confirmDeleteBtn').getAttribute('data-id');
+            window.location.href = `/admin/delete/${id}`;
+        }
+
+        // 点击模态框外部关闭模态框
+        document.getElementById('deleteConfirmModal').addEventListener('click', function (event) {
+            if (event.target === this) {
+                cancelDelete();
+            }
+        });
+
+        // 为取消和确认按钮添加事件监听
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('cancelDeleteBtn').addEventListener('click', cancelDelete);
+            document.getElementById('confirmDeleteBtn').addEventListener('click', confirmDelete);
+
+            // 添加ESC键关闭模态框
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && document.getElementById('deleteConfirmModal').style.display === 'flex') {
+                    cancelDelete();
+                }
+            });
+        });
+
+        // 添加列头点击事件，让点击空白处也能触发排序
+        document.addEventListener('DOMContentLoaded', function () {
+            // 获取所有包含排序链接的表头
+            const sortableHeaders = document.querySelectorAll('table th');
+
+            sortableHeaders.forEach(th => {
+                // 检查th中是否包含排序链接
+                const sortLink = th.querySelector('a[href^="/admin?sort_by="]');
+
+                if (sortLink) {
+                    // 为th添加点击事件
+                    th.addEventListener('click', function (event) {
+                        // 如果点击的不是a标签本身，而是th的空白区域
+                        if (event.target !== sortLink && !sortLink.contains(event.target)) {
+                            // 触发a标签的点击事件
+                            sortLink.click();
+                        }
+                    });
+
+                    // 让表头显示为可点击状态
+                    th.style.cursor = 'pointer';
+                }
+            });
+        });
+    </script>
+
+    <!-- 拖拽排序功能 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tableBody = document.getElementById('anniversaries-table-body');
+            const rows = tableBody.querySelectorAll('tr');
+
+            let dragStartIndex;
+            let draggedRow;
+
+            // 添加拖拽事件监听
+            rows.forEach((row, index) => {
+                row.setAttribute('draggable', 'true');
+
+                // 拖拽开始事件
+                row.addEventListener('dragstart', function () {
+                    dragStartIndex = index;
+                    draggedRow = this;
+                    setTimeout(() => {
+                        this.style.opacity = '0.5';
+                    }, 0);
+                });
+
+                // 拖拽结束事件
+                row.addEventListener('dragend', function () {
+                    this.style.opacity = '1';
+                    rows.forEach(r => r.classList.remove('drag-over'));
+
+                    // 发送更新请求
+                    updateSortOrder();
+                });
+
+                // 拖拽经过事件
+                row.addEventListener('dragover', function (e) {
+                    e.preventDefault();
+                    return false;
+                });
+
+                // 拖拽进入事件
+                row.addEventListener('dragenter', function () {
+                    this.classList.add('drag-over');
+                });
+
+                // 拖拽离开事件
+                row.addEventListener('dragleave', function () {
+                    this.classList.remove('drag-over');
+                });
+
+                // 拖拽放置事件
+                row.addEventListener('drop', function (e) {
+                    e.preventDefault();
+                    const dragEndIndex = index;
+
+                    if (dragStartIndex !== dragEndIndex) {
+                        // 移动行
+                        if (dragEndIndex > dragStartIndex) {
+                            this.after(draggedRow);
+                        } else {
+                            this.before(draggedRow);
+                        }
+                    }
+
+                    this.classList.remove('drag-over');
+                });
+            });
+
+            // 更新排序函数
+            function updateSortOrder() {
+                const rows = tableBody.querySelectorAll('tr');
+                const orderData = [];
+
+                // 收集所有行的数据，准备发送到服务器
+                rows.forEach((row, index) => {
+                    const id = row.getAttribute('data-id');
+                    orderData.push({
+                        id: parseInt(id),
+                        sort_order: index + 1 // 排序值从1开始
+                    });
+                });
+
+                // 先立即更新页面上的排序值，这样用户可以立即看到变化
+                updateSortDisplay(rows);
+
+                // 然后发送请求到后端更新数据库
+                fetch('/admin/update_order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ order: orderData })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.success) {
+                            console.error('排序更新失败:', data.message);
+                            alert('排序更新失败，请重试');
+                            // 如果失败，可以刷新页面恢复原状
+                            location.reload();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('排序更新失败:', error);
+                        alert('排序更新失败，请重试');
+                        location.reload();
+                    });
+            }
+
+            // 单独的函数用于更新页面显示的排序值
+            function updateSortDisplay(rows) {
+                // 遍历所有行并更新排序值显示
+                rows.forEach((row, index) => {
+                    // 找到排序列的单元格 - 索引从7改为6，因为ID列已删除
+                    const sortOrderCell = row.cells[6]; // 排序列的新索引
+
+                    if (sortOrderCell) {
+                        sortOrderCell.textContent = index + 1;
+                    } else {
+                        // 如果没有找到，遍历所有单元格并打印内容，帮助调试
+                        console.log('无法找到排序列单元格，单元格内容:',
+                            Array.from(row.cells).map((cell, i) => `[${i}]: ${cell.textContent.trim()}`));
+                    }
+
+                    // 更新行的数据属性
+                    row.setAttribute('data-sort-order', index + 1);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

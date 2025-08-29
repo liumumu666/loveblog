@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基础信息管理 - 爱情纪念册</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+
+        .admin-nav {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .admin-nav a {
+            color: #00b894;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .admin-nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* 表单样式 */
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .info-sections {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .user-info-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .user-info-item {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .file-input {
+            margin-bottom: 10px;
+        }
+
+        .image-preview,
+        .banner-preview {
+            border: 1px dashed #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            max-height: 150px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .preview-banner {
+            max-width: 100%;
+            max-height: 200px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .file-name-display {
+            color: #6c757d;
+            font-size: 12px;
+            display: none;
+        }
+
+        .file-name-display.show {
+            display: block;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #00b894;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #00a085;
+        }
+
+       /* 消息提示 */
+    .message {
+        padding: 10px 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 100;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .message.success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .message.error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>爱情纪念册 - 后台管理</h1>
+
+        <!-- 管理导航 -->
+        <div class="admin-nav">
+            <a href="/admin_anniversaries"><i class="fas fa-calendar-alt"></i> 纪念日管理</a>
+            <a href="/admin_basic_info"><i class="fas fa-cog"></i> 基础信息管理</a>
+            <a href="/admin_attachments"><i class="fas fa-file"></i> 附件管理</a>
+        </div>
+
+        <!-- 消息提示 -->
+        {% if message %}
+        <div class="message {{ message_type }}">
+            {{ message }}
+        </div>
+        {% endif %}
+
+        <!-- 基础信息管理 -->
+        <div class="form-container">
+            <h2>基础信息管理</h2>
+            <form id="basicInfoForm" enctype="multipart/form-data">
+                <div class="info-sections">
+                    <!-- 用户信息卡片 -->
+                    <div class="info-card">
+                        <h3>用户信息</h3>
+                        <div class="user-info-grid">
+                            <div class="user-info-item">
+                                <div class="form-group">
+                                    <label for="username1">第一个用户昵称</label>
+                                    <input type="text" id="username1" name="username1" placeholder="请输入第一个用户昵称"
+                                        class="form-input">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="avatar1">上传第一个用户头像</label>
+                                    <input type="file" id="avatar1" name="avatar1" accept="image/*" class="file-input">
+                                    <div id="avatar1Preview" class="image-preview">
+                                        <img id="avatar1Img" src="" alt="头像预览" class="preview-image">
+                                        <div id="avatar1FileNameDisplay" class="file-name-display"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="user-info-item">
+                                <div class="form-group">
+                                    <label for="username2">第二个用户昵称</label>
+                                    <input type="text" id="username2" name="username2" placeholder="请输入第二个用户昵称"
+                                        class="form-input">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="avatar2">上传第二个用户头像</label>
+                                    <input type="file" id="avatar2" name="avatar2" accept="image/*" class="file-input">
+                                    <div id="avatar2Preview" class="image-preview">
+                                        <img id="avatar2Img" src="" alt="头像预览" class="preview-image">
+                                        <div id="avatar2FileNameDisplay" class="file-name-display"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 壁纸设置卡片 -->
+                    <div class="info-card">
+                        <h3>首页壁纸设置</h3>
+                        <div class="form-group">
+                            <label for="banner">上传首页壁纸</label>
+                            <input type="file" id="banner" name="banner" accept="image/*" class="file-input">
+                            <div id="bannerPreview" class="banner-preview">
+                                <img id="bannerImg" src="" alt="壁纸预览" class="preview-banner">
+                                <div id="bannerFileNameDisplay" class="file-name-display"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> 保存设置</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 显示消息提示
+        function showMessage(message, type = 'success') {
+            // 检查是否已存在消息元素，如果有则移除
+            let existingMessage = document.querySelector('.message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+
+            // 创建新的消息元素
+            const messageElement = document.createElement('div');
+            messageElement.className = `message ${type}`;
+            messageElement.textContent = message;
+
+            // 添加到页面中，放在导航下方
+            const adminNav = document.querySelector('.admin-nav');
+            if (adminNav && adminNav.nextElementSibling) {
+                adminNav.parentNode.insertBefore(messageElement, adminNav.nextElementSibling);
+            } else if (adminNav) {
+                adminNav.parentNode.appendChild(messageElement);
+            }
+
+            // 3秒后自动移除消息
+            setTimeout(() => {
+                if (messageElement && messageElement.parentNode) {
+                    // 添加淡出动画
+                    messageElement.style.transition = 'opacity 0.5s ease';
+                    messageElement.style.opacity = '0';
+
+                    // 等待动画完成后移除元素
+                    setTimeout(() => {
+                        if (messageElement && messageElement.parentNode) {
+                            messageElement.remove();
+                        }
+                    }, 500);
+                }
+            }, 3000);
+        }
+        // 获取当前用户信息
+        function loadBasicInfo() {
+            fetch('/admin/get_basic_info')
+                .then(response => response.json())
+                .then(data => {
+                    // 填充表单数据
+                    document.getElementById('username1').value = data.username1 || '';
+                    document.getElementById('username2').value = data.username2 || '';
+
+                    // 显示预览
+                    if (data.avatar1) {
+                        const avatar1Img = document.getElementById('avatar1Img');
+                        avatar1Img.src = data.avatar1;
+                        avatar1Img.style.display = 'block';
+
+                        // 从URL中提取文件名并显示
+                        const avatar1Name = data.avatar1.split('/').pop();
+                        const avatar1FileNameDisplay = document.getElementById('avatar1FileNameDisplay');
+                        avatar1FileNameDisplay.textContent = avatar1Name;
+                        avatar1FileNameDisplay.classList.add('show');
+                    }
+
+                    if (data.avatar2) {
+                        const avatar2Img = document.getElementById('avatar2Img');
+                        avatar2Img.src = data.avatar2;
+                        avatar2Img.style.display = 'block';
+
+                        // 从URL中提取文件名并显示
+                        const avatar2Name = data.avatar2.split('/').pop();
+                        const avatar2FileNameDisplay = document.getElementById('avatar2FileNameDisplay');
+                        avatar2FileNameDisplay.textContent = avatar2Name;
+                        avatar2FileNameDisplay.classList.add('show');
+                    }
+
+                    if (data.banner) {
+                        const bannerImg = document.getElementById('bannerImg');
+                        bannerImg.src = data.banner;
+                        bannerImg.style.display = 'block';
+
+                        // 从URL中提取文件名并显示
+                        const bannerName = data.banner.split('/').pop();
+                        const bannerFileNameDisplay = document.getElementById('bannerFileNameDisplay');
+                        bannerFileNameDisplay.textContent = bannerName;
+                        bannerFileNameDisplay.classList.add('show');
+                    }
+                });
+        }
+
+        // 为文件输入添加事件监听，显示选中的文件名和预览
+        document.getElementById('avatar1').addEventListener('change', function (e) {
+            if (e.target.files && e.target.files[0]) {
+                // 显示预览图片
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = document.getElementById('avatar1Img');
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                }
+                reader.readAsDataURL(e.target.files[0]);
+
+                // 显示文件名
+                const fileNameDisplay = document.getElementById('avatar1FileNameDisplay');
+                fileNameDisplay.textContent = e.target.files[0].name;
+                fileNameDisplay.classList.add('show');
+            }
+        });
+
+        document.getElementById('avatar2').addEventListener('change', function (e) {
+            if (e.target.files && e.target.files[0]) {
+                // 显示预览图片
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = document.getElementById('avatar2Img');
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                }
+                reader.readAsDataURL(e.target.files[0]);
+
+                // 显示文件名
+                const fileNameDisplay = document.getElementById('avatar2FileNameDisplay');
+                fileNameDisplay.textContent = e.target.files[0].name;
+                fileNameDisplay.classList.add('show');
+            }
+        });
+
+        document.getElementById('banner').addEventListener('change', function (e) {
+            if (e.target.files && e.target.files[0]) {
+                // 显示预览图片
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = document.getElementById('bannerImg');
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                }
+                reader.readAsDataURL(e.target.files[0]);
+
+                // 显示文件名
+                const fileNameDisplay = document.getElementById('bannerFileNameDisplay');
+                fileNameDisplay.textContent = e.target.files[0].name;
+                fileNameDisplay.classList.add('show');
+            }
+        });
+
+        // 提交基础信息表单
+        document.getElementById('basicInfoForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch('/admin/update_basic_info', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // 使用自定义消息提示代替alert
+                        showMessage('基础信息更新成功！', 'success');
+                    } else {
+                        // 使用自定义消息提示代替alert
+                        showMessage('更新失败：' + data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('更新失败:', error);
+                    // 使用自定义消息提示代替alert
+                    showMessage('更新失败，请重试', 'error');
+                });
+        });
+
+        // 页面加载完成后自动加载基础信息
+        document.addEventListener('DOMContentLoaded', loadBasicInfo);
+    </script>
+</body>
+
+</html>

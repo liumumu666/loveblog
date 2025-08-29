@@ -1,0 +1,4 @@
+instance/
+static/uploads/
+Dockerfile
+__pycache__/
