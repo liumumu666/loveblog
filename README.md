@@ -21,6 +21,9 @@
 ## 后端管理页面
 <img width="1891" height="1058" alt="image" src="https://github.com/user-attachments/assets/8d126004-91bb-402b-92da-14debbcf9203" />
 <img width="1910" height="1048" alt="image" src="https://github.com/user-attachments/assets/224803dd-9e34-4bc7-9bc1-028de6d33b5c" />
-<img width="1910" height="803" alt="image" src="https://github.com/user-attachments/assets/93fa2f84-3275-4a6b-b63d-92afbcd5c147" />
+<img width="1891" height="1020" alt="image" src="https://github.com/user-attachments/assets/7c31afb0-efe7-4718-9cc3-0e855c4fc57d" />
+<img width="1257" height="950" alt="image" src="https://github.com/user-attachments/assets/95ede5a8-a0dc-4bbf-8bcc-b68a81eabc91" />
+<img width="1910" height="1015" alt="image" src="https://github.com/user-attachments/assets/a61fe971-21cb-4a43-bce5-962cb4ad75b9" />
+
 
 
