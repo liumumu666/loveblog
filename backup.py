@@ -31,7 +31,8 @@ def register_backup_routes(bp, app, db):
                 backup_filepath = os.path.join(temp_dir, backup_filename)
                 
                 # 创建zip文件
-                with zipfile.ZipFile(backup_filepath, 'w', zipfile.ZIP_DEFLATED) as zipf:
+                zipf = zipfile.ZipFile(backup_filepath, 'w', zipfile.ZIP_DEFLATED)
+                try:
                     # 1. 备份数据库
                     db_name = "anniversaries.db"
                     
@@ -86,9 +87,22 @@ def register_backup_routes(bp, app, db):
                         json.dump(backup_info, f, ensure_ascii=False, indent=4)
                     
                     zipf.write(info_file_path, 'backup_info.json')
+                finally:
+                    # 确保zip文件正确关闭
+                    zipf.close()
                 
+                # 在Windows系统上，使用BytesIO避免文件锁定问题
+                from io import BytesIO
+                with open(backup_filepath, 'rb') as f:
+                    backup_content = f.read()
+                    
                 # 发送生成的备份文件给用户下载
-                return send_file(backup_filepath, as_attachment=True, download_name=backup_filename)
+                return send_file(
+                    BytesIO(backup_content),
+                    as_attachment=True,
+                    download_name=backup_filename,
+                    mimetype='application/zip'
+                )
                 
         except Exception as e:
             # 记录错误并返回错误消息

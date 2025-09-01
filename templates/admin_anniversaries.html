@@ -241,125 +241,125 @@
             font-weight: bold;
             border-left: 3px solid #ff4d4f;
         }
-        
+
         /* 卡片颜色样式 */
         .card-red {
             background-color: #ffebee;
             border-left: 4px solid #f44336;
         }
-        
+
         .card-blue {
             background-color: #e3f2fd;
             border-left: 4px solid #2196f3;
         }
-        
+
         .card-green {
             background-color: #e8f5e9;
             border-left: 4px solid #4caf50;
         }
-        
+
         .card-purple {
             background-color: #f3e5f5;
             border-left: 4px solid #9c27b0;
         }
-        
+
         .card-dark {
             background-color: #f5f5f5;
             border-left: 4px solid #333333;
             color: #333333;
         }
-        
+
         .card-pink {
             background-color: #fce4ec;
             border-left: 4px solid #e91e63;
         }
-        
+
         .card-yellow {
             background-color: #fff8e1;
             border-left: 4px solid #ffeb3b;
         }
-        
+
         .card-cyan {
             background-color: #e0f7fa;
             border-left: 4px solid #00bcd4;
         }
-        
+
         .card-indigo {
             background-color: #e8eaf6;
             border-left: 4px solid #3f51b5;
         }
-        
+
         .card-teal {
             background-color: #e0f2f1;
             border-left: 4px solid #009688;
         }
-        
+
         .card-orange {
             background-color: #fff3e0;
             border-left: 4px solid #ff9800;
         }
-        
+
         .card-rose {
             background-color: #ffe4e1;
             border-left: 4px solid #e91e63;
         }
-        
+
         .card-fuchsia {
             background-color: #f8bbd0;
             border-left: 4px solid #d0021b;
         }
-        
+
         .card-violet {
             background-color: #e1bee7;
             border-left: 4px solid #aa00ff;
         }
-        
+
         .card-amber {
             background-color: #fff8e1;
             border-left: 4px solid #ffc107;
         }
-        
+
         .card-lime {
             background-color: #f0f4c3;
             border-left: 4px solid #8bc34a;
         }
-        
+
         .card-blue-violet {
             background-color: #e6e6fa;
             border-left: 4px solid #8a2be2;
         }
-        
+
         .card-gray {
             background-color: #f5f5f5;
             border-left: 4px solid #9e9e9e;
         }
-        
+
         .card-light {
             background-color: #ffffff;
             border-left: 4px solid #f5f5f5;
             border: 1px solid #e0e0e0;
         }
-        
+
         .card-mint {
             background-color: #e8f5e9;
             border-left: 4px solid #66bb6a;
         }
-        
+
         .card-peach {
             background-color: #fff3e0;
             border-left: 4px solid #ffab91;
         }
-        
+
         .card-olive {
             background-color: #f1f8e9;
             border-left: 4px solid #8d6e63;
         }
-        
+
         .card-maroon {
             background-color: #fce4ec;
             border-left: 4px solid #c2185b;
         }
-        
+
         .card-navy {
             background-color: #e3f2fd;
             border-left: 4px solid #1565c0;
@@ -382,119 +382,6 @@
             {{ message }}
         </div>
         {% endif %}
-
-        <!-- 添加纪念日表单 - 隐藏 -->
-        <div class="form-container" style="display: none;">
-            <h2>添加纪念日</h2>
-            <form action="/admin/add" method="post">
-                <div class="form-group">
-                    <label for="title">标题</label>
-                    <input type="text" id="title" name="title" required placeholder="请输入纪念日标题">
-                </div>
-
-                <div class="form-group">
-                    <label for="date">日期</label>
-                    <input type="date" id="date" name="date" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="icon">图标</label>
-                    <!-- 增加更多图标选项 -->
-                    <select id="icon" name="icon" required>
-                        <option value="heart">心形 (heart)</option>
-                        <option value="star">星星 (star)</option>
-                        <option value="house">家 (house)</option>
-                        <option value="location-dot">地图标记 (location-dot)</option>
-                        <option value="gem">戒指 (gem)</option>
-                        <option value="arrows-rotate">同步 (arrows-rotate)</option>
-                        <option value="handshake">握手 (handshake)</option>
-                        <option value="plane">飞机 (plane)</option>
-                        <option value="mug-hot">咖啡 (mug-hot)</option>
-                        <option value="fire">火焰 (fire)</option>
-                        <option value="gift">礼物 (gift)</option>
-                        <option value="leaf">树叶 (leaf)</option>
-                        <option value="moon">月亮 (moon)</option>
-                        <option value="sun">太阳 (sun)</option>
-                        <option value="camera">相机 (camera)</option>
-                        <option value="book">书本 (book)</option>
-                        <option value="music">音乐 (music)</option>
-                        <option value="film">电影 (film)</option>
-                        <option value="utensils">餐具 (utensils)</option>
-                        <option value="champagne-glasses">干杯 (champagne-glasses)</option>
-                        <option value="tree">树 (tree)</option>
-                        <option value="love">爱心 (love)</option>
-                    </select>
-                    
-                    <!-- 增加更多图标颜色选项 -->
-                    <select id="icon_color" name="icon_color">
-                        <option value="">默认</option>
-                        <option value="text-primary">蓝色</option>
-                        <option value="text-danger">红色</option>
-                        <option value="text-success">绿色</option>
-                        <option value="text-warning">黄色</option>
-                        <option value="text-info">青色</option>
-                        <option value="text-purple">紫色</option>
-                        <option value="text-pink">粉色</option>
-                        <option value="text-secondary">灰色</option>
-                        <option value="text-dark">黑色</option>
-                        <option value="text-light">白色</option>
-                    </select>
-                    
-                    <!-- 增加更多卡片颜色选项 -->
-                    <select id="card_color" name="card_color" required>
-                        <option value="card-red">红色</option>
-                        <option value="card-blue">蓝色</option>
-                        <option value="card-green">绿色</option>
-                        <option value="card-purple">紫色</option>
-                        <option value="card-dark">深色</option>
-                        <option value="card-pink">粉色</option>
-                        <option value="card-yellow">黄色</option>
-                        <option value="card-cyan">青色</option>
-                        <option value="card-indigo">靛蓝色</option>
-                        <option value="card-teal">蓝绿色</option>
-                        <option value="card-orange">橙色</option>
-                    </select>
-                    
-                    <!-- 在编辑表单中也做同样的修改 -->
-                    <!-- 找到id="editIcon"、id="editIconColor"、id="editCardColor"的select元素，添加相同的选项 -->
-                    
-
-                </div>
-
-                <div class="form-group">
-                    <label for="icon_color">图标颜色</label>
-                    <select id="icon_color" name="icon_color">
-                        <option value="">默认</option>
-                        <option value="text-primary">蓝色</option>
-                        <option value="text-danger">红色</option>
-                        <option value="text-success">绿色</option>
-                        <option value="text-warning">黄色</option>
-                        <option value="text-info">青色</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="card_color">卡片颜色</label>
-                    <select id="card_color" name="card_color" required>
-                        <option value="card-red">红色</option>
-                        <option value="card-blue">蓝色</option>
-                        <option value="card-green">绿色</option>
-                        <option value="card-purple">紫色</option>
-                        <option value="card-dark">深色</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="is_future">是否为未来日期</label>
-                    <input type="checkbox" id="is_future" name="is_future" style="width: auto;">
-                </div>
-
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> 添加</button>
-                </div>
-            </form>
-        </div>
-
         <!-- 纪念日列表 -->
         <div class="table-container">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -508,20 +395,19 @@
                     <tr>
                         <th style="width: 40px; cursor: move;">✥</th> <!-- 拖拽列 -->
                         <th><a
-                                href="/admin?sort_by=title&sort_order={% if current_sort == 'title' and current_order == 'asc' %}desc{% else %}asc{% endif %}">标题
+                                href="/admin_anniversaries?sort_by=title&sort_order={% if current_sort == 'title' and current_order == 'asc' %}desc{% else %}asc{% endif %}">标题
                                 <i
                                     class="fas fa-sort-{% if current_sort == 'title' %}{% if current_order == 'asc' %}up{% else %}down{% endif %}{% else %}sort{% endif %}"></i></a>
                         </th>
                         <th><a
-                                href="/admin?sort_by=date&sort_order={% if current_sort == 'date' and current_order == 'asc' %}desc{% else %}asc{% endif %}">日期
+                                href="/admin_anniversaries?sort_by=date&sort_order={% if current_sort == 'date' and current_order == 'asc' %}desc{% else %}asc{% endif %}">日期
                                 <i
                                     class="fas fa-sort-{% if current_sort == 'date' %}{% if current_order == 'asc' %}up{% else %}down{% endif %}{% else %}sort{% endif %}"></i></a>
                         </th>
-                        <th>图标</th>
-                        <th>卡片颜色</th>
+                        <th>预览</th>
                         <th>是否未来</th>
                         <th><a
-                                href="/admin?sort_by=sort_order&sort_order={% if current_sort == 'sort_order' and current_order == 'asc' %}desc{% else %}asc{% endif %}">排序
+                                href="/admin_anniversaries?sort_by=sort_order&sort_order={% if current_sort == 'sort_order' and current_order == 'asc' %}desc{% else %}asc{% endif %}">排序
                                 {% if current_sort == 'sort_order' %}<i
                                     class="fas fa-sort-{% if current_order == 'asc' %}up{% else %}down{% endif %}"></i>{%
                                 endif %}</a></th>
@@ -534,18 +420,25 @@
                         <td style="cursor: move; user-select: none;">⋮⋮</td> <!-- 拖拽手柄 -->
                         <td>{{ anniversary.title }}</td>
                         <td>{{ anniversary.date.strftime('%Y-%m-%d') }}</td>
-                        <td><i
-                                class="fas fa-{{ anniversary.icon }}{% if anniversary.icon_color %} {{ anniversary.icon_color }}{% endif %}"></i>
+                        <td>
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <div class="anniversary-card {{ anniversary.card_color }}"
+                                    style="width: 100px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-{{ anniversary.icon }} text-dark fa-2x"></i>
+                                </div>
+                            </div>
                         </td>
-                        <td>{{ anniversary.card_color }}</td>
                         <td>{{ '是' if anniversary.is_future else '否' }}</td>
                         <td>{{ anniversary.sort_order }}</td>
                         <td>
                             <div class="action-buttons">
-                                <button class="btn btn-secondary" onclick="editAnniversary('{{ anniversary.id }}', '{{ anniversary.title }}')">
+                                <!-- 修复editAnniversary调用，移除id的单引号 -->
+                                <button class="btn btn-secondary"
+                                    onclick="editAnniversary('{{ anniversary.id }}', '{{ anniversary.title }}')">
                                     <i class="fas fa-edit"></i> 编辑
                                 </button>
                                 {% if anniversary.title != '我们在一起啦' %}
+                                <!-- 修复deleteAnniversary调用，移除id的单引号 -->
                                 <button class="btn btn-danger" onclick="deleteAnniversary('{{ anniversary.id }}')">
                                     <i class="fas fa-trash"></i> 删除
                                 </button>
@@ -557,388 +450,22 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- 编辑纪念日模态框 -->
-        <div id="editModal"
-            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
-            <div style="background-color: white; padding: 20px; border-radius: 10px; width: 500px; max-width: 90%;">
-                <h3>编辑纪念日</h3>
-                
-                <!-- 预览区域 -->
-                <div style="text-align: center; margin-bottom: 20px; padding: 15px; border-radius: 8px; background-color: #f8f9fa;">
-                    <div id="editPreviewCard" style="display: inline-block; padding: 20px; border-radius: 10px; min-width: 100px; text-align: center;">
-                        <i id="editPreviewIcon" class="fas fa-heart text-primary" style="font-size: 28px; margin-bottom: 10px;"></i>
-                    </div>
-                </div>
-                
-                <form id="editForm" action="" method="post">
-                    <div class="form-group">
-                        <label for="editTitle">标题</label>
-                        <input type="text" id="editTitle" name="title" required placeholder="请输入纪念日标题">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editDate">日期</label>
-                        <input type="date" id="editDate" name="date" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editIcon">图标</label>
-                        <div style="border: 1px solid #ddd; border-radius: 5px; padding: 10px; max-height: 150px; overflow-y: auto;">
-                            <!-- 隐藏的输入框，用于存储选择的图标值 -->
-                            <input type="hidden" id="editIcon" name="icon" required>
-                            
-                            <!-- 基本情感与爱情 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">基本情感与爱情</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="icon-option" data-value="heart" title="心形 (heart)"><i class="fas fa-heart"></i></button>
-                                    <button type="button" class="icon-option" data-value="heartbeat" title="心跳 (heartbeat)"><i class="fas fa-heartbeat"></i></button>
-                                    <button type="button" class="icon-option" data-value="heart-fill" title="实心心形 (heart-fill)"><i class="fas fa-heart-fill"></i></button>
-                                    <button type="button" class="icon-option" data-value="heart-circle" title="心形圆圈 (heart-circle)"><i class="fas fa-heart-circle"></i></button>
-                                    <button type="button" class="icon-option" data-value="heart-crack" title="破碎的心 (heart-crack)"><i class="fas fa-heart-crack"></i></button>
-                                    <button type="button" class="icon-option" data-value="heart-circle-check" title="心形对勾 (heart-circle-check)"><i class="fas fa-heart-circle-check"></i></button>
-                                    <button type="button" class="icon-option" data-value="heart-hands" title="心形双手 (heart-hands)"><i class="fas fa-heart-hands"></i></button>
-                                    <button type="button" class="icon-option" data-value="kissing" title="亲吻 (kissing)"><i class="fas fa-kissing"></i></button>
-                                    <button type="button" class="icon-option" data-value="valentine" title="情人节 (valentine)"><i class="fas fa-valentine"></i></button>
-                                    <button type="button" class="icon-option" data-value="heart-pulse" title="心跳 (heart-pulse)"><i class="fas fa-heart-pulse"></i></button>
-                                    <button type="button" class="icon-option" data-value="heart-handshake" title="心形握手 (heart-handshake)"><i class="fas fa-heart-handshake"></i></button>
-                                    <button type="button" class="icon-option" data-value="heart-star" title="心形星星 (heart-star)"><i class="fas fa-heart-star"></i></button>
-                                </div>
-                            </div>
-                            
-                            <!-- 庆祝与礼物 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">庆祝与礼物</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="icon-option" data-value="gift" title="礼物 (gift)"><i class="fas fa-gift"></i></button>
-                                    <button type="button" class="icon-option" data-value="birthday-cake" title="生日蛋糕 (birthday-cake)"><i class="fas fa-birthday-cake"></i></button>
-                                    <button type="button" class="icon-option" data-value="trophy" title="奖杯 (trophy)"><i class="fas fa-trophy"></i></button>
-                                    <button type="button" class="icon-option" data-value="medal" title="奖牌 (medal)"><i class="fas fa-medal"></i></button>
-                                    <button type="button" class="icon-option" data-value="star" title="星星 (star)"><i class="fas fa-star"></i></button>
-                                    <button type="button" class="icon-option" data-value="star-fill" title="实心星星 (star-fill)"><i class="fas fa-star-fill"></i></button>
-                                    <button type="button" class="icon-option" data-value="award" title="奖励 (award)"><i class="fas fa-award"></i></button>
-                                    <button type="button" class="icon-option" data-value="crown" title="皇冠 (crown)"><i class="fas fa-crown"></i></button>
-                                    <button type="button" class="icon-option" data-value="flag" title="旗帜 (flag)"><i class="fas fa-flag"></i></button>
-                                    <button type="button" class="icon-option" data-value="balloon" title="气球 (balloon)"><i class="fas fa-balloon"></i></button>
-                                    <button type="button" class="icon-option" data-value="fireworks" title="烟花 (fireworks)"><i class="fas fa-fireworks"></i></button>
-                                    <button type="button" class="icon-option" data-value="champagne-glasses" title="香槟杯 (champagne-glasses)"><i class="fas fa-champagne-glasses"></i></button>
-                                </div>
-                            </div>
-                            
-                            <!-- 自然元素 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">自然元素</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="icon-option" data-value="moon" title="月亮 (moon)"><i class="fas fa-moon"></i></button>
-                                    <button type="button" class="icon-option" data-value="moon-fill" title="实心月亮 (moon-fill)"><i class="fas fa-moon-fill"></i></button>
-                                    <button type="button" class="icon-option" data-value="sun" title="太阳 (sun)"><i class="fas fa-sun"></i></button>
-                                    <button type="button" class="icon-option" data-value="sun-fill" title="实心太阳 (sun-fill)"><i class="fas fa-sun-fill"></i></button>
-                                    <button type="button" class="icon-option" data-value="cloud" title="云 (cloud)"><i class="fas fa-cloud"></i></button>
-                                    <button type="button" class="icon-option" data-value="cloud-rain" title="雨云 (cloud-rain)"><i class="fas fa-cloud-rain"></i></button>
-                                    <button type="button" class="icon-option" data-value="thunderstorm" title="雷暴 (thunderstorm)"><i class="fas fa-thunderstorm"></i></button>
-                                    <button type="button" class="icon-option" data-value="snowflake" title="雪花 (snowflake)"><i class="fas fa-snowflake"></i></button>
-                                    <button type="button" class="icon-option" data-value="leaf" title="树叶 (leaf)"><i class="fas fa-leaf"></i></button>
-                                    <button type="button" class="icon-option" data-value="seedling" title="幼苗 (seedling)"><i class="fas fa-seedling"></i></button>
-                                    <button type="button" class="icon-option" data-value="palm-tree" title="棕榈树 (palm-tree)"><i class="fas fa-palm-tree"></i></button>
-                                    <button type="button" class="icon-option" data-value="tree" title="树 (tree)"><i class="fas fa-tree"></i></button>
-                                    <button type="button" class="icon-option" data-value="mountain" title="山 (mountain)"><i class="fas fa-mountain"></i></button>
-                                    <button type="button" class="icon-option" data-value="droplet" title="水滴 (droplet)"><i class="fas fa-droplet"></i></button>
-                                    <button type="button" class="icon-option" data-value="wave" title="波浪 (wave)"><i class="fas fa-wave"></i></button>
-                                    <button type="button" class="icon-option" data-value="wind" title="风 (wind)"><i class="fas fa-wind"></i></button>
-                                    <button type="button" class="icon-option" data-value="tree-deciduous" title="落叶树 (tree-deciduous)"><i class="fas fa-tree-deciduous"></i></button>
-                                    <button type="button" class="icon-option" data-value="tree-evergreen" title="常绿树 (tree-evergreen)"><i class="fas fa-tree-evergreen"></i></button>
-                                </div>
-                            </div>
-                            
-                            <!-- 生活物品 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">生活物品</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="icon-option" data-value="home" title="家 (home)"><i class="fas fa-home"></i></button>
-                                    <button type="button" class="icon-option" data-value="home-lg" title="大家 (home-lg)"><i class="fas fa-home-lg"></i></button>
-                                    <button type="button" class="icon-option" data-value="ring" title="戒指 (ring)"><i class="fas fa-ring"></i></button>
-                                    <button type="button" class="icon-option" data-value="diamond" title="钻石 (diamond)"><i class="fas fa-diamond"></i></button>
-                                    <button type="button" class="icon-option" data-value="coffee" title="咖啡 (coffee)"><i class="fas fa-coffee"></i></button>
-                                    <button type="button" class="icon-option" data-value="utensils" title="餐具 (utensils)"><i class="fas fa-utensils"></i></button>
-                                    <button type="button" class="icon-option" data-value="glass-water" title="水杯 (glass-water)"><i class="fas fa-glass-water"></i></button>
-                                    <button type="button" class="icon-option" data-value="wine-glass" title="酒杯 (wine-glass)"><i class="fas fa-wine-glass"></i></button>
-                                    <button type="button" class="icon-option" data-value="camera" title="相机 (camera)"><i class="fas fa-camera"></i></button>
-                                    <button type="button" class="icon-option" data-value="image" title="图片 (image)"><i class="fas fa-image"></i></button>
-                                    <button type="button" class="icon-option" data-value="book" title="书本 (book)"><i class="fas fa-book"></i></button>
-                                    <button type="button" class="icon-option" data-value="book-open" title="打开的书 (book-open)"><i class="fas fa-book-open"></i></button>
-                                    <button type="button" class="icon-option" data-value="pen" title="钢笔 (pen)"><i class="fas fa-pen"></i></button>
-                                    <button type="button" class="icon-option" data-value="pencil" title="铅笔 (pencil)"><i class="fas fa-pencil"></i></button>
-                                    <button type="button" class="icon-option" data-value="music" title="音乐 (music)"><i class="fas fa-music"></i></button>
-                                    <button type="button" class="icon-option" data-value="headphones" title="耳机 (headphones)"><i class="fas fa-headphones"></i></button>
-                                    <button type="button" class="icon-option" data-value="film" title="电影 (film)"><i class="fas fa-film"></i></button>
-                                    <button type="button" class="icon-option" data-value="video" title="视频 (video)"><i class="fas fa-video"></i></button>
-                                    <button type="button" class="icon-option" data-value="tv" title="电视 (tv)"><i class="fas fa-tv"></i></button>
-                                    <button type="button" class="icon-option" data-value="gamepad" title="游戏手柄 (gamepad)"><i class="fas fa-gamepad"></i></button>
-                                    <button type="button" class="icon-option" data-value="star-half" title="半星 (star-half)"><i class="fas fa-star-half"></i></button>
-                                    <button type="button" class="icon-option" data-value="star-burst" title="星形爆发 (star-burst)"><i class="fas fa-star-burst"></i></button>
-                                    <button type="button" class="icon-option" data-value="check" title="对勾 (check)"><i class="fas fa-check"></i></button>
-                                    <button type="button" class="icon-option" data-value="xmark" title="叉号 (xmark)"><i class="fas fa-xmark"></i></button>
-                                    <button type="button" class="icon-option" data-value="lightbulb" title="灯泡 (lightbulb)"><i class="fas fa-lightbulb"></i></button>
-                                    <button type="button" class="icon-option" data-value="lamp" title="台灯 (lamp)"><i class="fas fa-lamp"></i></button>
-                                    <button type="button" class="icon-option" data-value="candle" title="蜡烛 (candle)"><i class="fas fa-candle"></i></button>
-                                    <button type="button" class="icon-option" data-value="lantern" title="灯笼 (lantern)"><i class="fas fa-lantern"></i></button>
-                                    <button type="button" class="icon-option" data-value="gift-open" title="打开的礼物 (gift-open)"><i class="fas fa-gift-open"></i></button>
-                                </div>
-                            </div>
-                            
-                            <!-- 旅行与交通 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">旅行与交通</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="icon-option" data-value="plane" title="飞机 (plane)"><i class="fas fa-plane"></i></button>
-                                    <button type="button" class="icon-option" data-value="plane-departure" title="飞机起飞 (plane-departure)"><i class="fas fa-plane-departure"></i></button>
-                                    <button type="button" class="icon-option" data-value="car" title="汽车 (car)"><i class="fas fa-car"></i></button>
-                                    <button type="button" class="icon-option" data-value="bus" title="公交车 (bus)"><i class="fas fa-bus"></i></button>
-                                    <button type="button" class="icon-option" data-value="train" title="火车 (train)"><i class="fas fa-train"></i></button>
-                                    <button type="button" class="icon-option" data-value="boat" title="船 (boat)"><i class="fas fa-boat"></i></button>
-                                    <button type="button" class="icon-option" data-value="ship" title="船 (ship)"><i class="fas fa-ship"></i></button>
-                                    <button type="button" class="icon-option" data-value="bicycle" title="自行车 (bicycle)"><i class="fas fa-bicycle"></i></button>
-                                    <button type="button" class="icon-option" data-value="motorcycle" title="摩托车 (motorcycle)"><i class="fas fa-motorcycle"></i></button>
-                                    <button type="button" class="icon-option" data-value="map" title="地图 (map)"><i class="fas fa-map"></i></button>
-                                    <button type="button" class="icon-option" data-value="map-pin" title="地图标记 (map-pin)"><i class="fas fa-map-pin"></i></button>
-                                    <button type="button" class="icon-option" data-value="location-dot" title="位置点 (location-dot)"><i class="fas fa-location-dot"></i></button>
-                                    <button type="button" class="icon-option" data-value="compass" title="指南针 (compass)"><i class="fas fa-compass"></i></button>
-                                    <button type="button" class="icon-option" data-value="navigation" title="导航 (navigation)"><i class="fas fa-navigation"></i></button>
-                                </div>
-                            </div>
-                            
-                            <!-- 运动与爱好 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">运动与爱好</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="icon-option" data-value="basketball" title="篮球 (basketball)"><i class="fas fa-basketball"></i></button>
-                                    <button type="button" class="icon-option" data-value="football" title="足球 (football)"><i class="fas fa-football"></i></button>
-                                    <button type="button" class="icon-option" data-value="baseball" title="棒球 (baseball)"><i class="fas fa-baseball"></i></button>
-                                    <button type="button" class="icon-option" data-value="tennis" title="网球 (tennis)"><i class="fas fa-tennis"></i></button>
-                                    <button type="button" class="icon-option" data-value="golf-ball" title="高尔夫球 (golf-ball)"><i class="fas fa-golf-ball"></i></button>
-                                    <button type="button" class="icon-option" data-value="swimmer" title="游泳者 (swimmer)"><i class="fas fa-swimmer"></i></button>
-                                    <button type="button" class="icon-option" data-value="dumbbell" title="哑铃 (dumbbell)"><i class="fas fa-dumbbell"></i></button>
-                                    <button type="button" class="icon-option" data-value="running" title="跑步 (running)"><i class="fas fa-running"></i></button>
-                                </div>
-                            </div>
-                            
-                            <!-- 职业与工具 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">职业与工具</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="icon-option" data-value="briefcase" title="公文包 (briefcase)"><i class="fas fa-briefcase"></i></button>
-                                    <button type="button" class="icon-option" data-value="laptop" title="笔记本电脑 (laptop)"><i class="fas fa-laptop"></i></button>
-                                    <button type="button" class="icon-option" data-value="mobile-screen" title="手机 (mobile-screen)"><i class="fas fa-mobile-screen"></i></button>
-                                    <button type="button" class="icon-option" data-value="tablet-screen" title="平板 (tablet-screen)"><i class="fas fa-tablet-screen"></i></button>
-                                    <button type="button" class="icon-option" data-value="headset" title="耳机 (headset)"><i class="fas fa-headset"></i></button>
-                                    <button type="button" class="icon-option" data-value="key" title="钥匙 (key)"><i class="fas fa-key"></i></button>
-                                    <button type="button" class="icon-option" data-value="lock" title="锁 (lock)"><i class="fas fa-lock"></i></button>
-                                    <button type="button" class="icon-option" data-value="unlock" title="解锁 (unlock)"><i class="fas fa-unlock"></i></button>
-                                    <button type="button" class="icon-option" data-value="toolbox" title="工具箱 (toolbox)"><i class="fas fa-toolbox"></i></button>
-                                </div>
-                            </div>
-                            
-                            <!-- 时间与日历 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">时间与日历</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="icon-option" data-value="clock" title="时钟 (clock)"><i class="fas fa-clock"></i></button>
-                                    <button type="button" class="icon-option" data-value="stopwatch" title="秒表 (stopwatch)"><i class="fas fa-stopwatch"></i></button>
-                                    <button type="button" class="icon-option" data-value="alarm-clock" title="闹钟 (alarm-clock)"><i class="fas fa-alarm-clock"></i></button>
-                                    <button type="button" class="icon-option" data-value="calendar" title="日历 (calendar)"><i class="fas fa-calendar"></i></button>
-                                    <button type="button" class="icon-option" data-value="calendar-check" title="日历勾选 (calendar-check)"><i class="fas fa-calendar-check"></i></button>
-                                    <button type="button" class="icon-option" data-value="calendar-day" title="日历日期 (calendar-day)"><i class="fas fa-calendar-day"></i></button>
-                                </div>
-                            </div>
-                            
-                            <!-- 其他常用符号 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">其他常用符号</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="icon-option" data-value="fire" title="火焰 (fire)"><i class="fas fa-fire"></i></button>
-                                    <button type="button" class="icon-option" data-value="bolt" title="闪电 (bolt)"><i class="fas fa-bolt"></i></button>
-                                    <button type="button" class="icon-option" data-value="umbrella" title="雨伞 (umbrella)"><i class="fas fa-umbrella"></i></button>
-                                    <button type="button" class="icon-option" data-value="bell" title="铃铛 (bell)"><i class="fas fa-bell"></i></button>
-                                    <button type="button" class="icon-option" data-value="bell-ring" title="响铃 (bell-ring)"><i class="fas fa-bell-ring"></i></button>
-                                    <button type="button" class="icon-option" data-value="bell-slash" title="静音铃 (bell-slash)"><i class="fas fa-bell-slash"></i></button>
-                                    <button type="button" class="icon-option" data-value="message" title="消息 (message)"><i class="fas fa-message"></i></button>
-                                    <button type="button" class="icon-option" data-value="comment" title="评论 (comment)"><i class="fas fa-comment"></i></button>
-                                    <button type="button" class="icon-option" data-value="chat" title="聊天 (chat)"><i class="fas fa-chat"></i></button>
-                                    <button type="button" class="icon-option" data-value="share-nodes" title="分享 (share-nodes)"><i class="fas fa-share-nodes"></i></button>
-                                    <button type="button" class="icon-option" data-value="copy" title="复制 (copy)"><i class="fas fa-copy"></i></button>
-                                    <button type="button" class="icon-option" data-value="paste" title="粘贴 (paste)"><i class="fas fa-paste"></i></button>
-                                    <button type="button" class="icon-option" data-value="cut" title="剪切 (cut)"><i class="fas fa-cut"></i></button>
-                                    <button type="button" class="icon-option" data-value="trash" title="垃圾桶 (trash)"><i class="fas fa-trash"></i></button>
-                                    <button type="button" class="icon-option" data-value="recycle" title="回收 (recycle)"><i class="fas fa-recycle"></i></button>
-                                    <button type="button" class="icon-option" data-value="plus" title="加号 (plus)"><i class="fas fa-plus"></i></button>
-                                    <button type="button" class="icon-option" data-value="minus" title="减号 (minus)"><i class="fas fa-minus"></i></button>
-                                    <button type="button" class="icon-option" data-value="times" title="乘号 (times)"><i class="fas fa-times"></i></button>
-                                    <button type="button" class="icon-option" data-value="divide" title="除号 (divide)"><i class="fas fa-divide"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 图标选择的JavaScript逻辑 -->
-                        <script>
-                            // 为所有图标选项按钮添加点击事件
-                            document.querySelectorAll('.icon-option').forEach(button => {
-                                button.addEventListener('click', function() {
-                                    // 移除所有图标选项的选中状态
-                                    document.querySelectorAll('.icon-option').forEach(btn => {
-                                        btn.classList.remove('selected');
-                                        btn.style.border = '1px solid #ddd';
-                                        btn.style.backgroundColor = '#fff';
-                                    });
-                                    
-                                    // 添加当前按钮的选中状态
-                                    this.classList.add('selected');
-                                    this.style.border = '2px solid #007bff';
-                                    this.style.backgroundColor = '#f0f7ff';
-                                    
-                                    // 获取图标值并设置到隐藏输入框
-                                    const iconValue = this.getAttribute('data-value');
-                                    document.getElementById('editIcon').value = iconValue;
-                                    
-                                    // 更新预览
-                                    updatePreview('edit');
-                                });
-                            });
-                            
-                            // 设置默认选中状态
-                            document.addEventListener('DOMContentLoaded', function() {
-                                // 默认选中第一个图标
-                                const firstIcon = document.querySelector('.icon-option');
-                                if (firstIcon && !document.getElementById('editIcon').value) {
-                                    firstIcon.click();
-                                }
-                            });
-                        </script>
-                        
-                        <style>
-                            /* 图标选项按钮样式 */
-                            .icon-option {
-                                border: 1px solid #ddd;
-                                background-color: #fff;
-                                border-radius: 5px;
-                                padding: 8px;
-                                cursor: pointer;
-                                transition: all 0.2s ease;
-                                font-size: 18px;
-                                color: #555;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                aspect-ratio: 1;
-                            }
-                            
-                            .icon-option:hover {
-                                background-color: #f8f9fa;
-                                border-color: #007bff;
-                            }
-                            
-                            .icon-option.selected {
-                                border: 2px solid #007bff !important;
-                                background-color: #f0f7ff !important;
-                                color: #007bff;
-                            }
-                        </style>
-
-                    </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editIconColor">图标颜色</label>
-                        <select id="editIconColor" name="icon_color">
-                        <option value="">默认</option>
-                        <option value="text-primary">主色-蓝色</option>
-                        <option value="text-danger">危险-红色</option>
-                        <option value="text-success">成功-绿色</option>
-                        <option value="text-warning">警告-黄色</option>
-                        <option value="text-info">信息-青色</option>
-                        <option value="text-purple">紫色</option>
-                        <option value="text-pink">粉色</option>
-                        <option value="text-secondary">次要-灰色</option>
-                        <option value="text-dark">深色-黑色</option>
-                        <option value="text-light">浅色-白色</option>
-                        <option value="text-indigo">靛蓝色</option>
-                        <option value="text-blue">蓝色</option>
-                        <option value="text-cyan">青色</option>
-                        <option value="text-teal">蓝绿色</option>
-                        <option value="text-green">绿色</option>
-                        <option value="text-lime">青柠色</option>
-                        <option value="text-yellow">黄色</option>
-                        <option value="text-amber">琥珀色</option>
-                        <option value="text-orange">橙色</option>
-                        <option value="text-red">红色</option>
-                        <option value="text-rose">玫瑰色</option>
-                        <option value="text-fuchsia">紫红色</option>
-                        <option value="text-violet">紫罗兰色</option>
-                        <option value="text-blue-violet">蓝紫色</option>
-                    </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editCardColor">卡片颜色</label>
-                        <select id="editCardColor" name="card_color" required>
-                        <option value="card-red">热情红</option>
-                        <option value="card-blue">宁静蓝</option>
-                        <option value="card-green">自然绿</option>
-                        <option value="card-purple">优雅紫</option>
-                        <option value="card-dark">深沉黑</option>
-                        <option value="card-pink">浪漫粉</option>
-                        <option value="card-yellow">活力黄</option>
-                        <option value="card-cyan">清新青</option>
-                        <option value="card-indigo">神秘靛蓝</option>
-                        <option value="card-teal">水鸭绿</option>
-                        <option value="card-orange">温暖橙</option>
-                        <option value="card-rose">玫瑰红</option>
-                        <option value="card-fuchsia">紫红色</option>
-                        <option value="card-violet">紫罗兰</option>
-                        <option value="card-amber">琥珀色</option>
-                        <option value="card-lime">青柠绿</option>
-                        <option value="card-blue-violet">蓝紫色</option>
-                        <option value="card-gray">优雅灰</option>
-                        <option value="card-light">清爽白</option>
-                        <option value="card-mint">薄荷绿</option>
-                        <option value="card-peach">蜜桃色</option>
-                        <option value="card-olive">橄榄绿</option>
-                        <option value="card-maroon">栗色</option>
-                        <option value="card-navy">藏青色</option>
-                    </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editIsFuture">是否为未来日期</label>
-                        <input type="checkbox" id="editIsFuture" name="is_future" style="width: auto;">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="editSortOrder">排序值</label>
-                        <input type="number" id="editSortOrder" name="sort_order" min="1" required>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">保存</button>
-                        <button type="button" class="btn btn-secondary" onclick="closeModal()">取消</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
         <!-- 添加纪念日模态框 -->
         <div id="addModal"
-            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
-            <div style="background-color: white; padding: 20px; border-radius: 10px; width: 500px; max-width: 90%;">
+            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: flex-start; overflow-y: auto; padding: 20px 0;">
+            <div
+                style="background-color: white; padding: 20px; border-radius: 10px; width: 500px; max-width: 90%; max-height: 90vh; overflow-y: auto; margin: 20px auto;">
                 <h3>添加纪念日</h3>
-                
+
                 <!-- 预览区域 -->
-                <div style="text-align: center; margin-bottom: 20px; padding: 15px; border-radius: 8px; background-color: #f8f9fa;">
-                    <div id="previewCard" style="display: inline-block; padding: 20px; border-radius: 10px; min-width: 100px; text-align: center;">
-                        <i id="previewIcon" class="fas fa-heart text-primary" style="font-size: 28px; margin-bottom: 10px;"></i>
+                <div
+                    style="text-align: center; margin-bottom: 20px; padding: 15px; border-radius: 8px; background-color: #f8f9fa;">
+                    <div id="previewCard"
+                        style="display: inline-block; padding: 20px; border-radius: 10px; min-width: 100px; text-align: center;">
+                        <i id="previewIcon" class="fas fa-heart" style="font-size: 28px; margin-bottom: 10px;"></i>
                     </div>
                 </div>
-                
+
                 <form id="addForm" action="/admin/add" method="post">
                     <div class="form-group">
                         <label for="addTitle">标题</label>
@@ -952,317 +479,337 @@
 
                     <div class="form-group">
                         <label for="addIcon">图标</label>
-                        <div style="border: 1px solid #ddd; border-radius: 5px; padding: 10px; max-height: 150px; overflow-y: auto;">
+                        <div
+                            style="border: 1px solid #ddd; border-radius: 5px; padding: 10px; max-height: 130px; overflow-y: auto;">
                             <!-- 隐藏的输入框，用于存储选择的图标值 -->
                             <input type="hidden" id="addIcon" name="icon" required>
-                            
-                            <!-- 基本情感与爱情 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">基本情感与爱情</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="add-icon-option" data-value="heart" title="心形 (heart)"><i class="fas fa-heart"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="heartbeat" title="心跳 (heartbeat)"><i class="fas fa-heartbeat"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="heart-fill" title="实心心形 (heart-fill)"><i class="fas fa-heart-fill"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="heart-circle" title="心形圆圈 (heart-circle)"><i class="fas fa-heart-circle"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="heart-crack" title="破碎的心 (heart-crack)"><i class="fas fa-heart-crack"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="heart-circle-check" title="心形对勾 (heart-circle-check)"><i class="fas fa-heart-circle-check"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="heart-hands" title="心形双手 (heart-hands)"><i class="fas fa-heart-hands"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="kissing" title="亲吻 (kissing)"><i class="fas fa-kissing"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="valentine" title="情人节 (valentine)"><i class="fas fa-valentine"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="heart-pulse" title="心跳 (heart-pulse)"><i class="fas fa-heart-pulse"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="heart-handshake" title="心形握手 (heart-handshake)"><i class="fas fa-heart-handshake"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="heart-star" title="心形星星 (heart-star)"><i class="fas fa-heart-star"></i></button>
-                                </div>
-                            </div>
-                            
-                            <!-- 庆祝与礼物 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">庆祝与礼物</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="add-icon-option" data-value="gift" title="礼物 (gift)"><i class="fas fa-gift"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="birthday-cake" title="生日蛋糕 (birthday-cake)"><i class="fas fa-birthday-cake"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="trophy" title="奖杯 (trophy)"><i class="fas fa-trophy"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="medal" title="奖牌 (medal)"><i class="fas fa-medal"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="star" title="星星 (star)"><i class="fas fa-star"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="star-fill" title="实心星星 (star-fill)"><i class="fas fa-star-fill"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="award" title="奖励 (award)"><i class="fas fa-award"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="crown" title="皇冠 (crown)"><i class="fas fa-crown"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="flag" title="旗帜 (flag)"><i class="fas fa-flag"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="balloon" title="气球 (balloon)"><i class="fas fa-balloon"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="fireworks" title="烟花 (fireworks)"><i class="fas fa-fireworks"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="champagne-glasses" title="香槟杯 (champagne-glasses)"><i class="fas fa-champagne-glasses"></i></button>
-                                </div>
-                            </div>
-                            
-                            <!-- 自然元素 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">自然元素</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="add-icon-option" data-value="moon" title="月亮 (moon)"><i class="fas fa-moon"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="moon-fill" title="实心月亮 (moon-fill)"><i class="fas fa-moon-fill"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="sun" title="太阳 (sun)"><i class="fas fa-sun"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="sun-fill" title="实心太阳 (sun-fill)"><i class="fas fa-sun-fill"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="cloud" title="云 (cloud)"><i class="fas fa-cloud"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="cloud-rain" title="雨云 (cloud-rain)"><i class="fas fa-cloud-rain"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="thunderstorm" title="雷暴 (thunderstorm)"><i class="fas fa-thunderstorm"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="snowflake" title="雪花 (snowflake)"><i class="fas fa-snowflake"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="leaf" title="树叶 (leaf)"><i class="fas fa-leaf"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="seedling" title="幼苗 (seedling)"><i class="fas fa-seedling"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="palm-tree" title="棕榈树 (palm-tree)"><i class="fas fa-palm-tree"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="tree" title="树 (tree)"><i class="fas fa-tree"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="mountain" title="山 (mountain)"><i class="fas fa-mountain"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="droplet" title="水滴 (droplet)"><i class="fas fa-droplet"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="wave" title="波浪 (wave)"><i class="fas fa-wave"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="wind" title="风 (wind)"><i class="fas fa-wind"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="tree-deciduous" title="落叶树 (tree-deciduous)"><i class="fas fa-tree-deciduous"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="tree-evergreen" title="常绿树 (tree-evergreen)"><i class="fas fa-tree-evergreen"></i></button>
-                                </div>
-                            </div>
-                            
-                            <!-- 生活物品 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">生活物品</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="add-icon-option" data-value="home" title="家 (home)"><i class="fas fa-home"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="home-lg" title="大家 (home-lg)"><i class="fas fa-home-lg"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="ring" title="戒指 (ring)"><i class="fas fa-ring"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="diamond" title="钻石 (diamond)"><i class="fas fa-diamond"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="coffee" title="咖啡 (coffee)"><i class="fas fa-coffee"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="utensils" title="餐具 (utensils)"><i class="fas fa-utensils"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="glass-water" title="水杯 (glass-water)"><i class="fas fa-glass-water"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="wine-glass" title="酒杯 (wine-glass)"><i class="fas fa-wine-glass"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="camera" title="相机 (camera)"><i class="fas fa-camera"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="image" title="图片 (image)"><i class="fas fa-image"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="book" title="书本 (book)"><i class="fas fa-book"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="book-open" title="打开的书 (book-open)"><i class="fas fa-book-open"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="pen" title="钢笔 (pen)"><i class="fas fa-pen"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="pencil" title="铅笔 (pencil)"><i class="fas fa-pencil"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="music" title="音乐 (music)"><i class="fas fa-music"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="headphones" title="耳机 (headphones)"><i class="fas fa-headphones"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="film" title="电影 (film)"><i class="fas fa-film"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="video" title="视频 (video)"><i class="fas fa-video"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="tv" title="电视 (tv)"><i class="fas fa-tv"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="gamepad" title="游戏手柄 (gamepad)"><i class="fas fa-gamepad"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="star-half" title="半星 (star-half)"><i class="fas fa-star-half"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="star-burst" title="星形爆发 (star-burst)"><i class="fas fa-star-burst"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="check" title="对勾 (check)"><i class="fas fa-check"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="xmark" title="叉号 (xmark)"><i class="fas fa-xmark"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="lightbulb" title="灯泡 (lightbulb)"><i class="fas fa-lightbulb"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="lamp" title="台灯 (lamp)"><i class="fas fa-lamp"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="candle" title="蜡烛 (candle)"><i class="fas fa-candle"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="lantern" title="灯笼 (lantern)"><i class="fas fa-lantern"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="gift-open" title="打开的礼物 (gift-open)"><i class="fas fa-gift-open"></i></button>
-                                </div>
-                            </div>
-                            
-                            <!-- 旅行与交通 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">旅行与交通</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="add-icon-option" data-value="plane" title="飞机 (plane)"><i class="fas fa-plane"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="plane-departure" title="飞机起飞 (plane-departure)"><i class="fas fa-plane-departure"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="car" title="汽车 (car)"><i class="fas fa-car"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="bus" title="公交车 (bus)"><i class="fas fa-bus"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="train" title="火车 (train)"><i class="fas fa-train"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="boat" title="船 (boat)"><i class="fas fa-boat"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="ship" title="船 (ship)"><i class="fas fa-ship"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="bicycle" title="自行车 (bicycle)"><i class="fas fa-bicycle"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="motorcycle" title="摩托车 (motorcycle)"><i class="fas fa-motorcycle"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="map" title="地图 (map)"><i class="fas fa-map"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="map-pin" title="地图标记 (map-pin)"><i class="fas fa-map-pin"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="location-dot" title="位置点 (location-dot)"><i class="fas fa-location-dot"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="compass" title="指南针 (compass)"><i class="fas fa-compass"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="navigation" title="导航 (navigation)"><i class="fas fa-navigation"></i></button>
-                                </div>
-                            </div>
-                            
-                            <!-- 运动与爱好 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">运动与爱好</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="add-icon-option" data-value="basketball" title="篮球 (basketball)"><i class="fas fa-basketball"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="football" title="足球 (football)"><i class="fas fa-football"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="baseball" title="棒球 (baseball)"><i class="fas fa-baseball"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="tennis" title="网球 (tennis)"><i class="fas fa-tennis"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="golf-ball" title="高尔夫球 (golf-ball)"><i class="fas fa-golf-ball"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="swimmer" title="游泳者 (swimmer)"><i class="fas fa-swimmer"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="dumbbell" title="哑铃 (dumbbell)"><i class="fas fa-dumbbell"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="running" title="跑步 (running)"><i class="fas fa-running"></i></button>
-                                </div>
-                            </div>
-                            
-                            <!-- 职业与工具 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">职业与工具</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="add-icon-option" data-value="briefcase" title="公文包 (briefcase)"><i class="fas fa-briefcase"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="laptop" title="笔记本电脑 (laptop)"><i class="fas fa-laptop"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="mobile-screen" title="手机 (mobile-screen)"><i class="fas fa-mobile-screen"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="tablet-screen" title="平板 (tablet-screen)"><i class="fas fa-tablet-screen"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="headset" title="耳机 (headset)"><i class="fas fa-headset"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="key" title="钥匙 (key)"><i class="fas fa-key"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="lock" title="锁 (lock)"><i class="fas fa-lock"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="unlock" title="解锁 (unlock)"><i class="fas fa-unlock"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="toolbox" title="工具箱 (toolbox)"><i class="fas fa-toolbox"></i></button>
-                                </div>
-                            </div>
-                            
-                            <!-- 时间与日历 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">时间与日历</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="add-icon-option" data-value="clock" title="时钟 (clock)"><i class="fas fa-clock"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="stopwatch" title="秒表 (stopwatch)"><i class="fas fa-stopwatch"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="alarm-clock" title="闹钟 (alarm-clock)"><i class="fas fa-alarm-clock"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="calendar" title="日历 (calendar)"><i class="fas fa-calendar"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="calendar-check" title="日历勾选 (calendar-check)"><i class="fas fa-calendar-check"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="calendar-day" title="日历日期 (calendar-day)"><i class="fas fa-calendar-day"></i></button>
-                                </div>
-                            </div>
-                            
-                            <!-- 所有图标 -->
-                            <div style="margin-bottom: 15px;">
-                                <h5 style="margin-bottom: 8px; color: #555; font-size: 14px;">所有图标 (100个)</h5>
-                                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                                    <button type="button" class="add-icon-option" data-value="heart" title="心形 (heart)"><i class="fas fa-heart"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="star" title="星星 (star)"><i class="fas fa-star"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="fire" title="火焰 (fire)"><i class="fas fa-fire"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="bolt" title="闪电 (bolt)"><i class="fas fa-bolt"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="moon" title="月亮 (moon)"><i class="fas fa-moon"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="sun" title="太阳 (sun)"><i class="fas fa-sun"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="snowflake" title="雪花 (snowflake)"><i class="fas fa-snowflake"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="wind" title="风 (wind)"><i class="fas fa-wind"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="cloud" title="云 (cloud)"><i class="fas fa-cloud"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="droplet" title="水滴 (droplet)"><i class="fas fa-droplet"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="cloud-rain" title="雨云 (cloud-rain)"><i class="fas fa-cloud-rain"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="cloud-sun" title="晴云 (cloud-sun)"><i class="fas fa-cloud-sun"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="cloud-moon" title="月云 (cloud-moon)"><i class="fas fa-cloud-moon"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="cloud-lightning" title="雷云 (cloud-lightning)"><i class="fas fa-cloud-lightning"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="snowflake" title="雪花 (snowflake)"><i class="fas fa-snowflake"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="sun-haze" title="雾霾 (sun-haze)"><i class="fas fa-sun-haze"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="face-smile" title="微笑 (face-smile)"><i class="fas fa-face-smile"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="face-laugh-beam" title="大笑 (face-laugh-beam)"><i class="fas fa-face-laugh-beam"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="face-smile-wink" title="眨眼 (face-smile-wink)"><i class="fas fa-face-smile-wink"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="face-kiss" title="亲吻 (face-kiss)"><i class="fas fa-face-kiss"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="face-heart-eyes" title="爱心眼 (face-heart-eyes)"><i class="fas fa-face-heart-eyes"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="face-sad-tear" title="悲伤 (face-sad-tear)"><i class="fas fa-face-sad-tear"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="face-surprise" title="惊讶 (face-surprise)"><i class="fas fa-face-surprise"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="face-grin-tongue" title="吐舌头 (face-grin-tongue)"><i class="fas fa-face-grin-tongue"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="face-laugh-wink" title="偷笑 (face-laugh-wink)"><i class="fas fa-face-laugh-wink"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="face-meh" title="无奈 (face-meh)"><i class="fas fa-face-meh"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="face-angry" title="生气 (face-angry)"><i class="fas fa-face-angry"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="home" title="家 (home)"><i class="fas fa-home"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="coffee" title="咖啡 (coffee)"><i class="fas fa-coffee"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="utensils" title="餐具 (utensils)"><i class="fas fa-utensils"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="pizza-slice" title="披萨 (pizza-slice)"><i class="fas fa-pizza-slice"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="hamburger" title="汉堡 (hamburger)"><i class="fas fa-hamburger"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="beer" title="啤酒 (beer)"><i class="fas fa-beer"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="wine-glass" title="酒杯 (wine-glass)"><i class="fas fa-wine-glass"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="birthday-cake" title="生日蛋糕 (birthday-cake)"><i class="fas fa-birthday-cake"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="gift" title="礼物 (gift)"><i class="fas fa-gift"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="balloon" title="气球 (balloon)"><i class="fas fa-balloon"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="fireworks" title="烟花 (fireworks)"><i class="fas fa-fireworks"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="champagne-glasses" title="香槟杯 (champagne-glasses)"><i class="fas fa-champagne-glasses"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="tree" title="树 (tree)"><i class="fas fa-tree"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="leaf" title="叶子 (leaf)"><i class="fas fa-leaf"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="flower" title="花 (flower)"><i class="fas fa-flower"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="mountain" title="山 (mountain)"><i class="fas fa-mountain"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="waves" title="波浪 (waves)"><i class="fas fa-waves"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="volcano" title="火山 (volcano)"><i class="fas fa-volcano"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="globe" title="地球 (globe)"><i class="fas fa-globe"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="compass" title="指南针 (compass)"><i class="fas fa-compass"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="map" title="地图 (map)"><i class="fas fa-map"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="umbrella" title="雨伞 (umbrella)"><i class="fas fa-umbrella"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="dog" title="狗 (dog)"><i class="fas fa-dog"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="cat" title="猫 (cat)"><i class="fas fa-cat"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="bird" title="鸟 (bird)"><i class="fas fa-bird"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="fish" title="鱼 (fish)"><i class="fas fa-fish"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="butterfly" title="蝴蝶 (butterfly)"><i class="fas fa-butterfly"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="dragon" title="龙 (dragon)"><i class="fas fa-dragon"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="tiger" title="老虎 (tiger)"><i class="fas fa-tiger"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="dove" title="鸽子 (dove)"><i class="fas fa-dove"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="elephant" title="大象 (elephant)"><i class="fas fa-elephant"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="paw" title="爪子 (paw)"><i class="fas fa-paw"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="fox" title="狐狸 (fox)"><i class="fas fa-fox"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="rabbit" title="兔子 (rabbit)"><i class="fas fa-rabbit"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="monkey" title="猴子 (monkey)"><i class="fas fa-monkey"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="mobile-alt" title="手机 (mobile-alt)"><i class="fas fa-mobile-alt"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="phone" title="电话 (phone)"><i class="fas fa-phone"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="envelope" title="信封 (envelope)"><i class="fas fa-envelope"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="comment" title="评论 (comment)"><i class="fas fa-comment"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="message" title="消息 (message)"><i class="fas fa-message"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="chat" title="聊天 (chat)"><i class="fas fa-chat"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="video" title="视频 (video)"><i class="fas fa-video"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="camera" title="相机 (camera)"><i class="fas fa-camera"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="music" title="音乐 (music)"><i class="fas fa-music"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="headphones" title="耳机 (headphones)"><i class="fas fa-headphones"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="tv" title="电视 (tv)"><i class="fas fa-tv"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="laptop" title="笔记本电脑 (laptop)"><i class="fas fa-laptop"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="tablet-alt" title="平板 (tablet-alt)"><i class="fas fa-tablet-alt"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="keyboard" title="键盘 (keyboard)"><i class="fas fa-keyboard"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="mouse" title="鼠标 (mouse)"><i class="fas fa-mouse"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="car" title="汽车 (car)"><i class="fas fa-car"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="bike" title="自行车 (bike)"><i class="fas fa-bike"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="train" title="火车 (train)"><i class="fas fa-train"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="plane" title="飞机 (plane)"><i class="fas fa-plane"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="ship" title="船 (ship)"><i class="fas fa-ship"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="motorcycle" title="摩托车 (motorcycle)"><i class="fas fa-motorcycle"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="bus" title="公交车 (bus)"><i class="fas fa-bus"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="taxi" title="出租车 (taxi)"><i class="fas fa-taxi"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="subway" title="地铁 (subway)"><i class="fas fa-subway"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="football" title="足球 (football)"><i class="fas fa-football"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="basketball" title="篮球 (basketball)"><i class="fas fa-basketball"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="baseball" title="棒球 (baseball)"><i class="fas fa-baseball"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="volleyball" title="排球 (volleyball)"><i class="fas fa-volleyball"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="tennis-ball" title="网球 (tennis-ball)"><i class="fas fa-tennis-ball"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="gamepad" title="游戏手柄 (gamepad)"><i class="fas fa-gamepad"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="chess" title="国际象棋 (chess)"><i class="fas fa-chess"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="book" title="书 (book)"><i class="fas fa-book"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="film" title="电影 (film)"><i class="fas fa-film"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="wrench" title="扳手 (wrench)"><i class="fas fa-wrench"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="screwdriver" title="螺丝刀 (screwdriver)"><i class="fas fa-screwdriver"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="hammer" title="锤子 (hammer)"><i class="fas fa-hammer"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="axe" title="斧头 (axe)"><i class="fas fa-axe"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="key" title="钥匙 (key)"><i class="fas fa-key"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="lock" title="锁 (lock)"><i class="fas fa-lock"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="unlock" title="解锁 (unlock)"><i class="fas fa-unlock"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="bell" title="铃铛 (bell)"><i class="fas fa-bell"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="alarm-clock" title="闹钟 (alarm-clock)"><i class="fas fa-alarm-clock"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="calendar" title="日历 (calendar)"><i class="fas fa-calendar"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="clock" title="时钟 (clock)"><i class="fas fa-clock"></i></button>
-                                    <button type="button" class="add-icon-option" data-value="stopwatch" title="秒表 (stopwatch)"><i class="fas fa-stopwatch"></i></button>
-                                </div>
+
+                            <!-- 图标列表 -->
+                            <div style="display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px;">
+                                <button type="button" class="add-icon-option" data-value="house" title="房子 (house)"><i
+                                        class="fas fa-house"></i></button>
+                                <button type="button" class="add-icon-option" data-value="circle-user"
+                                    title="用户圆圈 (circle-user)"><i class="fas fa-circle-user"></i></button>
+                                <button type="button" class="add-icon-option" data-value="image" title="图片 (image)"><i
+                                        class="fas fa-image"></i></button>
+                                <button type="button" class="add-icon-option" data-value="file" title="文件 (file)"><i
+                                        class="fas fa-file"></i></button>
+                                <button type="button" class="add-icon-option" data-value="camera" title="相机 (camera)"><i
+                                        class="fas fa-camera"></i></button>
+                                <button type="button" class="add-icon-option" data-value="calendar"
+                                    title="日历 (calendar)"><i class="fas fa-calendar"></i></button>
+                                <button type="button" class="add-icon-option" data-value="cloud" title="云 (cloud)"><i
+                                        class="fas fa-cloud"></i></button>
+                                <button type="button" class="add-icon-option" data-value="truck" title="卡车 (truck)"><i
+                                        class="fas fa-truck"></i></button>
+                                <button type="button" class="add-icon-option" data-value="thumbs-up"
+                                    title="点赞 (thumbs-up)"><i class="fas fa-thumbs-up"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-smile"
+                                    title="笑脸 (face-smile)"><i class="fas fa-face-smile"></i></button>
+                                <button type="button" class="add-icon-option" data-value="headphones"
+                                    title="耳机 (headphones)"><i class="fas fa-headphones"></i></button>
+                                <button type="button" class="add-icon-option" data-value="bell" title="铃铛 (bell)"><i
+                                        class="fas fa-bell"></i></button>
+                                <button type="button" class="add-icon-option" data-value="user" title="用户 (user)"><i
+                                        class="fas fa-user"></i></button>
+                                <button type="button" class="add-icon-option" data-value="comment"
+                                    title="评论 (comment)"><i class="fas fa-comment"></i></button>
+                                <button type="button" class="add-icon-option" data-value="envelope"
+                                    title="信封 (envelope)"><i class="fas fa-envelope"></i></button>
+                                <button type="button" class="add-icon-option" data-value="eye" title="眼睛 (eye)"><i
+                                        class="fas fa-eye"></i></button>
+                                <button type="button" class="add-icon-option" data-value="font-awesome"
+                                    title="Font Awesome (font-awesome)"><i class="fas fa-font-awesome"></i></button>
+                                <button type="button" class="add-icon-option" data-value="star" title="星星 (star)"><i
+                                        class="fas fa-star"></i></button>
+                                <button type="button" class="add-icon-option" data-value="heart" title="心形 (heart)"><i
+                                        class="fas fa-heart"></i></button>
+                                <button type="button" class="add-icon-option" data-value="circle-xmark"
+                                    title="叉号圆圈 (circle-xmark)"><i class="fas fa-circle-xmark"></i></button>
+                                <button type="button" class="add-icon-option" data-value="calendar-days"
+                                    title="日历天数 (calendar-days)"><i class="fas fa-calendar-days"></i></button>
+                                <button type="button" class="add-icon-option" data-value="clipboard"
+                                    title="剪贴板 (clipboard)"><i class="fas fa-clipboard"></i></button>
+                                <button type="button" class="add-icon-option" data-value="circle-up"
+                                    title="上箭头圆圈 (circle-up)"><i class="fas fa-circle-up"></i></button>
+                                <button type="button" class="add-icon-option" data-value="circle-down"
+                                    title="下箭头圆圈 (circle-down)"><i class="fas fa-circle-down"></i></button>
+                                <button type="button" class="add-icon-option" data-value="bookmark"
+                                    title="书签 (bookmark)"><i class="fas fa-bookmark"></i></button>
+                                <button type="button" class="add-icon-option" data-value="pen-to-square"
+                                    title="笔 (pen-to-square)"><i class="fas fa-pen-to-square"></i></button>
+                                <button type="button" class="add-icon-option" data-value="eye-slash"
+                                    title="闭眼 (eye-slash)"><i class="fas fa-eye-slash"></i></button>
+                                <button type="button" class="add-icon-option" data-value="hand" title="手 (hand)"><i
+                                        class="fas fa-hand"></i></button>
+                                <button type="button" class="add-icon-option" data-value="folder"
+                                    title="文件夹 (folder)"><i class="fas fa-folder"></i></button>
+                                <button type="button" class="add-icon-option" data-value="folder-open"
+                                    title="打开文件夹 (folder-open)"><i class="fas fa-folder-open"></i></button>
+                                <button type="button" class="add-icon-option" data-value="thumbs-down"
+                                    title="点踩 (thumbs-down)"><i class="fas fa-thumbs-down"></i></button>
+                                <button type="button" class="add-icon-option" data-value="comments"
+                                    title="评论 (comments)"><i class="fas fa-comments"></i></button>
+                                <button type="button" class="add-icon-option" data-value="lemon" title="柠檬 (lemon)"><i
+                                        class="fas fa-lemon"></i></button>
+                                <button type="button" class="add-icon-option" data-value="paper-plane"
+                                    title="纸飞机 (paper-plane)"><i class="fas fa-paper-plane"></i></button>
+                                <button type="button" class="add-icon-option" data-value="compass"
+                                    title="指南针 (compass)"><i class="fas fa-compass"></i></button>
+                                <button type="button" class="add-icon-option" data-value="address-book"
+                                    title="通讯录 (address-book)"><i class="fas fa-address-book"></i></button>
+                                <button type="button" class="add-icon-option" data-value="handshake"
+                                    title="握手 (handshake)"><i class="fas fa-handshake"></i></button>
+                                <button type="button" class="add-icon-option" data-value="snowflake"
+                                    title="雪花 (snowflake)"><i class="fas fa-snowflake"></i></button>
+                                <button type="button" class="add-icon-option" data-value="sun" title="太阳 (sun)"><i
+                                        class="fas fa-sun"></i></button>
+                                <button type="button" class="add-icon-option" data-value="clock" title="时钟 (clock)"><i
+                                        class="fas fa-clock"></i></button>
+                                <button type="button" class="add-icon-option" data-value="circle" title="圆圈 (circle)"><i
+                                        class="fas fa-circle"></i></button>
+                                <button type="button" class="add-icon-option" data-value="credit-card"
+                                    title="信用卡 (credit-card)"><i class="fas fa-credit-card"></i></button>
+                                <button type="button" class="add-icon-option" data-value="copy" title="复制 (copy)"><i
+                                        class="fas fa-copy"></i></button>
+                                <button type="button" class="add-icon-option" data-value="square"
+                                    title="正方形 (square)"><i class="fas fa-square"></i></button>
+                                <button type="button" class="add-icon-option" data-value="newspaper"
+                                    title="报纸 (newspaper)"><i class="fas fa-newspaper"></i></button>
+                                <button type="button" class="add-icon-option" data-value="building"
+                                    title="建筑 (building)"><i class="fas fa-building"></i></button>
+                                <button type="button" class="add-icon-option" data-value="flag" title="旗帜 (flag)"><i
+                                        class="fas fa-flag"></i></button>
+                                <button type="button" class="add-icon-option" data-value="hand-point-up"
+                                    title="手指向上 (hand-point-up)"><i class="fas fa-hand-point-up"></i></button>
+                                <button type="button" class="add-icon-option" data-value="address-card"
+                                    title="地址卡 (address-card)"><i class="fas fa-address-card"></i></button>
+                                <button type="button" class="add-icon-option" data-value="registered"
+                                    title="注册 (registered)"><i class="fas fa-registered"></i></button>
+                                <button type="button" class="add-icon-option" data-value="moon" title="月亮 (moon)"><i
+                                        class="fas fa-moon"></i></button>
+                                <button type="button" class="add-icon-option" data-value="file-word"
+                                    title="Word文件 (file-word)"><i class="fas fa-file-word"></i></button>
+                                <button type="button" class="add-icon-option" data-value="closed-captioning"
+                                    title="字幕 (closed-captioning)"><i class="fas fa-closed-captioning"></i></button>
+                                <button type="button" class="add-icon-option" data-value="file-pdf"
+                                    title="PDF文件 (file-pdf)"><i class="fas fa-file-pdf"></i></button>
+                                <button type="button" class="add-icon-option" data-value="hospital"
+                                    title="医院 (hospital)"><i class="fas fa-hospital"></i></button>
+                                <button type="button" class="add-icon-option" data-value="square-check"
+                                    title="勾选正方形 (square-check)"><i class="fas fa-square-check"></i></button>
+                                <button type="button" class="add-icon-option" data-value="copyright"
+                                    title="版权 (copyright)"><i class="fas fa-copyright"></i></button>
+                                <button type="button" class="add-icon-option" data-value="circle-check"
+                                    title="勾选圆圈 (circle-check)"><i class="fas fa-circle-check"></i></button>
+                                <button type="button" class="add-icon-option" data-value="square-minus"
+                                    title="减号正方形 (square-minus)"><i class="fas fa-square-minus"></i></button>
+                                <button type="button" class="add-icon-option" data-value="lightbulb"
+                                    title="灯泡 (lightbulb)"><i class="fas fa-lightbulb"></i></button>
+                                <button type="button" class="add-icon-option" data-value="keyboard"
+                                    title="键盘 (keyboard)"><i class="fas fa-keyboard"></i></button>
+                                <button type="button" class="add-icon-option" data-value="clone" title="克隆 (clone)"><i
+                                        class="fas fa-clone"></i></button>
+                                <button type="button" class="add-icon-option" data-value="images"
+                                    title="多张图片 (images)"><i class="fas fa-images"></i></button>
+                                <button type="button" class="add-icon-option" data-value="window-restore"
+                                    title="窗口还原 (window-restore)"><i class="fas fa-window-restore"></i></button>
+                                <button type="button" class="add-icon-option" data-value="bell-slash"
+                                    title="静音铃铛 (bell-slash)"><i class="fas fa-bell-slash"></i></button>
+                                <button type="button" class="add-icon-option" data-value="calendar-check"
+                                    title="日历勾选 (calendar-check)"><i class="fas fa-calendar-check"></i></button>
+                                <button type="button" class="add-icon-option" data-value="calendar-minus"
+                                    title="日历减号 (calendar-minus)"><i class="fas fa-calendar-minus"></i></button>
+                                <button type="button" class="add-icon-option" data-value="calendar-plus"
+                                    title="日历加号 (calendar-plus)"><i class="fas fa-calendar-plus"></i></button>
+                                <button type="button" class="add-icon-option" data-value="calendar-xmark"
+                                    title="日历叉号 (calendar-xmark)"><i class="fas fa-calendar-xmark"></i></button>
+                                <button type="button" class="add-icon-option" data-value="circle-pause"
+                                    title="暂停圆圈 (circle-pause)"><i class="fas fa-circle-pause"></i></button>
+                                <button type="button" class="add-icon-option" data-value="circle-play"
+                                    title="播放圆圈 (circle-play)"><i class="fas fa-circle-play"></i></button>
+                                <button type="button" class="add-icon-option" data-value="circle-question"
+                                    title="问号圆圈 (circle-question)"><i class="fas fa-circle-question"></i></button>
+                                <button type="button" class="add-icon-option" data-value="circle-right"
+                                    title="右箭头圆圈 (circle-right)"><i class="fas fa-circle-right"></i></button>
+                                <button type="button" class="add-icon-option" data-value="envelope-open"
+                                    title="打开信封 (envelope-open)"><i class="fas fa-envelope-open"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-angry"
+                                    title="生气表情 (face-angry)"><i class="fas fa-face-angry"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-dizzy"
+                                    title="晕眩表情 (face-dizzy)"><i class="fas fa-face-dizzy"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-flushed"
+                                    title="脸红表情 (face-flushed)"><i class="fas fa-face-flushed"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-frown"
+                                    title="皱眉表情 (face-frown)"><i class="fas fa-face-frown"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-frown-open"
+                                    title="张嘴皱眉 (face-frown-open)"><i class="fas fa-face-frown-open"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-grimace"
+                                    title="鬼脸表情 (face-grimace)"><i class="fas fa-face-grimace"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-grin"
+                                    title="露齿笑 (face-grin)"><i class="fas fa-face-grin"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-grin-beam"
+                                    title="笑容满面 (face-grin-beam)"><i class="fas fa-face-grin-beam"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-grin-beam-sweat"
+                                    title="出汗笑 (face-grin-beam-sweat)"><i
+                                        class="fas fa-face-grin-beam-sweat"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-grin-hearts"
+                                    title="爱心笑 (face-grin-hearts)"><i class="fas fa-face-grin-hearts"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-grin-squint"
+                                    title="眯眼笑 (face-grin-squint)"><i class="fas fa-face-grin-squint"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-grin-squint-tears"
+                                    title="眯眼流泪笑 (face-grin-squint-tears)"><i
+                                        class="fas fa-face-grin-squint-tears"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-grin-stars"
+                                    title="星星眼笑 (face-grin-stars)"><i class="fas fa-face-grin-stars"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-grin-tears"
+                                    title="流泪笑 (face-grin-tears)"><i class="fas fa-face-grin-tears"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-grin-tongue"
+                                    title="吐舌笑 (face-grin-tongue)"><i class="fas fa-face-grin-tongue"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-grin-tongue-squint"
+                                    title="眯眼吐舌笑 (face-grin-tongue-squint)"><i
+                                        class="fas fa-face-grin-tongue-squint"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-grin-wide"
+                                    title="咧嘴笑 (face-grin-wide)"><i class="fas fa-face-grin-wide"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-grin-wink"
+                                    title="眨眼笑 (face-grin-wink)"><i class="fas fa-face-grin-wink"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-kiss"
+                                    title="亲吻表情 (face-kiss)"><i class="fas fa-face-kiss"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-kiss-beam"
+                                    title="带光亲吻 (face-kiss-beam)"><i class="fas fa-face-kiss-beam"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-kiss-wink-heart"
+                                    title="眨眼爱心亲吻 (face-kiss-wink-heart)"><i
+                                        class="fas fa-face-kiss-wink-heart"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-laugh"
+                                    title="大笑表情 (face-laugh)"><i class="fas fa-face-laugh"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-laugh-beam"
+                                    title="大笑满面 (face-laugh-beam)"><i class="fas fa-face-laugh-beam"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-laugh-wink"
+                                    title="眨眼大笑 (face-laugh-wink)"><i class="fas fa-face-laugh-wink"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-meh"
+                                    title="无语表情 (face-meh)"><i class="fas fa-face-meh"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-meh-blank"
+                                    title="空白表情 (face-meh-blank)"><i class="fas fa-face-meh-blank"></i></button>
+                                <button type="button" class="add-icon-option" data-value="face-rolling-eyes"
+                                    title="翻白眼 (face-rolling-eyes)"><i class="fas fa-face-rolling-eyes"></i></button>
+                                <button type="button" class="add-icon-option" data-value="file-lines"
+                                    title="文件行 (file-lines)"><i class="fas fa-file-lines"></i></button>
+                                <button type="button" class="add-icon-option" data-value="file-powerpoint"
+                                    title="PPT文件 (file-powerpoint)"><i class="fas fa-file-powerpoint"></i></button>
+                                <button type="button" class="add-icon-option" data-value="file-video"
+                                    title="视频文件 (file-video)"><i class="fas fa-file-video"></i></button>
+                                <button type="button" class="add-icon-option" data-value="file-zipper"
+                                    title="压缩文件 (file-zipper)"><i class="fas fa-file-zipper"></i></button>
+                                <button type="button" class="add-icon-option" data-value="floppy-disk"
+                                    title="软盘 (floppy-disk)"><i class="fas fa-floppy-disk"></i></button>
+                                <button type="button" class="add-icon-option" data-value="folder-closed"
+                                    title="关闭文件夹 (folder-closed)"><i class="fas fa-folder-closed"></i></button>
+                                <button type="button" class="add-icon-option" data-value="futbol" title="足球 (futbol)"><i
+                                        class="fas fa-futbol"></i></button>
+                                <button type="button" class="add-icon-option" data-value="grip" title="把手 (grip)"><i
+                                        class="fas fa-grip"></i></button>
+                                <button type="button" class="add-icon-option" data-value="hand-back-fist"
+                                    title="手背拳头 (hand-back-fist)"><i class="fas fa-hand-back-fist"></i></button>
+                                <button type="button" class="add-icon-option" data-value="hand-fist"
+                                    title="拳头 (hand-fist)"><i class="fas fa-hand-fist"></i></button>
+                                <button type="button" class="add-icon-option" data-value="hand-peace"
+                                    title="和平手势 (hand-peace)"><i class="fas fa-hand-peace"></i></button>
+                                <button type="button" class="add-icon-option" data-value="hand-point-down"
+                                    title="手指向下 (hand-point-down)"><i class="fas fa-hand-point-down"></i></button>
+                                <button type="button" class="add-icon-option" data-value="hand-point-left"
+                                    title="手指向左 (hand-point-left)"><i class="fas fa-hand-point-left"></i></button>
+                                <button type="button" class="add-icon-option" data-value="hand-point-right"
+                                    title="手指向右 (hand-point-right)"><i class="fas fa-hand-point-right"></i></button>
+                                <button type="button" class="add-icon-option" data-value="hand-pointer"
+                                    title="指针 (hand-pointer)"><i class="fas fa-hand-pointer"></i></button>
+                                <button type="button" class="add-icon-option" data-value="hand-scissors"
+                                    title="剪刀手 (hand-scissors)"><i class="fas fa-hand-scissors"></i></button>
+                                <button type="button" class="add-icon-option" data-value="hand-spock"
+                                    title="瓦肯手势 (hand-spock)"><i class="fas fa-hand-spock"></i></button>
+                                <button type="button" class="add-icon-option" data-value="hard-drive"
+                                    title="硬盘 (hard-drive)"><i class="fas fa-hard-drive"></i></button>
+                                <button type="button" class="add-icon-option" data-value="hourglass"
+                                    title="沙漏 (hourglass)"><i class="fas fa-hourglass"></i></button>
+                                <button type="button" class="add-icon-option" data-value="hourglass-half"
+                                    title="半沙漏 (hourglass-half)"><i class="fas fa-hourglass-half"></i></button>
+                                <button type="button" class="add-icon-option" data-value="id-badge"
+                                    title="身份证 (id-badge)"><i class="fas fa-id-badge"></i></button>
+                                <button type="button" class="add-icon-option" data-value="id-card"
+                                    title="ID卡 (id-card)"><i class="fas fa-id-card"></i></button>
+                                <button type="button" class="add-icon-option" data-value="life-ring"
+                                    title="救生圈 (life-ring)"><i class="fas fa-life-ring"></i></button>
+                                <button type="button" class="add-icon-option" data-value="map" title="地图 (map)"><i
+                                        class="fas fa-map"></i></button>
+                                <button type="button" class="add-icon-option" data-value="message"
+                                    title="消息 (message)"><i class="fas fa-message"></i></button>
+                                <button type="button" class="add-icon-option" data-value="money-bill-1"
+                                    title="纸币 (money-bill-1)"><i class="fas fa-money-bill-1"></i></button>
+                                <button type="button" class="add-icon-option" data-value="note-sticky"
+                                    title="便签 (note-sticky)"><i class="fas fa-note-sticky"></i></button>
+                                <button type="button" class="add-icon-option" data-value="object-group"
+                                    title="对象组 (object-group)"><i class="fas fa-object-group"></i></button>
+                                <button type="button" class="add-icon-option" data-value="object-ungroup"
+                                    title="对象解散 (object-ungroup)"><i class="fas fa-object-ungroup"></i></button>
+                                <button type="button" class="add-icon-option" data-value="paste" title="粘贴 (paste)"><i
+                                        class="fas fa-paste"></i></button>
+                                <button type="button" class="add-icon-option" data-value="rectangle-list"
+                                    title="矩形列表 (rectangle-list)"><i class="fas fa-rectangle-list"></i></button>
+                                <button type="button" class="add-icon-option" data-value="rectangle-xmark"
+                                    title="矩形叉号 (rectangle-xmark)"><i class="fas fa-rectangle-xmark"></i></button>
+                                <button type="button" class="add-icon-option" data-value="square-caret-down"
+                                    title="下三角正方形 (square-caret-down)"><i class="fas fa-square-caret-down"></i></button>
+                                <button type="button" class="add-icon-option" data-value="square-caret-left"
+                                    title="左三角正方形 (square-caret-left)"><i class="fas fa-square-caret-left"></i></button>
+                                <button type="button" class="add-icon-option" data-value="square-caret-right"
+                                    title="右三角正方形 (square-caret-right)"><i
+                                        class="fas fa-square-caret-right"></i></button>
+                                <button type="button" class="add-icon-option" data-value="square-caret-up"
+                                    title="上三角正方形 (square-caret-up)"><i class="fas fa-square-caret-up"></i></button>
+                                <button type="button" class="add-icon-option" data-value="square-full"
+                                    title="满正方形 (square-full)"><i class="fas fa-square-full"></i></button>
+                                <button type="button" class="add-icon-option" data-value="square-plus"
+                                    title="加号正方形 (square-plus)"><i class="fas fa-square-plus"></i></button>
+                                <button type="button" class="add-icon-option" data-value="star-half"
+                                    title="半星 (star-half)"><i class="fas fa-star-half"></i></button>
+                                <button type="button" class="add-icon-option" data-value="star-half-stroke"
+                                    title="半星描边 (star-half-stroke)"><i class="fas fa-star-half-stroke"></i></button>
+                                <button type="button" class="add-icon-option" data-value="trash-can"
+                                    title="垃圾桶 (trash-can)"><i class="fas fa-trash-can"></i></button>
+                                <button type="button" class="add-icon-option" data-value="window-maximize"
+                                    title="窗口最大化 (window-maximize)"><i class="fas fa-window-maximize"></i></button>
+                                <button type="button" class="add-icon-option" data-value="window-minimize"
+                                    title="窗口最小化 (window-minimize)"><i class="fas fa-window-minimize"></i></button>
                             </div>
                         </div>
-                        
+
                         <!-- 图标选择的JavaScript逻辑 -->
                         <script>
                             // 为所有图标选项按钮添加点击事件
                             document.querySelectorAll('.add-icon-option').forEach(button => {
-                                button.addEventListener('click', function() {
+                                button.addEventListener('click', function () {
                                     // 移除所有图标选项的选中状态
                                     document.querySelectorAll('.add-icon-option').forEach(btn => {
                                         btn.classList.remove('selected');
                                         btn.style.border = '1px solid #ddd';
                                         btn.style.backgroundColor = '#fff';
                                     });
-                                    
+
                                     // 添加当前按钮的选中状态
                                     this.classList.add('selected');
                                     this.style.border = '2px solid #007bff';
                                     this.style.backgroundColor = '#f0f7ff';
-                                    
+
                                     // 获取图标值并设置到隐藏输入框
                                     const iconValue = this.getAttribute('data-value');
                                     document.getElementById('addIcon').value = iconValue;
-                                    
+
                                     // 更新预览
                                     updatePreview('add');
                                 });
                             });
-                            
+
                             // 设置默认选中状态
-                            document.addEventListener('DOMContentLoaded', function() {
+                            document.addEventListener('DOMContentLoaded', function () {
                                 // 默认选中第一个图标
                                 const firstIcon = document.querySelector('.add-icon-option');
                                 if (firstIcon && !document.getElementById('addIcon').value) {
@@ -1270,7 +817,7 @@
                                 }
                             });
                         </script>
-                        
+
                         <style>
                             /* 图标选项按钮样式 */
                             .add-icon-option {
@@ -1287,12 +834,12 @@
                                 align-items: center;
                                 aspect-ratio: 1;
                             }
-                            
+
                             .add-icon-option:hover {
                                 background-color: #f8f9fa;
                                 border-color: #007bff;
                             }
-                            
+
                             .add-icon-option.selected {
                                 border: 2px solid #007bff !important;
                                 background-color: #f0f7ff !important;
@@ -1302,65 +849,124 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="addIconColor">图标颜色</label>
-                        <select id="addIconColor" name="icon_color">
-                        <option value="">默认</option>
-                        <option value="text-primary">主色-蓝色</option>
-                        <option value="text-danger">危险-红色</option>
-                        <option value="text-success">成功-绿色</option>
-                        <option value="text-warning">警告-黄色</option>
-                        <option value="text-info">信息-青色</option>
-                        <option value="text-purple">紫色</option>
-                        <option value="text-pink">粉色</option>
-                        <option value="text-secondary">次要-灰色</option>
-                        <option value="text-dark">深色-黑色</option>
-                        <option value="text-light">浅色-白色</option>
-                        <option value="text-indigo">靛蓝色</option>
-                        <option value="text-blue">蓝色</option>
-                        <option value="text-cyan">青色</option>
-                        <option value="text-teal">蓝绿色</option>
-                        <option value="text-green">绿色</option>
-                        <option value="text-lime">青柠色</option>
-                        <option value="text-yellow">黄色</option>
-                        <option value="text-amber">琥珀色</option>
-                        <option value="text-orange">橙色</option>
-                        <option value="text-red">红色</option>
-                        <option value="text-rose">玫瑰色</option>
-                        <option value="text-fuchsia">紫红色</option>
-                        <option value="text-violet">紫罗兰色</option>
-                        <option value="text-blue-violet">蓝紫色</option>
-                    </select>
+                        <label for="addCardColor">卡片颜色</label>
+
+                        <!-- 隐藏的输入框，用于存储选中的颜色值 -->
+                        <input type="hidden" id="addCardColor" name="card_color" required value="card-red">
+
+                        <!-- 可视化颜色选择器 -->
+                        <div id="colorPicker" style="margin-top: 10px;">
+                            <!-- 预设颜色选项 -->
+                                                        <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+                                <button type="button" class="preset-color" data-color="card-red" data-hex="#ff6b6b"
+                                    style="width: 30px; height: 30px; background-color: #ff6b6b; border: 2px solid #ddd; border-radius: 4px; cursor: pointer;"></button>
+                                <button type="button" class="preset-color" data-color="card-blue" data-hex="#4ecdc4"
+                                    style="width: 30px; height: 30px; background-color: #4ecdc4; border: 2px solid #ddd; border-radius: 4px; cursor: pointer;"></button>
+                                <button type="button" class="preset-color" data-color="card-green" data-hex="#45b7d1"
+                                    style="width: 30px; height: 30px; background-color: #45b7d1; border: 2px solid #ddd; border-radius: 4px; cursor: pointer;"></button>
+                                <button type="button" class="preset-color" data-color="card-yellow" data-hex="#ffeaa7"
+                                    style="width: 30px; height: 30px; background-color: #ffeaa7; border: 2px solid #ddd; border-radius: 4px; cursor: pointer;"></button>
+                                <button type="button" class="preset-color" data-color="card-purple" data-hex="#a29bfe"
+                                    style="width: 30px; height: 30px; background-color: #a29bfe; border: 2px solid #ddd; border-radius: 4px; cursor: pointer;"></button>
+                                <button type="button" class="preset-color" data-color="card-pink" data-hex="#fd79a8"
+                                    style="width: 30px; height: 30px; background-color: #fd79a8; border: 2px solid #ddd; border-radius: 4px; cursor: pointer;"></button>
+                                <button type="button" class="preset-color" data-color="card-orange" data-hex="#fdcb6e"
+                                    style="width: 30px; height: 30px; background-color: #fdcb6e; border: 2px solid #ddd; border-radius: 4px; cursor: pointer;"></button>
+                                <button type="button" class="preset-color" data-color="card-teal" data-hex="#55efc4"
+                                    style="width: 30px; height: 30px; background-color: #55efc4; border: 2px solid #ddd; border-radius: 4px; cursor: pointer;"></button>
+                                <button type="button" class="preset-color" data-color="card-gray" data-hex="#b2bec3"
+                                    style="width: 30px; height: 30px; background-color: #b2bec3; border: 2px solid #ddd; border-radius: 4px; cursor: pointer;"></button>
+                                <button type="button" class="preset-color" data-color="card-brown" data-hex="#d63031"
+                                    style="width: 30px; height: 30px; background-color: #d63031; border: 2px solid #ddd; border-radius: 4px; cursor: pointer;"></button>
+                                <button type="button" class="preset-color" data-color="card-lavender" data-hex="#6c5ce7"
+                                    style="width: 30px; height: 30px; background-color: #6c5ce7; border: 2px solid #ddd; border-radius: 4px; cursor: pointer;"></button>
+                               <button type="button" class="preset-color" data-color="card-gold" data-hex="#e17055"
+                                    style="width: 30px; height: 30px; background-color: #e17055; border: 2px solid #ddd; border-radius: 4px; cursor: pointer;"></button>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="addCardColor">卡片颜色</label>
-                        <select id="addCardColor" name="card_color" required>
-                        <option value="card-red">热情红</option>
-                        <option value="card-blue">宁静蓝</option>
-                        <option value="card-green">自然绿</option>
-                        <option value="card-purple">优雅紫</option>
-                        <option value="card-dark">深沉黑</option>
-                        <option value="card-pink">浪漫粉</option>
-                        <option value="card-yellow">活力黄</option>
-                        <option value="card-cyan">清新青</option>
-                        <option value="card-indigo">神秘靛蓝</option>
-                        <option value="card-teal">水鸭绿</option>
-                        <option value="card-orange">温暖橙</option>
-                        <option value="card-rose">玫瑰红</option>
-                        <option value="card-fuchsia">紫红色</option>
-                        <option value="card-violet">紫罗兰</option>
-                        <option value="card-amber">琥珀色</option>
-                        <option value="card-lime">青柠绿</option>
-                        <option value="card-blue-violet">蓝紫色</option>
-                        <option value="card-gray">优雅灰</option>
-                        <option value="card-light">清爽白</option>
-                        <option value="card-mint">薄荷绿</option>
-                        <option value="card-peach">蜜桃色</option>
-                        <option value="card-olive">橄榄绿</option>
-                        <option value="card-maroon">栗色</option>
-                        <option value="card-navy">藏青色</option>
-                    </select>
-                    </div>
+                    <script>
+                        // 在页面加载完成后初始化颜色选择器
+                        // 在页面加载完成后初始化颜色选择器
+                        document.addEventListener('DOMContentLoaded', function () {
+                            // 初始化预设颜色点击事件
+                            document.querySelectorAll('.preset-color').forEach(button => {
+                                button.addEventListener('click', function () {
+                                    // 移除所有预设颜色的选中状态
+                                    document.querySelectorAll('.preset-color').forEach(btn => {
+                                        btn.style.border = '2px solid #ddd';
+                                    });
+
+                                    // 设置当前选中状态
+                                    this.style.border = '2px solid #007bff';
+
+                                    // 获取颜色数据
+                                    const colorValue = this.getAttribute('data-color');
+
+                                    // 更新隐藏输入框的值
+                                    document.getElementById('addCardColor').value = colorValue;
+
+                                    // 更新预览卡片
+                                    updatePreview('add');
+                                });
+                            });
+                        });
+
+                        // 辅助函数：HSL转RGB
+                        function hslToRgb(h, s, l) {
+                            let r, g, b;
+
+                            if (s === 0) {
+                                r = g = b = l; // achromatic
+                            } else {
+                                const hue2rgb = function hue2rgb(p, q, t) {
+                                    if (t < 0) t += 1;
+                                    if (t > 1) t -= 1;
+                                    if (t < 1 / 6) return p + (q - p) * 6 * t;
+                                    if (t < 1 / 2) return q;
+                                    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+                                    return p;
+                                };
+
+                                const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                                const p = 2 * l - q;
+                                r = hue2rgb(p, q, h + 1 / 3);
+                                g = hue2rgb(p, q, h);
+                                b = hue2rgb(p, q, h - 1 / 3);
+                            }
+
+                            return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) };
+                        }
+
+                        // 辅助函数：RGB转HEX
+                        function rgbToHex(r, g, b) {
+                            return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+                        }
+
+                        // 辅助函数：添加自定义颜色类到样式表
+                        function addCustomColorClass(className, hexColor) {
+                            // 检查是否已经存在样式表
+                            let styleSheet = document.getElementById('customColorStyles');
+                            if (!styleSheet) {
+                                styleSheet = document.createElement('style');
+                                styleSheet.id = 'customColorStyles';
+                                document.head.appendChild(styleSheet);
+                            }
+
+                            // 移除已有的相同类名样式
+                            const rules = Array.from(styleSheet.sheet.cssRules);
+                            for (let i = 0; i < rules.length; i++) {
+                                if (rules[i].selectorText === `.${className}`) {
+                                    styleSheet.sheet.deleteRule(i);
+                                    break;
+                                }
+                            }
+
+                            // 添加新的样式规则
+                            styleSheet.sheet.insertRule(`.${className} { background-color: ${hexColor}; }`, styleSheet.sheet.cssRules.length);
+                        }
+                    </script>
 
                     <!-- 重新随机按钮 -->
                     <div class="form-group">
@@ -1414,29 +1020,14 @@
     </div>
 
     <script>
-        // 添加纪念日模态框显示函数
         function showAddModal() {
             // 清空表单
             document.getElementById('addForm').reset();
 
-            // 获取当前最大排序值
-            fetch('/admin/get_max_sort_order')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('获取最大排序值失败');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // 设置默认排序值为最大排序值+1
-                    const maxSortOrder = data.max_sort_order || 0;
-                    document.getElementById('addSortOrder').value = maxSortOrder + 1;
-                })
-                .catch(error => {
-                    console.error('获取最大排序值失败:', error);
-                    // 如果获取失败，设置为1作为默认值
-                    document.getElementById('addSortOrder').value = 1;
-                });
+            // 获取当前最大排序值 - 修复这个URL问题
+            // 由于后端没有对应的路由，我们使用一个替代方案
+            // 直接设置默认排序值为1
+            document.getElementById('addSortOrder').value = 1;
 
             // 随机选择所有选项
             randomizeOptions();
@@ -1445,78 +1036,88 @@
             document.getElementById('randomizeBtn').onclick = randomizeOptions;
 
             // 为选择框添加变更事件，实时更新预览
-            document.getElementById('addIconColor').addEventListener('change', updatePreview);
             document.getElementById('addCardColor').addEventListener('change', updatePreview);
+
+            // 确保表单的action属性为新增URL - 修复URL路径，移除anniversary前缀
+            document.getElementById('addForm').action = '/admin/add';
+
+            // 更新模态框标题
+            document.querySelector('#addModal h3').textContent = '添加纪念日';
 
             // 显示模态框
             document.getElementById('addModal').style.display = 'flex';
         }
 
-        // 随机选择图标和颜色的函数
         function randomizeOptions() {
-            // 随机选择图标 - 现在使用图形界面的按钮
+            // 随机选择图标
             const iconOptions = document.querySelectorAll('.add-icon-option');
             if (iconOptions.length > 0) {
                 const randomIconIndex = Math.floor(Math.random() * iconOptions.length);
                 iconOptions[randomIconIndex].click(); // 触发点击事件来选择图标
             }
 
-            // 随机选择图标颜色（有30%几率不选择颜色，保持默认）
-            const iconColorSelect = document.getElementById('addIconColor');
-            const randomColorIndex = Math.random() < 0.3 ? 0 : Math.floor(Math.random() * (iconColorSelect.options.length - 1)) + 1;
-            iconColorSelect.selectedIndex = randomColorIndex;
-
-            // 随机选择卡片颜色
-            const cardColorSelect = document.getElementById('addCardColor');
-            const randomCardColorIndex = Math.floor(Math.random() * cardColorSelect.options.length);
-            cardColorSelect.selectedIndex = randomCardColorIndex;
+            // 随机选择卡片颜色 - 更新为使用新的颜色选择器
+            const presetColorButtons = document.querySelectorAll('.preset-color');
+            if (presetColorButtons.length > 0) {
+                const randomColorIndex = Math.floor(Math.random() * presetColorButtons.length);
+                presetColorButtons[randomColorIndex].click(); // 触发点击事件来选择预设颜色
+            }
 
             // 更新预览
-            updatePreview();
+            updatePreview('add');
         }
 
-        // 更新预览效果的函数 - 支持添加和编辑两种模态框
-        function updatePreview(modalType = 'add') {
-            // 根据模态框类型选择正确的元素ID
-            const iconSelectId = modalType === 'add' ? 'addIcon' : 'editIcon';
-            const iconColorSelectId = modalType === 'add' ? 'addIconColor' : 'editIconColor';
-            const cardColorSelectId = modalType === 'add' ? 'addCardColor' : 'editCardColor';
-            const previewIconId = modalType === 'add' ? 'previewIcon' : 'editPreviewIcon';
-            const previewCardId = modalType === 'add' ? 'previewCard' : 'editPreviewCard';
+        function updatePreview(type) {
+            // 获取表单值
+            const icon = document.getElementById('addIcon').value;
+            const cardColor = document.getElementById('addCardColor').value;
 
-            const previewIcon = document.getElementById(previewIconId);
-            const previewCard = document.getElementById(previewCardId);
-            const iconSelect = document.getElementById(iconSelectId);
-            const iconColorSelect = document.getElementById(iconColorSelectId);
-            const cardColorSelect = document.getElementById(cardColorSelectId);
+            // 获取预览区域元素
+            const previewIcon = document.getElementById('previewIcon');
+            const previewCard = document.getElementById('previewCard');
 
-            // 获取当前选择的值
-            const iconValue = iconSelect ? iconSelect.value : '';
-            const iconColorValue = iconColorSelect ? iconColorSelect.value : '';
-            const cardColorValue = cardColorSelect ? cardColorSelect.value : '';
+            // 更新图标
+            if (previewIcon) {
+                // 移除所有旧的图标类
+                const iconClasses = Array.from(previewIcon.classList).filter(cls => cls.startsWith('fa-'));
+                iconClasses.forEach(cls => previewIcon.classList.remove(cls));
 
-            // 如果找不到元素，不执行后续操作
-            if (!previewIcon || !previewCard) return;
-
-            // 清除旧的类名
-            previewIcon.className = 'fas';
-            previewCard.className = '';
-
-            // 添加新的类名
-            if (iconValue) {
-                previewIcon.classList.add('fa-' + iconValue);
+                // 添加新的图标类 - 检查icon是否为空
+                if (icon && icon.trim() !== '') {
+                    previewIcon.classList.add('fa-' + icon);
+                }
             }
-            if (iconColorValue) {
-                previewIcon.classList.add(iconColorValue);
-            }
-            if (cardColorValue) {
-                previewCard.classList.add(cardColorValue);
+
+            // 更新卡片颜色
+            if (previewCard) {
+                // 移除所有旧的卡片颜色类
+                const cardColorClasses = Array.from(previewCard.classList).filter(cls => cls.startsWith('card-'));
+                cardColorClasses.forEach(cls => previewCard.classList.remove(cls));
+
+                // 添加新的卡片颜色类 - 检查cardColor是否为空
+                if (cardColor && cardColor.trim() !== '') {
+                    previewCard.classList.add(cardColor);
+                }
             }
         }
 
         // 关闭添加模态框
         function closeAddModal() {
             document.getElementById('addModal').style.display = 'none';
+
+            // 恢复提交按钮文本为"添加"
+            const submitButton = document.querySelector('#addModal button[type="submit"]');
+            if (submitButton) {
+                submitButton.textContent = '添加';
+            }
+
+            // 清理默认标题提示
+            const addTitleInput = document.getElementById('addTitle');
+            addTitleInput.disabled = false;
+            const existingTip = addTitleInput.parentNode.querySelector('.default-title-tip');
+            if (existingTip) {
+                existingTip.remove();
+            }
         }
 
         // 编辑纪念日
@@ -1524,57 +1125,76 @@
             // 发送请求获取纪念日数据
             fetch(`/admin/get/${id}`)
                 .then(response => {
+                    console.log('响应状态:', response.status);
                     if (!response.ok) {
-                        throw new Error('网络响应失败');
+                        throw new Error('网络响应失败: ' + response.status);
                     }
                     return response.json();
                 })
                 .then(data => {
-                    // 填充表单数据
-                    const editTitleInput = document.getElementById('editTitle');
-                    editTitleInput.value = data.title;
-                    
+                    // 填充表单数据到addModal
+                    const addTitleInput = document.getElementById('addTitle');
+                    addTitleInput.value = data.title;
+
                     // 如果是"我们在一起啦"，禁用标题输入框
                     if (data.title === '我们在一起啦') {
-                        editTitleInput.disabled = true;
+                        addTitleInput.disabled = true;
                         // 添加提示信息
-                        if (!editTitleInput.nextElementSibling || !editTitleInput.nextElementSibling.classList.contains('default-title-tip')) {
+                        if (!addTitleInput.nextElementSibling || !addTitleInput.nextElementSibling.classList.contains('default-title-tip')) {
                             const tip = document.createElement('div');
                             tip.className = 'default-title-tip';
                             tip.style.color = '#666';
                             tip.style.fontSize = '12px';
                             tip.style.marginTop = '5px';
                             tip.textContent = '默认纪念日标题不可修改';
-                            editTitleInput.parentNode.appendChild(tip);
+                            addTitleInput.parentNode.appendChild(tip);
                         }
                     } else {
-                        editTitleInput.disabled = false;
+                        addTitleInput.disabled = false;
                         // 移除可能存在的提示信息
-                        const existingTip = editTitleInput.parentNode.querySelector('.default-title-tip');
+                        const existingTip = addTitleInput.parentNode.querySelector('.default-title-tip');
                         if (existingTip) {
                             existingTip.remove();
                         }
                     }
-                    
-                    document.getElementById('editDate').value = data.date;
-                    document.getElementById('editIcon').value = data.icon;
-                    document.getElementById('editIconColor').value = data.icon_color || '';
-                    document.getElementById('editCardColor').value = data.card_color;
-                    document.getElementById('editIsFuture').checked = data.is_future;
-                    document.getElementById('editSortOrder').value = data.sort_order;
 
-                    // 设置表单的action属性
-                    document.getElementById('editForm').action = `/admin/edit/${id}`;
+                    document.getElementById('addDate').value = data.date;
+                    document.getElementById('addIcon').value = data.icon;
+                    document.getElementById('addCardColor').value = data.card_color;
+                    document.getElementById('addIsFuture').checked = data.is_future;
+                    document.getElementById('addSortOrder').value = data.sort_order;
+
+                    // 设置表单的action属性为编辑URL
+                    document.getElementById('addForm').action = `/admin/edit/${id}`;
+
+                    // 添加隐藏字段标识这是编辑操作
+                    let hiddenField = document.getElementById('editMode');
+                    if (!hiddenField) {
+                        hiddenField = document.createElement('input');
+                        hiddenField.type = 'hidden';
+                        hiddenField.id = 'editMode';
+                        hiddenField.name = 'edit_mode';
+                        document.getElementById('addForm').appendChild(hiddenField);
+                    }
+                    hiddenField.value = 'true';
+
+                    // 更新模态框标题
+                    document.querySelector('#addModal h3').textContent = '编辑纪念日';
+
+                    // 更新提交按钮文本为"保存"
+                    document.querySelector('#addModal button[type="submit"]').textContent = '保存';
 
                     // 显示模态框
-                    document.getElementById('editModal').style.display = 'flex';
-                    
+                    document.getElementById('addModal').style.display = 'flex';
+
+                    // 初始化重新随机按钮事件
+                    document.getElementById('randomizeBtn').onclick = randomizeOptions;
+
                     // 绑定变更事件，实时更新预览
-                    document.getElementById('editIcon').addEventListener('change', function() { updatePreview('edit'); });
-                    document.getElementById('editIconColor').addEventListener('change', function() { updatePreview('edit'); });
-                    document.getElementById('editCardColor').addEventListener('change', function() { updatePreview('edit'); });
-                    
-                    // 初始化预览
+                    document.getElementById('addIcon').addEventListener('change', updatePreview);
+                    document.getElementById('addCardColor').addEventListener('change', updatePreview);
+
+                    // 初始化预览 - 传递类型参数
                     updatePreview('edit');
                 })
                 .catch(error => {
@@ -1583,9 +1203,9 @@
                 });
         }
 
-        // 关闭编辑模态框
+        // 关闭编辑模态框（现在复用添加模态框的关闭函数）
         function closeModal() {
-            document.getElementById('editModal').style.display = 'none';
+            closeAddModal();
         }
 
         // 删除纪念日
@@ -1618,6 +1238,7 @@
         // 确认删除
         function confirmDelete() {
             const id = document.getElementById('confirmDeleteBtn').getAttribute('data-id');
+            // 修复删除URL路径，移除anniversary前缀
             window.location.href = `/admin/delete/${id}`;
         }
 
@@ -1633,10 +1254,23 @@
             document.getElementById('cancelDeleteBtn').addEventListener('click', cancelDelete);
             document.getElementById('confirmDeleteBtn').addEventListener('click', confirmDelete);
 
-            // 添加ESC键关闭模态框
+            // 全局ESC键监听事件，用于关闭模态框
             document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape' && document.getElementById('deleteConfirmModal').style.display === 'flex') {
-                    cancelDelete();
+                // 检查是否按下了ESC键
+                if (e.key === 'Escape') {
+                    // 获取所有模态框元素
+                    const addModal = document.getElementById('addModal');
+                    const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+
+                    // 检查添加/编辑模态框是否显示，如果是则关闭
+                    if (addModal && addModal.style.display === 'flex') {
+                        closeAddModal();
+                    }
+
+                    // 检查删除确认模态框是否显示，如果是则关闭
+                    if (deleteConfirmModal && deleteConfirmModal.style.display === 'flex') {
+                        cancelDelete();
+                    }
                 }
             });
         });
