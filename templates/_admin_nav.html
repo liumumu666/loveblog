@@ -1,0 +1,39 @@
+<!-- 管理导航 -->
+<div class="admin-nav">
+    <a href="/admin" {% if request.path == '/admin' %}class="active"{% endif %}><i class="fas fa-home"></i> 管理首页</a>
+    <a href="/admin_anniversaries" {% if request.path == '/admin_anniversaries' %}class="active"{% endif %}><i class="fas fa-calendar-alt"></i> 纪念日管理</a>
+    <a href="/admin_basic_info" {% if request.path == '/admin_basic_info' %}class="active"{% endif %}><i class="fas fa-cog"></i> 基础信息管理</a>
+    <a href="/admin_attachments" {% if request.path == '/admin_attachments' %}class="active"{% endif %}><i class="fas fa-file"></i> 附件管理</a>
+    <a href="/admin_moments" {% if request.path == '/admin_moments' %}class="active"{% endif %}><i class="fas fa-camera"></i> 点滴瞬间管理</a>
+    <a href="/admin_backup" {% if request.path == '/admin_backup' %}class="active"{% endif %}><i class="fas fa-shield-alt"></i> 数据备份与恢复</a>
+</div>
+
+<style>
+    /* 导航样式 */
+    .admin-nav {
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .admin-nav a {
+        color: #00b894;
+        text-decoration: none;
+        margin-right: 20px;
+        transition: color 0.3s ease;
+    }
+
+    .admin-nav a:hover {
+        color: #00a085;
+        text-decoration: underline;
+    }
+
+    /* 活动导航项样式 */
+    .admin-nav a.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        font-weight: bold;
+        border-left: 3px solid #ff4d4f;
+    }
+</style>

@@ -16,6 +16,9 @@ from attachments import attachments_bp, init_attachment_model, register_attachme
 # 导入点滴瞬间模块
 from moments import moments_bp, init_moment_model, register_moment_routes
 
+# 导入备份模块
+from backup import backup_bp, register_backup_routes
+
 app = Flask(__name__)
 # 配置SQLite数据库
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///anniversaries.db'
@@ -83,6 +86,10 @@ app.register_blueprint(attachments_bp)
 moments_bp = register_moment_routes(moments_bp, app, db, Moment, Attachment)
 app.register_blueprint(moments_bp)
 
+# 注册备份相关路由到蓝图并注册蓝图到应用
+backup_bp = register_backup_routes(backup_bp, app, db)
+app.register_blueprint(backup_bp)
+
 # 更新首页路由，安全地获取UserInfo数据
 @app.route('/')
 def home():
@@ -141,7 +148,7 @@ def home():
                           start_timestamp=start_timestamp,
                           anniversaries=anniversaries,
                           user_info=user_info)  # 保留用户信息传递
-
+                          
 # 后台管理主页
 @app.route('/admin')
 def admin():
@@ -152,5 +159,29 @@ if __name__ == '__main__':
     # 创建数据库表
     with app.app_context():
         db.create_all()
+        
+        # 检查是否已经存在"我们在一起啦"的纪念日
+        relationship_anniversary = Anniversary.query.filter_by(title='我们在一起啦').first()
+        
+        # 如果不存在，则添加默认的"我们在一起啦"纪念日
+        if not relationship_anniversary:
+            # 使用默认日期：2020-01-30（与首页逻辑保持一致）
+            default_date = datetime.date(2020, 1, 30)
+            
+            # 创建默认纪念日记录
+            new_relationship_anniversary = Anniversary(
+                title='我们在一起啦',
+                date=default_date,
+                icon='heart',  # 使用心形图标
+                icon_color='red',  # 红色图标
+                card_color='#FFCCCC',  # 浅红色卡片背景
+                is_future=False,  # 这是过去的日期
+                sort_order=0  # 设置为最高优先级
+            )
+            
+            # 添加到数据库并提交
+            db.session.add(new_relationship_anniversary)
+            db.session.commit()
+            print("已添加默认的'我们在一起啦'纪念日数据")
     # 重要：使用0.0.0.0作为主机，使容器外部可以访问
     app.run(host='0.0.0.0', port=1314, debug=True)

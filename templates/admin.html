@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>后台管理 - 爱情纪念册</title>
-    <!-- 引入 Font Awesome 图标 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入 Font Awesome 图标 (本地) -->
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
     <style>
         /* 全局样式 */
         * {
@@ -90,14 +90,8 @@
     <div class="container">
         <h1>爱情纪念册 - 后台管理</h1>
 
-        <!-- 管理导航 -->
-        <div class="admin-nav">
-            <a href="/admin" class="active"><i class="fas fa-home"></i> 管理首页</a>
-            <a href="/admin_anniversaries"><i class="fas fa-calendar-alt"></i> 纪念日管理</a>
-            <a href="/admin_basic_info"><i class="fas fa-cog"></i> 基础信息管理</a>
-            <a href="/admin_attachments"><i class="fas fa-file"></i> 附件管理</a>
-            <a href="/admin_moments"><i class="fas fa-camera"></i> 点滴瞬间管理</a>
-        </div>
+        <!-- 通用管理导航 -->
+        {% include '_admin_nav.html' %}
 
         <!-- 消息提示 -->
         {% if message %}

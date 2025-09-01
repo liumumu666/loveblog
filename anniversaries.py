@@ -136,15 +136,26 @@ def register_anniversary_routes(bp, db, Anniversary):
             if existing_anniversary:
                 return redirect(url_for('anniversary.admin_anniversaries', message='排序值已存在，请选择其他排序值', message_type='error'))
             
-            # 更新其他字段
-            anniversary.title = request.form['title']
-            date_str = request.form['date']
-            anniversary.date = datetime.datetime.strptime(date_str, '%Y-%m-%d').date()
-            anniversary.icon = request.form['icon']
-            anniversary.icon_color = request.form.get('icon_color', '')
-            anniversary.card_color = request.form['card_color']
-            anniversary.is_future = 'is_future' in request.form
-            anniversary.sort_order = new_sort_order
+            # 检查是否是默认的"我们在一起啦"纪念日，如果是则不允许修改标题
+            if anniversary.title == '我们在一起啦':
+                # 标题保持不变，只更新其他字段
+                date_str = request.form['date']
+                anniversary.date = datetime.datetime.strptime(date_str, '%Y-%m-%d').date()
+                anniversary.icon = request.form['icon']
+                anniversary.icon_color = request.form.get('icon_color', '')
+                anniversary.card_color = request.form['card_color']
+                anniversary.is_future = 'is_future' in request.form
+                anniversary.sort_order = new_sort_order
+            else:
+                # 更新所有字段
+                anniversary.title = request.form['title']
+                date_str = request.form['date']
+                anniversary.date = datetime.datetime.strptime(date_str, '%Y-%m-%d').date()
+                anniversary.icon = request.form['icon']
+                anniversary.icon_color = request.form.get('icon_color', '')
+                anniversary.card_color = request.form['card_color']
+                anniversary.is_future = 'is_future' in request.form
+                anniversary.sort_order = new_sort_order
             
             db.session.commit()
             
@@ -157,6 +168,11 @@ def register_anniversary_routes(bp, db, Anniversary):
     def delete_anniversary(id):
         try:
             anniversary = Anniversary.query.get_or_404(id)
+            
+            # 检查是否是默认的"我们在一起啦"纪念日，如果是则不允许删除
+            if anniversary.title == '我们在一起啦':
+                return redirect(url_for('anniversary.admin_anniversaries', message='默认纪念日不可删除', message_type='error'))
+            
             db.session.delete(anniversary)
             db.session.commit()
             return redirect(url_for('anniversary.admin_anniversaries', message='纪念日删除成功！', message_type='success'))

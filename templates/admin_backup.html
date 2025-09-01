@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据备份与恢复</title>
+    <!-- 引入 Bootstrap CSS (本地) -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- 引入 Font Awesome 图标 (本地) -->
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #e9ecef;
+            border-bottom: 1px solid #dee2e6;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .card-body {
+            padding: 25px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+        .action-card {
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .action-card:hover {
+            transform: translateY(-2px);
+        }
+        .backup-info {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .alert {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">数据备份与恢复</h1>
+
+        <!-- 通用管理导航 -->
+        {% include '_admin_nav.html' %}
+        
+        <!-- 消息提示 -->
+        {% if message %}
+        <div class="alert alert-{{ message_type }}">
+            {{ message }}
+        </div>
+        {% endif %}
+        
+        <!-- 备份信息说明 -->
+        <div class="backup-info">
+            <h4><i class="fas fa-info-circle text-primary"></i> 备份说明</h4>
+            <p><i class="fas fa-check-circle text-success"></i> 备份包含数据库和所有附件文件（图片等）</p>
+            <p><i class="fas fa-exclamation-triangle text-warning"></i> 恢复操作会覆盖现有数据，请谨慎操作</p>
+            <p><i class="fas fa-shield-alt text-primary"></i> 建议定期备份，以防数据丢失</p>
+        </div>
+        
+        <div class="row">
+            <!-- 备份操作卡片 -->
+            <div class="col-md-6">
+                <div class="card action-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-save text-success"></i> 创建备份
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <p>点击下方按钮创建当前数据的完整备份。备份文件将自动下载到您的设备。</p>
+                        <p>备份内容包括：</p>
+                        <ul>
+                            <li>所有数据库内容（纪念日、基础信息、附件记录、点滴瞬间等）</li>
+                            <li>所有上传的附件文件（头像、壁纸、图片等）</li>
+                            <li>备份元信息（备份时间、应用信息等）</li>
+                        </ul>
+                        <a href="{{ url_for('backup.backup') }}" class="btn btn-primary btn-lg w-100">
+                            <i class="fas fa-download"></i> 创建并下载备份
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 恢复操作卡片 -->
+            <div class="col-md-6">
+                <div class="card action-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-undo text-warning"></i> 恢复数据
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <p>上传之前创建的备份文件以恢复数据。<strong>此操作将覆盖当前所有数据！</strong></p>
+                        <form method="POST" action="{{ url_for('backup.restore') }}" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="backup_file" class="form-label">选择备份文件</label>
+                                <input type="file" class="form-control" id="backup_file" name="backup_file" accept=".zip" required>
+                            </div>
+                            <p class="text-danger mb-3">
+                                <i class="fas fa-exclamation-triangle"></i> 警告：恢复操作将清除所有当前数据并替换为备份文件中的数据！
+                            </p>
+                            <button type="submit" class="btn btn-danger btn-lg w-100">
+                                <i class="fas fa-upload"></i> 上传并恢复
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 操作建议 -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-lightbulb text-warning"></i> 备份与恢复最佳实践
+                </h3>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>定期创建备份（建议每周或每月一次，根据数据更新频率）</li>
+                    <li>在进行重要操作前创建备份</li>
+                    <li>将备份文件存储在多个安全位置</li>
+                    <li>恢复前确认备份文件的完整性和有效性</li>
+                    <li>恢复后检查网站功能是否正常</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 返回按钮 -->
+        <div class="mt-4 text-center">
+            <a href="{{ url_for('admin') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> 返回管理首页
+            </a>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
